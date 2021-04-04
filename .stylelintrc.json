@@ -1,0 +1,14 @@
+{
+  "extends": ["stylelint-config-recommended-scss", "stylelint-prettier/recommended"],
+  "rules": {
+    "prettier/prettier": true,
+    "selector-type-no-unknown": null,
+    "no-empty-source": null,
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ]
+  }
+}
