@@ -1,0 +1,12 @@
+.movies-container {
+  display: flex;
+  min-width: 800px;
+}
+
+app-movies-filter {
+  width: 30%;
+}
+
+app-movies-list {
+  width: 70%;
+}

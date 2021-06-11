@@ -1,0 +1,14 @@
+{
+  "common.or": "Or",
+  "auth.form.welcome.header": "Welcome to Cinemastic!",
+  "auth.form.form.email": "Email",
+  "auth.form.form.password": "Password",
+  "auth.form.sign_in": "Sign in",
+  "auth.form.sign_out": "Sign out",
+  "auth.forgotten_password": "Forgot your password?",
+  "home.menu.home": "Home",
+  "home.menu.movies": "Movies",
+  "home.menu.user": "Welcome, {{userName}}!",
+  "movies.filter.genre": "Genre",
+  "movies.filter.language": "Language"
+}

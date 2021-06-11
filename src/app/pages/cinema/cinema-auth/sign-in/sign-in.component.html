@@ -1,0 +1,26 @@
+<div class="sign-in-form-container">
+  <p class="sign-in-header">{{ "auth.form.welcome.header" | translate }}</p>
+  <form class="sign-in-form" [formGroup]="signInForm">
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "auth.form.form.email" | translate }}</mat-label>
+      <input formControlName="userName" matInput color="white" />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "auth.form.form.password" | translate }}</mat-label>
+      <input formControlName="password" matInput [type]="passwordHidden ? 'password' : 'text'" />
+      <mat-icon matSuffix class="show-password" (click)="showPassword()">{{ passwordHidden ? "visibility_off" : "visibility" }}</mat-icon>
+    </mat-form-field>
+    <a href="#" class="password-reminder">{{ "auth.forgotten_password" | translate }}</a>
+    <button class="sign-in-button" mat-raised-button color="primary" (click)="signIn()">
+      {{ "auth.form.sign_in" | translate }}
+    </button>
+    <p class="sign-in-providers">
+      <span>{{ "common.or" | translate }}</span>
+    </p>
+    <div class="icon-buttons-container">
+      <button class="icon-button" mat-button>
+        <mat-icon svgIcon="google"></mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

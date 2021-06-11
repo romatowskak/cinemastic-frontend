@@ -1,0 +1,97 @@
+.sign-in-form-container {
+  height: 700px;
+  width: 500px;
+  box-shadow: 0 0 30px 20px rgba(2, 13, 31, 0.667);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30%;
+}
+
+.sign-in-header {
+  color: var(--white);
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.mat-form-field {
+  width: 300px;
+  color: var(--white);
+}
+
+.show-password {
+  font-size: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.password-reminder {
+  align-self: flex-end;
+  font-size: 13px;
+  color: var(--indigo);
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.sign-in-button {
+  width: 160px;
+  height: 50px;
+  margin: 40px 0;
+  font-size: 20px;
+  border-radius: 40px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, rgba(227, 72, 99, 1) 0%, rgba(151, 85, 181, 1) 35%, rgba(86, 95, 254, 1) 100%);
+}
+
+.icon-buttons-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.sign-in-providers {
+  line-height: 0.5;
+  text-align: center;
+}
+
+.sign-in-providers span {
+  display: inline-block;
+  position: relative;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.sign-in-providers span:before,
+.sign-in-providers span:after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid var(--white);
+  top: 0;
+  width: 100px;
+}
+
+.sign-in-providers span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.sign-in-providers span:after {
+  margin-left: 15px;
+}
