@@ -1,0 +1,24 @@
+<div class="movies-filter-container">
+  <div class="genre-filters">
+    <h1 class="genre-filters-header">{{ "movies.filter.genre" | translate }}</h1>
+    <mat-list *ngFor="let genre of genres">
+      <mat-list-item class="genre">
+        <mat-checkbox class="filter-checkbox" (change)="toggleGenre(genre)" [checked]="genreSelection.isSelected(genre)"></mat-checkbox>
+        <p>{{ genre }}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="language-filters">
+    <h1 class="language-filters-header">{{ "movies.filter.language" | translate }}</h1>
+    <mat-list *ngFor="let language of languages">
+      <mat-list-item class="language">
+        <mat-checkbox
+          class="filter-checkbox"
+          (change)="toggleLanguage(language)"
+          [checked]="languageSelection.isSelected(language)"
+        ></mat-checkbox>
+        <p>{{ language }}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

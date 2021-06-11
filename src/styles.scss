@@ -1,10 +1,66 @@
+@import '~@angular/material/theming';
+@import 'colors/colors';
+
+$cinema-app-primary: mat-palette($mat-indigo);
+$cinema-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$cinema-app-warn: mat-palette($mat-red);
+$cinema-app-theme: mat-light-theme($cinema-app-primary, $cinema-app-accent, $cinema-app-warn);
+
+@include mat-core();
+@include angular-material-theme($cinema-app-theme);
+@import '~ngx-bar-rating/themes/br-stars-theme';
+
 * {
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
 
 html,
 body {
   height: 100%;
   margin: 0;
+  background-color: var(--dark-blue);
+}
+
+.mat-form-field {
+  font-size: 20px;
+  .mat-input-element,
+  .mat-form-field-label {
+    color: var(--white);
+  }
+
+  .mat-form-field-underline {
+    background-color: var(--white);
+  }
+}
+
+.mat-checkbox-frame {
+  border-color: var(--white);
+}
+
+.ngx-pagination {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+  span,
+  .pagination-previous a,
+  .pagination-next a {
+    color: var(--white);
+  }
+}
+
+.ngx-pagination li.current {
+  border-radius: 30px;
+  background: linear-gradient(90deg, rgba(227, 72, 99, 1) 0%, rgba(151, 85, 181, 1) 35%, rgba(86, 95, 254, 1) 100%);
+}
+
+.mat-select-panel {
+  background-color: var(--dark-blue);
+  border: 1px solid var(--blue);
+  min-height: 390px;
+}
+
+.mat-select-arrow,
+.mat-select-value,
+.mat-option-text {
+  color: var(--white);
 }

@@ -1,0 +1,155 @@
+.movies-list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.movies-list-header {
+  height: 70px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  margin-bottom: 30px;
+}
+
+.week-day {
+  color: var(--white);
+  font-size: 20px;
+  margin-right: 15px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.week-day-active {
+  color: var(--green);
+}
+
+.calendar-icon {
+  margin-right: 10px;
+}
+
+mat-select {
+  color: var(--white);
+  width: 200px;
+  border: 1px solid var(--blue);
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+mat-option {
+  color: var(--white);
+}
+
+.week-days {
+  display: flex;
+  align-items: center;
+  align-items: center;
+}
+
+mat-label {
+  margin-right: 15px;
+  font-size: 20px;
+  color: var(--white);
+}
+
+.movies-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movies {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.movie-card {
+  width: 360px;
+  height: 650px;
+  margin: 15px;
+  background-color: var(--medium-blue);
+  color: var(--white);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-image {
+  max-height: 500px;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+  }
+}
+
+.movie-details-and-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.movie-details {
+  display: flex;
+}
+
+.card-header {
+  border-bottom: 1px dotted var(--blue);
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.movie-title {
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.movie-rating,
+.movie-genre,
+.movie-duration {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  font-size: 13px;
+}
+
+.movie-action-button {
+  font-size: 22px;
+  margin-right: 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.movie-details-icon {
+  margin-right: 10px;
+}
+
+pagination-controls {
+  color: var(--white);
+}

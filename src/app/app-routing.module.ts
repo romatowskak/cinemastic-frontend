@@ -6,18 +6,10 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'auth',
-        loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),
+        path: 'cinemastic',
+        loadChildren: () => import('./pages/cinema/cinema.module').then((m) => m.CinemaModule),
       },
-      {
-        path: 'movies',
-        loadChildren: () => import('./pages/movies/movies.module').then((m) => m.MoviesModule),
-      },
-      {
-        path: 'contact',
-        loadChildren: () => import('./pages/contact/contact.module').then((m) => m.ContactModule),
-      },
-      { path: '**', redirectTo: '/movies' },
+      { path: '**', redirectTo: '/cinemastic' },
     ],
   },
 ];

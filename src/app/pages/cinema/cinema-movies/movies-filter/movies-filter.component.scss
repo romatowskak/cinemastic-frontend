@@ -1,0 +1,36 @@
+.movies-filter-container {
+  height: 100%;
+  margin-right: 80px;
+  padding: 150px 30px 0;
+}
+
+.genre-filters-header,
+.language-filters-header {
+  font-size: 20px;
+  margin-left: 10px;
+  padding: 10px;
+  border-bottom: 1px dotted var(--blue);
+  text-transform: uppercase;
+}
+
+.genre-filters,
+.language-filters {
+  min-width: 200px;
+  background-color: var(--medium-blue);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  padding: 10px;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.genre,
+.language {
+  color: var(--white);
+  font-size: 13px;
+}
+
+.filter-checkbox {
+  margin-right: 10px;
+  color: var(--white);
+}
