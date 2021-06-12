@@ -9,6 +9,7 @@ $cinema-app-theme: mat-light-theme($cinema-app-primary, $cinema-app-accent, $cin
 @include mat-core();
 @include angular-material-theme($cinema-app-theme);
 @import '~ngx-bar-rating/themes/br-stars-theme';
+@import url(../node_modules/font-awesome/css/font-awesome.css);
 
 * {
   box-sizing: border-box;

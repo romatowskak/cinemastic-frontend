@@ -1,21 +1,24 @@
+import { MovieRating } from './MovieRating';
+import { MovieGenre } from 'src/app/shared/enums/MovieGenre';
+import { MovieLanguage } from 'src/app/shared/enums/MovieLanguage';
+import { MovieActor } from './MovieActor';
+import { MoviePhoto } from './MoviePhoto';
+
 export interface Movie {
-  id: string;
+  id: number;
   title: string;
-  genre: string;
+  genre: MovieGenre;
   production: string;
   directior: string;
-  duration: string;
+  duration: number;
   adult: boolean;
-  original_language: string;
+  original_language: MovieLanguage;
   subtitles: string[];
-  releaseDate: string;
-  ratings: {
-    rated_by: number;
-    value: number;
-  }[];
+  release_date: string;
+  ratings: MovieRating[];
   overview: string;
-  cover_photo: string;
+  cover_photo: MoviePhoto;
   trailer: string;
-  gallery: string[];
-  actors: { photo: string; real_name: string; movie_name: string }[];
+  gallery: MoviePhoto[];
+  actors: MovieActor[];
 }

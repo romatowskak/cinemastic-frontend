@@ -10,5 +10,11 @@
   "home.menu.movies": "Movies",
   "home.menu.user": "Welcome, {{userName}}!",
   "movies.filter.genre": "Genre",
-  "movies.filter.language": "Language"
+  "movies.filter.language": "Language",
+  "movie.details.users_rating": "Users rating",
+  "movie.details.rate_it": "Rate it",
+  "movie.details.book_tickets": "Book tickets",
+  "movie.details.overview": "Overview",
+  "movie.details.photos": "Photos",
+  "movie.details.cast": "Cast"
 }
