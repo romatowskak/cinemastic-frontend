@@ -19,5 +19,18 @@ export class MoviesEffects {
     )
   );
 
+  getMovieDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.getMovieDetailsRequest),
+      map((action) => action.payload),
+      switchMap(({ movieId }) =>
+        this.moviesService.getMovieDetails(movieId).pipe(
+          map((response) => MoviesActions.getMovieDetailsSuccess({ payload: response })),
+          catchError((error) => of(MoviesActions.getMovieDetailsFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
   constructor(private actions$: Actions, private moviesService: MoviesService) {}
 }

@@ -5,10 +5,28 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AngularMaterialModule } from '../pages/angular-material/angular-material.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { NgxGalleryModule } from 'ngx-gallery';
+import 'hammerjs';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ReactiveFormsModule, AngularMaterialModule, TranslateModule, NgxPaginationModule, BarRatingModule],
-  exports: [ReactiveFormsModule, AngularMaterialModule, TranslateModule, CommonModule, NgxPaginationModule, BarRatingModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AngularMaterialModule,
+    TranslateModule,
+    NgxPaginationModule,
+    BarRatingModule,
+    NgxGalleryModule,
+  ],
+  exports: [
+    ReactiveFormsModule,
+    AngularMaterialModule,
+    TranslateModule,
+    CommonModule,
+    NgxPaginationModule,
+    BarRatingModule,
+    NgxGalleryModule,
+  ],
 })
 export class SharedModule {}

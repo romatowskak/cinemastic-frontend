@@ -1,0 +1,54 @@
+<div class="movie-details-container">
+  <div class="movie-details-header">
+    <div class="movie-rating">
+      <img class="movie-image" [src]="apiUrl + movieDetails?.cover_photo.url" />
+      <div class="movie-details">
+        <div class="movie-information">
+          <p class="movie-title">{{ movieDetails?.title }}</p>
+          <p class="movie-language">{{ movieDetails?.original_language }}</p>
+          <p class="movie-genre">{{ movieDetails?.genre }}</p>
+          <div class="movie-release-date-and-duration">
+            <div class="movie-release-date">
+              <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
+              <p>{{ movieDetails?.release_date }}</p>
+            </div>
+            <div class="movie-duration">
+              <mat-icon class="clock-icon" svgIcon="clock"></mat-icon>
+              <p>{{ movieDetails?.duration | movieDuration }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="movie-actions">
+          <div class="users-rating">
+            <div class="rating">
+              <mat-icon class="viewer-rating-icon" svgIcon="rating_star"></mat-icon>
+              <p>{{ movieDetails?.ratings | movieRatingAverage }}</p>
+            </div>
+            <p>{{ "movie.details.users_rating" | translate }}</p>
+          </div>
+          <div class="rating-bar">
+            <bar-rating (rateChange)="rateMovie($event)" [max]="5" [theme]="'stars'"></bar-rating>
+            <p>{{ "movie.details.rate_it" | translate }}</p>
+          </div>
+          <button class="book-tickets-button" mat-raised-button color="primary">{{ "movie.details.book_tickets" | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movie-details-content">
+    <div class="overview">
+      <p class="overview-header">{{ "movie.details.overview" | translate }}</p>
+      <p>{{ movieDetails?.overview }}</p>
+    </div>
+    <div class="gallery">
+      <p class="gallery-header">{{ "movie.details.photos" | translate }}</p>
+      <div class="photos">
+        <ngx-gallery [options]="galleryOptions" [images]="galleryPhotos"></ngx-gallery>
+      </div>
+    </div>
+    <div class="cast">
+      <p class="cast-header">{{ "movie.details.cast" | translate }}</p>
+      <div class="cast"></div>
+    </div>
+  </div>
+</div>
