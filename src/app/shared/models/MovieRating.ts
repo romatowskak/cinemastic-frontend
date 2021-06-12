@@ -1,4 +1,8 @@
+import { Movie } from './Movie';
+
 export interface MovieRating {
-  rated_by: string;
+  id: number;
+  user: number;
   value: number;
+  movie: Movie;
 }
