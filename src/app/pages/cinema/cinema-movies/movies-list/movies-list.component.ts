@@ -12,6 +12,7 @@ import { getMoviesSelector } from '../../../../core/store/reducers/movies.reduce
 import { environment } from 'src/environments/environment';
 import { getSignedInUserSelector } from '../../../../core/store/reducers/auth.reducer';
 import { User } from 'src/app/shared/models/User';
+import { getMoviesRequest } from 'src/app/core/store/actions/movies.actions';
 
 @Component({
   selector: 'app-movies-list',
@@ -50,6 +51,8 @@ export class MoviesListComponent implements OnInit {
       this.user = user;
     });
 
+    this.store.dispatch(getMoviesRequest());
+
     this.moviesSubscription = this.store.select(getMoviesSelector).subscribe((movies: Movie[]) => {
       this.movies = movies;
       const { queryParams } = this.currentRoute.snapshot;
@@ -57,7 +60,6 @@ export class MoviesListComponent implements OnInit {
         this.filterMovies(queryParams);
       }
     });
-
     this.currentRoute.queryParams.subscribe((queryParams) => {
       this.dayParam = queryParams.day;
       this.filterMovies(queryParams);

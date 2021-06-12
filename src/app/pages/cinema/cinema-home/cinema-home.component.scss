@@ -12,6 +12,17 @@
   margin-bottom: 100px;
 }
 
+.navigation-bar-list {
+  display: flex;
+  align-items: center;
+}
+
+.film-roll-icon {
+  height: 70px;
+  width: 100px;
+  margin-right: 10px;
+}
+
 .mat-tab-link {
   color: var(--white);
   text-transform: uppercase;

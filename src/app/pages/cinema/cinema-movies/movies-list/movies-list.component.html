@@ -28,7 +28,7 @@
             <div class="movie-details">
               <div class="movie-rating">
                 <mat-icon class="movie-details-icon" svgIcon="rating_star"></mat-icon>
-                <p>{{ movie.ratings[0].value }}</p>
+                <p>{{ movie.ratings | movieRatingAverage }}</p>
               </div>
               <div class="movie-genre">
                 <mat-icon class="movie-details-icon" [svgIcon]="movieGenreImageDictionary[movie.genre]"></mat-icon>

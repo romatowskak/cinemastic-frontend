@@ -1,8 +1,8 @@
 import { MovieRating } from './MovieRating';
 import { MovieGenre } from 'src/app/shared/enums/MovieGenre';
 import { MovieLanguage } from 'src/app/shared/enums/MovieLanguage';
-import { MovieActor } from './MovieActor';
 import { MoviePhoto } from './MoviePhoto';
+import { MovieActor } from './MovieActor';
 
 export interface Movie {
   id: number;

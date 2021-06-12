@@ -27,7 +27,7 @@
             <p>{{ "movie.details.users_rating" | translate }}</p>
           </div>
           <div class="rating-bar">
-            <bar-rating (rateChange)="rateMovie($event)" [max]="5" [theme]="'stars'"></bar-rating>
+            <bar-rating [rate]="currentUserRating?.value" (rateChange)="rateMovie($event)" [max]="5" [theme]="'stars'"></bar-rating>
             <p>{{ "movie.details.rate_it" | translate }}</p>
           </div>
           <button class="book-tickets-button" mat-raised-button color="primary">{{ "movie.details.book_tickets" | translate }}</button>
