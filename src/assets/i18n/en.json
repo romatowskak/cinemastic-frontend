@@ -1,5 +1,6 @@
 {
   "common.or": "Or",
+  "common.save": "Save",
   "auth.form.welcome.header": "Welcome to Cinemastic!",
   "auth.form.form.email": "Email",
   "auth.form.form.password": "Password",
@@ -16,5 +17,23 @@
   "movie.details.book_tickets": "Book tickets",
   "movie.details.overview": "Overview",
   "movie.details.photos": "Photos",
-  "movie.details.cast": "Cast"
+  "movie.remove.dialog.remove_movie": "Remove movie",
+  "movie.remove.dialog.confirmation_text": "Are you sure you want to remove movie {{movieTitle}}? You will not be able to recover it.",
+  "movie.remove.dialog.remove": "Remove",
+  "movie.remove.dialog.close": "Close",
+  "movie.managing.panel.edit_movie": "Edit movie",
+  "movie.managing.panel.add_movie": "Add movie",
+  "movie.managing.panel.label.title": "Title",
+  "movie.managing.panel.label.genre": "Genre",
+  "movie.managing.panel.label.production": "Production",
+  "movie.managing.panel.label.director": "Director",
+  "movie.managing.panel.label.duration": "Duration",
+  "movie.managing.panel.label.adult": "Adult",
+  "movie.managing.panel.label.original_language": "Original language",
+  "movie.managing.panel.label.subtitles": "Subtitles",
+  "movie.managing.panel.label.release_date": "Release date",
+  "movie.managing.panel.label.overview": "Overview",
+  "movie.managing.panel.label.trailer": "Trailer",
+  "movie.managing.panel.attach_movie_photos": "Attach movie photos",
+  "movie.managing.panel.photos": "Photos"
 }

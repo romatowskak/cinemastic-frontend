@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { switchMap, map, catchError, withLatestFrom } from 'rxjs/internal/operators';
+import { combineLatest, of } from 'rxjs';
+import { switchMap, map, catchError, withLatestFrom, tap, filter } from 'rxjs/internal/operators';
 import * as MoviesActions from '../actions/movies.actions';
 import { MoviesService } from '../../services/movies.service';
 import { State } from '../reducers';
 import { Store } from '@ngrx/store';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
-import { getMoviesRequest, getMovieDetailsRequest } from 'src/app/core/store/actions/movies.actions';
 import { getMoviesSelector } from '../reducers/movies.reducer';
-import { Movie } from 'src/app/shared/models/Movie';
 import { MovieRating } from 'src/app/shared/models/MovieRating';
 
 @Injectable()
@@ -39,14 +37,65 @@ export class MoviesEffects {
     )
   );
 
+  addMovie$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.addMovieRequest),
+      map((action) => action.payload),
+      switchMap(({ movie, uploadPhotos }) =>
+        this.moviesService.addMovie(movie).pipe(
+          map((movie) => MoviesActions.addMovieSuccess({ payload: { movie, uploadPhotos } })),
+          catchError((error) => of(MoviesActions.addMovieFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
   updateMovie$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieRequest),
       map((action) => action.payload),
-      switchMap((payload) =>
-        this.moviesService.updateMovie(payload).pipe(
-          map((response) => MoviesActions.updateMovieSuccess({ payload: response })),
+      switchMap(({ movie, uploadPhotos }) => {
+        return this.moviesService.updateMovie(movie).pipe(
+          map((movie) => MoviesActions.updateMovieSuccess({ payload: { movie, uploadPhotos } })),
           catchError((error) => of(MoviesActions.updateMovieFailure({ payload: error })))
+        );
+      })
+    )
+  );
+
+  uploadPhotos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.updateMovieSuccess),
+      map((action) => action.payload),
+      filter((payload) => !!payload.uploadPhotos.length),
+      switchMap(({ movie, uploadPhotos }) => {
+        return this.moviesService.uploadPhotos(uploadPhotos).pipe(
+          map((uploadPhotos) => MoviesActions.uploadPhotosSuccess({ payload: { movie, uploadPhotos } })),
+          catchError((error) => of(MoviesActions.uploadPhotosFailure({ payload: error })))
+        );
+      })
+    )
+  );
+
+  updateMovieGallery$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.uploadPhotosSuccess),
+      map((action) => action.payload),
+      map(({ movie, uploadPhotos }) => {
+        const cinemaMovie = { ...movie, gallery: [...movie.gallery, ...uploadPhotos] };
+        return MoviesActions.updateMovieRequest({ payload: { movie: cinemaMovie } });
+      })
+    )
+  );
+
+  removeMovie$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.removeMovieRequest),
+      map((action) => action.payload),
+      switchMap(({ movieId }) =>
+        this.moviesService.removeMovie(movieId).pipe(
+          map(() => MoviesActions.removeMovieSuccess()),
+          catchError((error) => of(MoviesActions.removeMovieFailure({ payload: error })))
         )
       )
     )
@@ -87,7 +136,7 @@ export class MoviesEffects {
         const movieUpdated = { ...movie, ratings: [...movie.ratings, payload] };
         return movieUpdated;
       }),
-      map((movieUpdated) => MoviesActions.updateMovieRequest({ payload: movieUpdated }))
+      map((movieUpdated) => MoviesActions.updateMovieRequest({ payload: { movie: movieUpdated } }))
     )
   );
 
@@ -95,7 +144,7 @@ export class MoviesEffects {
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieSuccess),
       map((action) => action.payload),
-      map((movie) => MoviesActions.getMovieDetailsRequest({ payload: { movieId: movie.id } }))
+      map(({ movie }) => MoviesActions.getMovieDetailsRequest({ payload: { movieId: movie.id } }))
     )
   );
 

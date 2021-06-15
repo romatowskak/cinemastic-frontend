@@ -1,7 +1,7 @@
 <div class="movie-details-container">
   <div class="movie-details-header">
     <div class="movie-rating">
-      <img class="movie-image" [src]="apiUrl + movieDetails?.cover_photo.url" />
+      <img class="movie-image" [src]="apiUrl + movieDetails?.coverPhoto.url" />
       <div class="movie-details">
         <div class="movie-information">
           <p class="movie-title">{{ movieDetails?.title }}</p>
@@ -10,7 +10,7 @@
           <div class="movie-release-date-and-duration">
             <div class="movie-release-date">
               <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
-              <p>{{ movieDetails?.release_date }}</p>
+              <p>{{ movieDetails?.releaseDate }}</p>
             </div>
             <div class="movie-duration">
               <mat-icon class="clock-icon" svgIcon="clock"></mat-icon>
@@ -45,10 +45,6 @@
       <div class="photos">
         <ngx-gallery [options]="galleryOptions" [images]="galleryPhotos"></ngx-gallery>
       </div>
-    </div>
-    <div class="cast">
-      <p class="cast-header">{{ "movie.details.cast" | translate }}</p>
-      <div class="cast"></div>
     </div>
   </div>
 </div>

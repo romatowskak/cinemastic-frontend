@@ -8,20 +8,19 @@
           <mat-option [value]="day.day" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day.day)">{{ day.day }}</mat-option>
         </mat-select>
       </div>
+      <button class="add-movie-button" mat-raised-button color="primary" (click)="onAddMovie()">
+        <mat-icon class="add-movie-icon">add</mat-icon><span>{{ "movie.managing.panel.add_movie" | translate }}</span>
+      </button>
     </div>
     <div class="movies">
-      <mat-card
-        (click)="onShowMovieDetails(movie)"
-        class="movie-card"
-        *ngFor="let movie of filteredMovies | paginate: { itemsPerPage: 6, currentPage: p }"
-      >
-        <img mat-card-image class="movie-image" [src]="apiUrl + movie.cover_photo.url" />
+      <mat-card class="movie-card" *ngFor="let movie of filteredMovies | paginate: { itemsPerPage: 6, currentPage: p }">
+        <img mat-card-image (click)="onShowMovieDetails(movie)" class="movie-image" [src]="apiUrl + movie.coverPhoto?.url" />
         <mat-card-content class="card-content">
           <div class="card-header">
             <p class="movie-title">{{ movie.title }}</p>
             <div class="movie-actions" *ngIf="user.user?.admin">
-              <mat-icon class="movie-action-button">edit</mat-icon>
-              <mat-icon class="movie-action-button">delete</mat-icon>
+              <mat-icon class="movie-action-button" (click)="onEditMovie(movie.id)">edit</mat-icon>
+              <mat-icon class="movie-action-button" (click)="onRemoveMovie(movie)">delete</mat-icon>
             </div>
           </div>
           <div class="movie-details-and-actions">

@@ -9,6 +9,8 @@ import { MoviesFilterComponent } from './cinema-movies/movies-filter/movies-filt
 import { MovieDetailsComponent } from './cinema-movies/movies-list/movie-details/movie-details.component';
 import { MovieDurationPipe } from 'src/app/shared/pipes/movie-duration/movie-duration.pipe';
 import { MovieRatingAveragePipe } from 'src/app/shared/pipes/movie-rating-average/movie-rating-average.pipe';
+import { MovieManagingPanelComponent } from './cinema-movies/movie-managing-panel/movie-managing-panel.component';
+import { RemoveMovieDialogComponent } from './cinema-movies/remove-movie-dialog/remove-movie-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import { MovieRatingAveragePipe } from 'src/app/shared/pipes/movie-rating-averag
     MovieDetailsComponent,
     MovieRatingAveragePipe,
     MovieDurationPipe,
+    MovieManagingPanelComponent,
+    RemoveMovieDialogComponent,
   ],
   imports: [CinemaRoutingModule, SharedModule],
+  entryComponents: [RemoveMovieDialogComponent],
 })
 export class CinemaModule {}
