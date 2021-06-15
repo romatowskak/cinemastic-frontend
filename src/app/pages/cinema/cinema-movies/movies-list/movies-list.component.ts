@@ -13,6 +13,8 @@ import { environment } from 'src/environments/environment';
 import { getSignedInUserSelector } from '../../../../core/store/reducers/auth.reducer';
 import { User } from 'src/app/shared/models/User';
 import { getMoviesRequest } from 'src/app/core/store/actions/movies.actions';
+import { RemoveMovieDialogComponent } from '../remove-movie-dialog/remove-movie-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-movies-list',
@@ -38,7 +40,7 @@ export class MoviesListComponent implements OnInit {
   dayParam: string;
   user: User;
 
-  constructor(private store: Store<State>, private router: Router, private currentRoute: ActivatedRoute) {}
+  constructor(private store: Store<State>, private router: Router, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
     const { day } = this.currentRoute.snapshot.queryParams;
@@ -86,7 +88,7 @@ export class MoviesListComponent implements OnInit {
 
   filterByLanguage(languages: MovieLanguage[]) {
     return languages && languages.length
-      ? this.movies.filter((movie: Movie) => languages.find((language: MovieLanguage) => language === movie.original_language))
+      ? this.movies.filter((movie: Movie) => languages.find((language: MovieLanguage) => language === movie.originalLanguage))
       : this.movies;
   }
 
@@ -96,6 +98,22 @@ export class MoviesListComponent implements OnInit {
 
   onWeekDaySelection(day: string) {
     this.router.navigate([], { queryParams: { day } });
+  }
+
+  onAddMovie() {
+    this.router.navigate(['/cinemastic/create']);
+  }
+
+  onEditMovie(movieId: number) {
+    this.router.navigate(['/cinemastic/edit/', movieId]);
+  }
+
+  onRemoveMovie(movie: Movie) {
+    this.dialog.open(RemoveMovieDialogComponent, {
+      width: '400px',
+      height: 'auto',
+      data: movie,
+    });
   }
 
   ngOnDestroy() {

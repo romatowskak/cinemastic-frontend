@@ -56,6 +56,25 @@ mat-option {
   align-items: center;
 }
 
+.add-movie-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  border: 1px solid var(--blue);
+  padding: 3px 20px;
+  border-radius: 30px;
+  font-size: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
+}
+
+.add-movie-icon {
+  font-size: 20px;
+  margin-top: 5px;
+}
+
 mat-label {
   margin-right: 15px;
   font-size: 20px;
@@ -83,7 +102,6 @@ mat-label {
   margin: 15px;
   background-color: var(--medium-blue);
   color: var(--white);
-  cursor: pointer;
   overflow: hidden;
 }
 
@@ -94,6 +112,7 @@ mat-label {
 
 .movie-image {
   max-height: 500px;
+  cursor: pointer;
 
   &:hover {
     transition: all 0.2s ease-in-out;
@@ -119,12 +138,6 @@ mat-label {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
-}
-
-.movie-title {
-  &:hover {
-    color: var(--green);
-  }
 }
 
 .movie-rating,

@@ -45,6 +45,10 @@ export class AppComponent implements OnInit {
         name: 'movie_ticket',
         url: 'assets/icons/ticket.svg',
       },
+      {
+        name: 'folder',
+        url: 'assets/icons/folder.svg',
+      },
     ];
 
     icons.forEach((icon) => {

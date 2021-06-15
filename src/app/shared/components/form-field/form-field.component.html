@@ -1,0 +1,7 @@
+<mat-form-field class="form-field" appearance="standard">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput *ngIf="fieldType === 'input'; else textarea" [formControl]="formControl" />
+  <ng-template #textarea>
+    <textarea matInput [formControl]="formControl"></textarea>
+  </ng-template>
+</mat-form-field>

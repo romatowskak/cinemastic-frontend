@@ -40,8 +40,6 @@ body {
 }
 
 .ngx-pagination {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-
   span,
   .pagination-previous a,
   .pagination-next a {
@@ -51,7 +49,7 @@ body {
 
 .ngx-pagination li.current {
   border-radius: 30px;
-  background: linear-gradient(90deg, rgba(227, 72, 99, 1) 0%, rgba(151, 85, 181, 1) 35%, rgba(86, 95, 254, 1) 100%);
+  background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
 }
 
 .mat-select-panel {
@@ -64,4 +62,8 @@ body {
 .mat-select-value,
 .mat-option-text {
   color: var(--white);
+}
+
+.mat-dialog-container {
+  background-color: var(--dark-blue);
 }

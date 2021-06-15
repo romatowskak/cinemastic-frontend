@@ -4,6 +4,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -11,6 +12,7 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule,
+  MatSlideToggleModule,
   MatTabsModule,
 } from '@angular/material';
 
@@ -29,6 +31,8 @@ import {
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatDialogModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatInputModule,
@@ -42,6 +46,8 @@ import {
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatDialogModule,
+    MatSlideToggleModule,
   ],
 })
 export class AngularMaterialModule {}

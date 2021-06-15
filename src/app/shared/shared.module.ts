@@ -7,9 +7,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxGalleryModule } from 'ngx-gallery';
 import 'hammerjs';
+import { FormFieldComponent } from './components/form-field/form-field.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [FormFieldComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -27,6 +28,7 @@ import 'hammerjs';
     NgxPaginationModule,
     BarRatingModule,
     NgxGalleryModule,
+    FormFieldComponent,
   ],
 })
 export class SharedModule {}
