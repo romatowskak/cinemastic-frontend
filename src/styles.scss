@@ -18,8 +18,8 @@ $cinema-app-theme: mat-light-theme($cinema-app-primary, $cinema-app-accent, $cin
 
 html,
 body {
-  height: 100%;
   margin: 0;
+  overflow-x: hidden;
   background-color: var(--dark-blue);
 }
 
@@ -44,6 +44,11 @@ body {
   .pagination-previous a,
   .pagination-next a {
     color: var(--white);
+    &:hover {
+      color: var(--green);
+      background: none;
+      cursor: pointer;
+    }
   }
 }
 
@@ -55,12 +60,13 @@ body {
 .mat-select-panel {
   background-color: var(--dark-blue);
   border: 1px solid var(--blue);
-  min-height: 390px;
+  min-height: 340px;
 }
 
 .mat-select-arrow,
 .mat-select-value,
-.mat-option-text {
+.mat-option-text,
+.mat-select-placeholder {
   color: var(--white);
 }
 

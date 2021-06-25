@@ -15,6 +15,7 @@ export class MoviesFilterComponent implements OnInit {
   genres = [MovieGenre.COMEDY, MovieGenre.ANIMATION, MovieGenre.HORROR];
   languageSelection = new SelectionModel<MovieLanguage>(true);
   languages = [MovieLanguage.ENGLISH, MovieLanguage.POLISH, MovieLanguage.ITALIAN];
+  searchInputValue = '';
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) {}
 
@@ -24,6 +25,19 @@ export class MoviesFilterComponent implements OnInit {
     const selectedLanguages = language ? formatToArray(language) : [];
     this.genreSelection.select(...selectedGenres);
     this.languageSelection.select(...selectedLanguages);
+    const { query } = this.currentRoute.snapshot.queryParams;
+    this.searchInputValue = query ? query : '';
+  }
+
+  search(searchQuery: string) {
+    this.searchInputValue = searchQuery;
+    if (searchQuery) this.router.navigate([], { queryParams: { query: searchQuery }, queryParamsHandling: 'merge' });
+    else this.clearSearch();
+  }
+
+  clearSearch() {
+    this.searchInputValue = '';
+    this.router.navigate([], { queryParams: { ...this.currentRoute.snapshot.queryParams, query: null }, queryParamsHandling: 'merge' });
   }
 
   toggleGenre(genre: MovieGenre) {

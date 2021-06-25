@@ -1,0 +1,15 @@
+<div class="cinema-home-container">
+  <div class="navigation-bar" *ngIf="user">
+    <nav mat-tab-nav-bar mat-stretch-tabs class="navigation-bar-list">
+      <mat-icon class="film-roll-icon" svgIcon="movie_ticket"></mat-icon>
+      <app-toolbar-menu-tab mat-tab-link route="/cinemastic/movies" [tabName]="'cinema.menu.movies'"></app-toolbar-menu-tab>
+    </nav>
+    <div class="signed-in-user">
+      <p class="user-name">{{ "cinema.menu.user" | translate: { userName: user?.user.username } }}</p>
+      <button mat-raised-button class="sign-out-button" color="primary" (click)="signOut()">{{ "auth.form.sign_out" | translate }}</button>
+    </div>
+  </div>
+  <div class="cinema-home-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

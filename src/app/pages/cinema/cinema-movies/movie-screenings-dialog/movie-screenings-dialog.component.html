@@ -1,0 +1,16 @@
+<div class="movie-screenings-container">
+  <div class="movie-screenings-content">
+    <h1 mat-dialog-title>{{ "movie.screenings.header" | translate | uppercase }}</h1>
+    <mat-select [placeholder]="'movie.screenings.select.placeholder' | translate">
+      <mat-option [value]="day.day | translate" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day.value)">
+        {{ day.day | translate }}
+      </mat-option>
+    </mat-select>
+    <div class="movie-screenings-list">
+      <button mat-button mat-dialog-close class="screening" *ngFor="let screening of screenings" (click)="selectScreening(screening)">
+        <span class="time">{{ screening.time }}</span>
+      </button>
+    </div>
+  </div>
+  <button class="close-button" mat-raised-button mat-dialog-close>{{ "common.close" | translate | uppercase }}</button>
+</div>

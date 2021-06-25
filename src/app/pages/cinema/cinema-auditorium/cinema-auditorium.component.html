@@ -1,0 +1,56 @@
+<div class="auditorium-container">
+  <div class="auditorium-banner">
+    <div class="auditorium-banner-movie">
+      <span class="movie-title">{{ currentScreening?.movie.title }}</span>
+      <div class="movie-details">
+        <span>{{ currentScreening?.movie.originalLanguage | uppercase }}</span>
+        <span>|</span>
+        <span>{{ currentScreening?.movie.duration | movieDuration }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="auditorium">
+    <div class="auditorium-header">
+      <button mat-button class="movie-details-button" (click)="goToMovieDetails(currentScreening?.movie.id)">
+        <mat-icon class="arrow-icon">arrow_back</mat-icon>
+        <span>{{ "cinema.auditorium.details.button" | translate | uppercase }}</span>
+      </button>
+      <div class="screening-details">
+        <span class="screening-detail">{{ currentScreening?.day | uppercase }}</span>
+        <span class="screening-detail">{{ currentScreening?.time }}</span>
+      </div>
+    </div>
+    <div class="auditorium-content">
+      <div class="screen">
+        <p class="screen-header">{{ "cinema.auditorium.details.screen" | translate | uppercase }}</p>
+        <img class="screen-image" src="/assets/images/cinema-screen.png" />
+        <p class="seats-header">{{ "cinema.auditorium.details.seats" | translate | uppercase }}</p>
+      </div>
+      <div class="auditorium-seats" *ngIf="auditorium">
+        <button
+          mat-button
+          [disableRipple]="true"
+          class="seat-button"
+          *ngFor="let seat of auditorium.seats"
+          (click)="selectSeat(seat)"
+          [disabled]="screeningSeatSelection.isSelected(seat.id) && !reservationSeatSelection.isSelected(seat)"
+        >
+          <div class="seat" [class.selected-seat]="screeningSeatSelection.isSelected(seat.id)">
+            {{ seat.seatNumber }}
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="reservation-overview">
+      <div class="selected-seats-container">
+        <p class="selected-seats-header">{{ "cinema.auditorium.selected_seats" | translate | uppercase }}</p>
+        <div class="selected-seats">
+          <div class="selected-seat-number" *ngFor="let seat of reservationSeatSelection.selected">{{ seat.seatNumber }}</div>
+        </div>
+      </div>
+      <button mat-button class="book-button" (click)="bookTickets()" [disabled]="!reservationSeatSelection.selected.length">
+        {{ "movie.details.book_tickets" | translate | uppercase }}
+      </button>
+    </div>
+  </div>
+</div>

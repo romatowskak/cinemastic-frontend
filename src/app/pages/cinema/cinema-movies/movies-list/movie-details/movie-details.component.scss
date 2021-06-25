@@ -1,14 +1,13 @@
 .movie-details-container {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-top: 300px;
+  width: 100vw;
 }
 
 .movie-details-header {
   height: 150px;
   background-color: var(--medium-blue);
   border: 1px solid var(--blue);
+  width: 100%;
+  margin-top: 400px;
 }
 
 .movie-image {
@@ -39,15 +38,27 @@
   font-size: 36px;
 }
 
-.movie-genre {
-  border: 1px solid var(--blue);
-  max-width: 150px;
+.movie-language {
+  text-transform: uppercase;
   color: var(--light-purple);
-  font-size: 15px;
-  border-radius: 30px;
-  padding: 10px;
-  text-align: center;
+  font-size: 14px;
+}
+
+.play-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 50px;
   margin-top: 40px;
+}
+
+.play-icon {
+  color: var(--light-purple);
+  height: 35px;
+  width: 35px;
+  &:hover {
+    color: var(--green);
+  }
 }
 
 .movie-release-date-and-duration {
@@ -65,6 +76,15 @@
 .calendar-icon,
 .clock-icon {
   margin-right: 10px;
+}
+
+.movie-action-button {
+  color: var(--light-purple);
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    color: var(--green);
+  }
 }
 
 .movie-actions {
@@ -108,20 +128,13 @@
 }
 
 .book-tickets-button {
-  width: 200px;
-  height: 50px;
+  padding: 5px 40px;
   margin: 40px 0;
-  font-size: 20px;
-  border-radius: 40px;
+  color: var(--white);
+  border-radius: 30px;
+  font-size: 18px;
   text-transform: uppercase;
-  cursor: pointer;
   background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
-}
-
-.movie-language {
-  text-transform: uppercase;
-  color: var(--light-purple);
-  font-size: 14px;
 }
 
 .movie-details-content {

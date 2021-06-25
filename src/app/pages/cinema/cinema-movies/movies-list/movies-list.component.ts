@@ -13,8 +13,9 @@ import { environment } from 'src/environments/environment';
 import { getSignedInUserSelector } from '../../../../core/store/reducers/auth.reducer';
 import { User } from 'src/app/shared/models/User';
 import { getMoviesRequest } from 'src/app/core/store/actions/movies.actions';
-import { RemoveMovieDialogComponent } from '../remove-movie-dialog/remove-movie-dialog.component';
 import { MatDialog } from '@angular/material';
+import { MovieScreeningsDialogComponent } from '../movie-screenings-dialog/movie-screenings-dialog.component';
+import { MovieTrailerDialogComponent } from '../movie-trailer-dialog/movie-trailer-dialog.component';
 
 @Component({
   selector: 'app-movies-list',
@@ -28,27 +29,21 @@ export class MoviesListComponent implements OnInit {
   movieGenreImageDictionary = MovieGenreImageDictionary;
   apiUrl = environment.apiUrl;
   weekDays = [
-    { day: 'All' },
-    { day: 'Monday' },
-    { day: 'Tuesday' },
-    { day: 'Wednesday' },
-    { day: 'Thursday' },
-    { day: 'Friday' },
-    { day: 'Saturday' },
-    { day: 'Sunday' },
+    { value: 'Monday', day: 'movie.screenings.monday' },
+    { value: 'Tuesday', day: 'movie.screenings.tuesday' },
+    { value: 'Wednesday', day: 'movie.screenings.wednesday' },
+    { value: 'Thursday', day: 'movie.screenings.thursday' },
+    { value: 'Friday', day: 'movie.screenings.friday' },
+    { value: 'Saturday', day: 'movie.screenings.saturday' },
+    { value: 'Sunday', day: 'movie.screenings.sunday' },
   ];
+
   dayParam: string;
   user: User;
 
   constructor(private store: Store<State>, private router: Router, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
-    const { day } = this.currentRoute.snapshot.queryParams;
-    if (!day) {
-      this.router.navigate([], { queryParams: { day: 'All' } });
-    } else {
-      this.dayParam = day;
-    }
     this.store.select(getSignedInUserSelector).subscribe((user) => {
       this.user = user;
     });
@@ -58,9 +53,8 @@ export class MoviesListComponent implements OnInit {
     this.moviesSubscription = this.store.select(getMoviesSelector).subscribe((movies: Movie[]) => {
       this.movies = movies;
       const { queryParams } = this.currentRoute.snapshot;
-      if (this.movies.length) {
-        this.filterMovies(queryParams);
-      }
+
+      this.filterMovies(queryParams);
     });
     this.currentRoute.queryParams.subscribe((queryParams) => {
       this.dayParam = queryParams.day;
@@ -69,27 +63,42 @@ export class MoviesListComponent implements OnInit {
   }
 
   filterMovies(queryParams) {
-    const { genre, language } = queryParams;
+    const { day, genre, language, query } = queryParams;
     let movies = this.movies;
+
+    if (day) {
+      movies = this.filterByScreeningDay(movies, day);
+    }
     if (genre) {
-      movies = this.fiterByGenre(formatToArray(genre));
+      movies = this.fiterByGenre(movies, formatToArray(genre));
     }
     if (language) {
-      movies = this.filterByLanguage(formatToArray(language));
+      movies = this.filterByLanguage(movies, formatToArray(language));
     }
+
+    if (query) {
+      movies = this.filterBySearchQuery(movies, query);
+    }
+
     this.filteredMovies = movies;
   }
 
-  fiterByGenre(genres: MovieGenre[]) {
-    return genres && genres.length
-      ? this.movies.filter((movie: Movie) => genres.find((genre: MovieGenre) => genre === movie.genre))
-      : this.movies;
+  filterByScreeningDay(movies: Movie[], day: string) {
+    return day && day !== 'All' ? movies.filter((movie: Movie) => movie.screenings.find((screening) => screening.day === day)) : movies;
   }
 
-  filterByLanguage(languages: MovieLanguage[]) {
+  fiterByGenre(movies: Movie[], genres: MovieGenre[]) {
+    return genres && genres.length ? movies.filter((movie: Movie) => genres.find((genre: MovieGenre) => genre === movie.genre)) : movies;
+  }
+
+  filterByLanguage(movies: Movie[], languages: MovieLanguage[]) {
     return languages && languages.length
-      ? this.movies.filter((movie: Movie) => languages.find((language: MovieLanguage) => language === movie.originalLanguage))
-      : this.movies;
+      ? movies.filter((movie: Movie) => languages.find((language: MovieLanguage) => language === movie.originalLanguage))
+      : movies;
+  }
+
+  filterBySearchQuery(movies: Movie[], query: string) {
+    return query ? movies.filter((movie: Movie) => movie.title.includes(query)) : this.movies;
   }
 
   onShowMovieDetails(movie: Movie) {
@@ -104,14 +113,16 @@ export class MoviesListComponent implements OnInit {
     this.router.navigate(['/cinemastic/create']);
   }
 
-  onEditMovie(movieId: number) {
-    this.router.navigate(['/cinemastic/edit/', movieId]);
-  }
-
-  onRemoveMovie(movie: Movie) {
-    this.dialog.open(RemoveMovieDialogComponent, {
+  onShowMovieScreenings(movie: Movie) {
+    this.dialog.open(MovieScreeningsDialogComponent, {
       width: '400px',
       height: 'auto',
+      data: movie,
+    });
+  }
+
+  onShowMovieTrailer(movie: Movie) {
+    this.dialog.open(MovieTrailerDialogComponent, {
       data: movie,
     });
   }

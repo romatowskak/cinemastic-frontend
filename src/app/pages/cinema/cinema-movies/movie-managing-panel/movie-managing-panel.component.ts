@@ -23,13 +23,11 @@ export class MovieManagingPanelComponent implements OnInit {
 
   ngOnInit() {
     const { movieId } = this.currentRoute.snapshot.params;
-    this.movieManagingPanelTitle = movieId ? 'movie.managing.panel.edit_movie' : 'movie.managing.panel.add_movie';
+    this.movieManagingPanelTitle = movieId ? 'movie.managing.panel.edit' : 'movie.managing.panel.add';
     if (movieId) {
       this.store.dispatch(getMovieDetailsRequest({ payload: { movieId: +movieId } }));
       this.store.select(getMovieDetailsSelector).subscribe((movieDetails: Movie) => {
-        if (movieDetails) {
-          this.createForm(movieDetails);
-        }
+        this.createForm(movieDetails);
       });
     } else this.createForm();
   }

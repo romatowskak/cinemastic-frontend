@@ -26,7 +26,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.signInSuccess),
         tap(() => {
-          this.router.navigate(['/cinemastic']);
+          this.router.navigate(['/cinemastic/movies']);
         })
       ),
     {

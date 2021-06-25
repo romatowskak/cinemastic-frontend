@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from 'src/app/core/store/reducers';
 import { signOut } from 'src/app/core/store/actions/auth.actions';
-import { getMoviesRequest } from 'src/app/core/store/actions/movies.actions';
-import { User } from 'src/app/shared/models/User';
+import { State } from 'src/app/core/store/reducers';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
+import { User } from 'src/app/shared/models/User';
 
 @Component({
-  selector: 'app-cinema-home',
-  templateUrl: './cinema-home.component.html',
-  styleUrls: ['./cinema-home.component.scss'],
+  selector: 'app-cinema',
+  templateUrl: './cinema.component.html',
+  styleUrls: ['./cinema.component.scss'],
 })
-export class CinemaHomeComponent implements OnInit {
+export class CinemaComponent implements OnInit {
   user: User;
 
   constructor(private store: Store<State>) {}
@@ -20,7 +19,6 @@ export class CinemaHomeComponent implements OnInit {
     this.store.select(getSignedInUserSelector).subscribe((user: User) => {
       this.user = user;
     });
-    this.store.dispatch(getMoviesRequest());
   }
 
   signOut() {

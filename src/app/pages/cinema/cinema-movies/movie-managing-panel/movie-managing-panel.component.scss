@@ -4,14 +4,38 @@
   justify-content: center;
 }
 
+.movies-banner {
+  height: 700px;
+  width: 100vw;
+  background: url('/assets/images/working-people-banner.jpeg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.1;
+  transform: scale(1.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--medium-blue);
+  background-blend-mode: difference;
+}
+
 .edit-panel-header {
+  margin-top: 700px;
   width: 100%;
-  font-size: 28px;
+  font-size: 60px;
   color: var(--white);
   text-transform: uppercase;
-  border-bottom: 1px dotted var(--blue);
   padding-bottom: 40px;
   text-align: center;
+}
+
+.title-movie {
+  color: var(--green);
 }
 
 .edit-form {
@@ -40,6 +64,7 @@
 
 .adult-toggle-label {
   margin-right: 15px;
+  font-size: 20px;
 }
 
 .gallery-photos-upload {

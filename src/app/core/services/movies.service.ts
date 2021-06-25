@@ -6,6 +6,10 @@ import { Movie } from 'src/app/shared/models/Movie';
 import { User } from 'src/app/shared/models/User';
 import { MovieRating } from 'src/app/shared/models/MovieRating';
 import { MoviePhoto } from '../../shared/models/MoviePhoto';
+import { AuditoriumSeat } from '../../shared/models/AuditoriumSeat';
+import { CinemaAuditorium } from '../../shared/models/CinemaAuditorium';
+import { MovieReservation } from '../../shared/models/MovieReservation';
+import { MovieScreening } from '../../shared/models/MovieScreening';
 
 @Injectable({
   providedIn: 'root',
@@ -50,5 +54,25 @@ export class MoviesService {
 
   public updateRating(rating: MovieRating): Observable<MovieRating> {
     return this.httpClient.put<MovieRating>(`${environment.apiUrl}/ratings/${rating.id}`, rating);
+  }
+
+  public addSeat(seat: AuditoriumSeat): Observable<AuditoriumSeat> {
+    return this.httpClient.post<AuditoriumSeat>(`${environment.apiUrl}/seats`, seat);
+  }
+
+  public getAuditorium(auditoriumId: number): Observable<CinemaAuditorium> {
+    return this.httpClient.get<CinemaAuditorium>(`${environment.apiUrl}/auditoriums/${auditoriumId}`);
+  }
+
+  public getReservations(): Observable<MovieReservation[]> {
+    return this.httpClient.get<MovieReservation[]>(`${environment.apiUrl}/reservations`);
+  }
+
+  public addReservation(reservation: MovieReservation): Observable<MovieReservation> {
+    return this.httpClient.post<MovieReservation>(`${environment.apiUrl}/reservations`, reservation);
+  }
+
+  public getScreening(screeningId: number): Observable<MovieScreening> {
+    return this.httpClient.get<MovieScreening>(`${environment.apiUrl}/screenings/${screeningId}`);
   }
 }

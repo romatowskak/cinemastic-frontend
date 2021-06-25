@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { combineLatest, of } from 'rxjs';
+import { of } from 'rxjs';
 import { switchMap, map, catchError, withLatestFrom, tap, filter } from 'rxjs/internal/operators';
 import * as MoviesActions from '../actions/movies.actions';
 import { MoviesService } from '../../services/movies.service';
@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
 import { getMoviesSelector } from '../reducers/movies.reducer';
 import { MovieRating } from 'src/app/shared/models/MovieRating';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class MoviesEffects {
@@ -148,5 +149,80 @@ export class MoviesEffects {
     )
   );
 
-  constructor(private actions$: Actions, private moviesService: MoviesService, private store: Store<State>) {}
+  addSeat$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.addSeatRequest),
+      map((action) => action.payload),
+      switchMap((seat) => {
+        return this.moviesService.addSeat(seat).pipe(
+          map((response) => MoviesActions.addSeatSuccess({ payload: response })),
+          catchError((error) => of(MoviesActions.addSeatFailure({ payload: error })))
+        );
+      })
+    )
+  );
+
+  getAuditiorium$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.getAuditoriumRequest),
+      map((action) => action.payload),
+      switchMap(({ auditoriumId }) =>
+        this.moviesService.getAuditorium(auditoriumId).pipe(
+          map((response) => MoviesActions.getAuditoriumSuccess({ payload: response })),
+          catchError((error) => of(MoviesActions.getAuditoriumFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
+  getReservations$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.getReservationsRequest),
+      switchMap(() =>
+        this.moviesService.getReservations().pipe(
+          map((response) => MoviesActions.getReservationsSuccess({ payload: response })),
+          catchError((error) => of(MoviesActions.getReservationsFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
+  addReservation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.addReservationRequest),
+      map((action) => action.payload),
+      switchMap(({ reservation }) =>
+        this.moviesService.addReservation(reservation).pipe(
+          map((reservation) => MoviesActions.addReservationSuccess({ payload: reservation })),
+          catchError((error) => of(MoviesActions.addReservationFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
+  redirectOnReservationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(MoviesActions.addReservationSuccess),
+        tap(() => {
+          this.router.navigate(['/cinemastic/movies']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  getScreening$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.getScreeningRequest),
+      map((action) => action.payload),
+      switchMap(({ screeningId }) =>
+        this.moviesService.getScreening(screeningId).pipe(
+          map((response) => MoviesActions.getScreeningSuccess({ payload: response })),
+          catchError((error) => of(MoviesActions.getScreeningFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
+  constructor(private actions$: Actions, private moviesService: MoviesService, private store: Store<State>, private router: Router) {}
 }

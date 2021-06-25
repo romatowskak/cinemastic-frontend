@@ -49,6 +49,10 @@ export class AppComponent implements OnInit {
         name: 'folder',
         url: 'assets/icons/folder.svg',
       },
+      {
+        name: 'play_button',
+        url: 'assets/icons/play-button.svg',
+      },
     ];
 
     icons.forEach((icon) => {

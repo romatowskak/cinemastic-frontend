@@ -1,0 +1,185 @@
+.auditorium-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.auditorium-banner {
+  height: 600px;
+  width: 100vw;
+  background: url('/assets/images/auditorium-banner.jpeg'), linear-gradient(#07245f5f, #07245ffc);
+  background-blend-mode: multiply;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.auditorium-banner-movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-title {
+  color: var(--white);
+  font-size: 70px;
+  padding: 0;
+}
+
+.movie-details {
+  display: flex;
+  color: var(--white);
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.auditorium {
+  margin-top: 485px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-details-button,
+.book-button {
+  padding: 5px 40px;
+  color: var(--white);
+  border-radius: 30px;
+  font-size: 18px;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
+}
+
+.auditorium-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.screening-details {
+  display: flex;
+  color: var(--white);
+  justify-content: space-evenly;
+  font-size: 20px;
+}
+
+.screening-detail {
+  margin-right: 10px;
+}
+
+.auditorium-header {
+  height: 150px;
+  background-color: var(--medium-blue);
+  border: 1px solid var(--blue);
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 100px;
+}
+
+.arrow-icon {
+  font-size: 20px;
+  margin: 5px 5px 0 0;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100px 0;
+}
+
+.screen-header,
+.seats-header {
+  font-size: 30px;
+  color: var(--green);
+  border-bottom: 1px solid var(--blue);
+  border-top: 1px solid var(--blue);
+  padding: 10px 0;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.screen-image {
+  margin: 50px 0;
+}
+
+.auditorium-seats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  width: 800px;
+  margin-bottom: 200px;
+}
+
+.seat-button {
+  border: none;
+  padding: 0;
+  background: none;
+  outline: none;
+  font-size: 15px;
+  color: var(--white);
+}
+
+.seat {
+  height: 40px;
+  width: 60px;
+  margin: 10px;
+  background: url('/assets/images/movie-seat.png') no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected-seat {
+  background: url('/assets/images/movie-seat-selected.png') no-repeat;
+  background-size: cover;
+}
+
+.reservation-overview {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  padding: 30px 50px;
+  margin-bottom: 100px;
+}
+
+.selected-seats-container {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-seats-header {
+  color: var(--white);
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.selected-seats {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selected-seat-number {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--green);
+  margin-right: 10px;
+}
