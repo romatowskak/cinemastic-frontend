@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CinemaHomeComponent } from './cinema-home.component';
+import { ToolbarMenuTabComponent } from './toolbar-menu-tab.component';
 
-describe('CinemaHomeComponent', () => {
-  let component: CinemaHomeComponent;
-  let fixture: ComponentFixture<CinemaHomeComponent>;
+describe('ToolbarMenuTabComponent', () => {
+  let component: ToolbarMenuTabComponent;
+  let fixture: ComponentFixture<ToolbarMenuTabComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CinemaHomeComponent],
+      declarations: [ToolbarMenuTabComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CinemaHomeComponent);
+    fixture = TestBed.createComponent(ToolbarMenuTabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

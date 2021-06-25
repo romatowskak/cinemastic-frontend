@@ -21,4 +21,5 @@ export interface Movie {
   trailer: string;
   gallery: MoviePhoto[];
   actors: MovieActor[];
+  screenings: any;
 }

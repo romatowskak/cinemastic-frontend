@@ -7,6 +7,6 @@ export class MovieDurationPipe implements PipeTransform {
   transform(duration): string {
     var hours = parseInt(duration);
     var minutes = Math.round((duration - hours) * 60);
-    return hours + 'h ' + minutes + 'min';
+    return hours + 'h ' + minutes + 'm';
   }
 }

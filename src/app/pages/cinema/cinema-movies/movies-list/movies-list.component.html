@@ -1,47 +1,50 @@
 <div class="movies-list-container">
-  <mat-spinner *ngIf="!filteredMovies.length" diameter="100" strokeWidth="2"></mat-spinner>
-  <div class="movies-list" *ngIf="filteredMovies.length">
+  <div class="movies-list">
     <div class="movies-list-header">
       <div class="week-days">
         <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
-        <mat-select [value]="dayParam">
-          <mat-option [value]="day.day" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day.day)">{{ day.day }}</mat-option>
+        <mat-select [value]="dayParam" placeholder="Select day">
+          <mat-option [value]="day.day | translate" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day.value)">{{
+            day.day | translate
+          }}</mat-option>
         </mat-select>
       </div>
-      <button class="add-movie-button" mat-raised-button color="primary" (click)="onAddMovie()">
-        <mat-icon class="add-movie-icon">add</mat-icon><span>{{ "movie.managing.panel.add_movie" | translate }}</span>
+      <button class="add-movie-button" mat-raised-button (click)="onAddMovie()">
+        <mat-icon class="add-movie-icon">add</mat-icon><span>{{ "movies.add_movie" | translate }}</span>
       </button>
     </div>
-    <div class="movies">
+    <div class="movies" *ngIf="filteredMovies.length">
       <mat-card class="movie-card" *ngFor="let movie of filteredMovies | paginate: { itemsPerPage: 6, currentPage: p }">
         <img mat-card-image (click)="onShowMovieDetails(movie)" class="movie-image" [src]="apiUrl + movie.coverPhoto?.url" />
         <mat-card-content class="card-content">
           <div class="card-header">
-            <p class="movie-title">{{ movie.title }}</p>
-            <div class="movie-actions" *ngIf="user.user?.admin">
-              <mat-icon class="movie-action-button" (click)="onEditMovie(movie.id)">edit</mat-icon>
-              <mat-icon class="movie-action-button" (click)="onRemoveMovie(movie)">delete</mat-icon>
-            </div>
-          </div>
-          <div class="movie-details-and-actions">
+            <span class="movie-title">{{ movie.title }}</span>
             <div class="movie-details">
               <div class="movie-rating">
                 <mat-icon class="movie-details-icon" svgIcon="rating_star"></mat-icon>
-                <p>{{ movie.ratings | movieRatingAverage }}</p>
+                <span>{{ movie.ratings | movieRatingAverage }}</span>
               </div>
               <div class="movie-genre">
                 <mat-icon class="movie-details-icon" [svgIcon]="movieGenreImageDictionary[movie.genre]"></mat-icon>
-                <p>{{ movie.genre }}</p>
+                <span>{{ movie.genre }}</span>
               </div>
               <div class="movie-duration">
                 <mat-icon class="movie-details-icon" svgIcon="clock"></mat-icon>
-                <p>{{ movie.duration | movieDuration }}</p>
+                <span>{{ movie.duration | movieDuration }}</span>
               </div>
+            </div>
+            <div class="movie-details-and-actions">
+              <button class="book-tickets-button" mat-raised-button color="primary" (click)="onShowMovieScreenings(movie)">
+                {{ "movie.details.book_tickets" | translate }}
+              </button>
+              <button class="play-button" (click)="onShowMovieTrailer(movie)">
+                <mat-icon class="play-icon" svgIcon="play_button"></mat-icon>
+              </button>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
     </div>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
+  <pagination-controls *ngIf="filteredMovies.length" (pageChange)="p = $event"></pagination-controls>
 </div>

@@ -1,5 +1,8 @@
 <div class="movie-edit-form-container">
-  <p class="edit-panel-header">{{ movieManagingPanelTitle | translate }}</p>
+  <div class="movies-banner"></div>
+  <p class="edit-panel-header">
+    {{ movieManagingPanelTitle | translate | uppercase }} <span class="title-movie">{{ "movie.managing.panel.movie" | translate }}</span>
+  </p>
   <form class="edit-form" *ngIf="movieManagingForm" [formGroup]="movieManagingForm">
     <app-form-field [control]="movieManagingForm.get('title')" [label]="'movie.managing.panel.label.title' | translate"></app-form-field>
     <app-form-field [control]="movieManagingForm.get('genre')" [label]="'movie.managing.panel.label.genre' | translate"></app-form-field>

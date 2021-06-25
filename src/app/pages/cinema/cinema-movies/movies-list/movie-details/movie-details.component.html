@@ -4,9 +4,13 @@
       <img class="movie-image" [src]="apiUrl + movieDetails?.coverPhoto.url" />
       <div class="movie-details">
         <div class="movie-information">
-          <p class="movie-title">{{ movieDetails?.title }}</p>
-          <p class="movie-language">{{ movieDetails?.original_language }}</p>
-          <p class="movie-genre">{{ movieDetails?.genre }}</p>
+          <div>
+            <p class="movie-title">{{ movieDetails?.title }}</p>
+          </div>
+          <p class="movie-language">{{ movieDetails?.genre }} | {{ movieDetails?.originalLanguage }}</p>
+          <button class="play-button" (click)="onShowMovieTrailer(movieDetails)">
+            <mat-icon class="play-icon" svgIcon="play_button"></mat-icon>
+          </button>
           <div class="movie-release-date-and-duration">
             <div class="movie-release-date">
               <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
@@ -15,6 +19,10 @@
             <div class="movie-duration">
               <mat-icon class="clock-icon" svgIcon="clock"></mat-icon>
               <p>{{ movieDetails?.duration | movieDuration }}</p>
+            </div>
+            <div class="movie-managing-actions">
+              <mat-icon class="movie-action-button" (click)="onEditMovie(movieDetails.id)">edit</mat-icon>
+              <mat-icon class="movie-action-button" (click)="onRemoveMovie(movieDetails)">delete</mat-icon>
             </div>
           </div>
         </div>
@@ -30,7 +38,9 @@
             <bar-rating [rate]="currentUserRating?.value" (rateChange)="rateMovie($event)" [max]="5" [theme]="'stars'"></bar-rating>
             <p>{{ "movie.details.rate_it" | translate }}</p>
           </div>
-          <button class="book-tickets-button" mat-raised-button color="primary">{{ "movie.details.book_tickets" | translate }}</button>
+          <button class="book-tickets-button" mat-raised-button color="primary" (click)="onShowMovieScreenings(movieDetails)">
+            {{ "movie.details.book_tickets" | translate }}
+          </button>
         </div>
       </div>
     </div>
@@ -40,7 +50,7 @@
       <p class="overview-header">{{ "movie.details.overview" | translate }}</p>
       <p>{{ movieDetails?.overview }}</p>
     </div>
-    <div class="gallery">
+    <div class="gallery" *ngIf="galleryPhotos.length">
       <p class="gallery-header">{{ "movie.details.photos" | translate }}</p>
       <div class="photos">
         <ngx-gallery [options]="galleryOptions" [images]="galleryPhotos"></ngx-gallery>
