@@ -102,7 +102,7 @@ export class MoviesListComponent implements OnInit {
   }
 
   onShowMovieDetails(movie: Movie) {
-    this.router.navigate(['/cinemastic/movies/', movie.id]);
+    this.router.navigate(['/cinemastic/movie_details/', movie.id]);
   }
 
   onWeekDaySelection(day: string) {
