@@ -32,7 +32,12 @@ export class MoviesEffects {
       switchMap(({ movieId }) =>
         this.moviesService.getMovieDetails(movieId).pipe(
           map((response) => MoviesActions.getMovieDetailsSuccess({ payload: response })),
-          catchError((error) => of(MoviesActions.getMovieDetailsFailure({ payload: error })))
+          catchError((error) => {
+            if (error.status === 404) {
+              this.router.navigate(['/cinemastic/movies']);
+            }
+            return of(MoviesActions.getMovieDetailsFailure({ payload: error }));
+          })
         )
       )
     )
@@ -169,7 +174,12 @@ export class MoviesEffects {
       switchMap(({ auditoriumId }) =>
         this.moviesService.getAuditorium(auditoriumId).pipe(
           map((response) => MoviesActions.getAuditoriumSuccess({ payload: response })),
-          catchError((error) => of(MoviesActions.getAuditoriumFailure({ payload: error })))
+          catchError((error) => {
+            if (error.status === 404) {
+              this.router.navigate(['/cinemastic/movies']);
+            }
+            return of(MoviesActions.getAuditoriumFailure({ payload: error }));
+          })
         )
       )
     )
@@ -218,7 +228,12 @@ export class MoviesEffects {
       switchMap(({ screeningId }) =>
         this.moviesService.getScreening(screeningId).pipe(
           map((response) => MoviesActions.getScreeningSuccess({ payload: response })),
-          catchError((error) => of(MoviesActions.getScreeningFailure({ payload: error })))
+          catchError((error) => {
+            if (error.status === 404) {
+              this.router.navigate(['/cinemastic/movies']);
+            }
+            return of(MoviesActions.getScreeningFailure({ payload: error }));
+          })
         )
       )
     )

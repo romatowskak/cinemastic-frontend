@@ -1,0 +1,53 @@
+.sign-in-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-header {
+  color: var(--white);
+  font-size: 40px;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  width: 60%;
+  text-align: center;
+}
+
+.header-cinemastic {
+  color: var(--green);
+}
+
+.sign-in-form {
+  height: 75vh;
+  width: 500px;
+  box-shadow: 0 0 30px 20px rgba(2, 13, 31, 0.667);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-form-field {
+  width: 300px;
+  color: var(--white);
+}
+
+.show-password {
+  font-size: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.sign-in-button {
+  padding: 5px 50px;
+  margin: 50px 0;
+  color: var(--white);
+  border-radius: 30px;
+  font-size: 20px;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
+}

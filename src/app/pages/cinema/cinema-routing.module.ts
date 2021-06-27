@@ -1,27 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SignInComponent } from './cinema-auth/sign-in/sign-in.component';
 import { MoviesComponent } from './cinema-movies/movies.component';
 import { MovieDetailsComponent } from './cinema-movies/movies-list/movie-details/movie-details.component';
 import { MovieManagingPanelComponent } from './cinema-movies/movie-managing-panel/movie-managing-panel.component';
 import { CinemaAuditoriumComponent } from './cinema-auditorium/cinema-auditorium.component';
 import { CinemaComponent } from './cinema.component';
+import { CinemaAccessGuard } from 'src/app/shared/guards/cinema-access-guard/cinema-access.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: CinemaComponent,
+    canActivateChild: [CinemaAccessGuard],
     children: [
-      {
-        path: 'sign_in',
-        component: SignInComponent,
-      },
       {
         path: 'movies',
         component: MoviesComponent,
       },
       {
-        path: 'movie_details/:movieId',
+        path: 'movies/:movieId',
         component: MovieDetailsComponent,
       },
       {
@@ -36,6 +33,7 @@ const routes: Routes = [
         path: 'auditorium/:auditoriumId/screening/:screeningId',
         component: CinemaAuditoriumComponent,
       },
+      { path: '**', redirectTo: '/cinemastic/movies' },
     ],
   },
 ];

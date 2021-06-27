@@ -39,7 +39,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.signOut),
         tap(() => {
-          this.router.navigate(['/cinemastic/sign_in']);
+          this.router.navigate(['/start/signin']);
         })
       ),
     {
