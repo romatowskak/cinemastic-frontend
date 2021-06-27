@@ -72,7 +72,7 @@ export class CinemaAuditoriumComponent implements OnInit {
   }
 
   goToMovieDetails(movieId: number) {
-    this.router.navigate(['/cinemastic/movie_details/', movieId]);
+    this.router.navigate(['/cinemastic/movie/', movieId]);
   }
 }
 function arrangeSeatsInNumericalOrder(seats: any[]): any[] {

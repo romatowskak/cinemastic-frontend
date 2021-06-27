@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CinemaRoutingModule } from './cinema-routing.module';
-import { SignInComponent } from './cinema-auth/sign-in/sign-in.component';
 import { MoviesListComponent } from './cinema-movies/movies-list/movies-list.component';
 import { MoviesComponent } from './cinema-movies/movies.component';
 import { MoviesFilterComponent } from './cinema-movies/movies-filter/movies-filter.component';
@@ -15,11 +14,11 @@ import { CinemaAuditoriumComponent } from './cinema-auditorium/cinema-auditorium
 import { CinemaComponent } from './cinema.component';
 import { MovieTrailerDialogComponent } from './cinema-movies/movie-trailer-dialog/movie-trailer-dialog.component';
 import { ToolbarMenuTabComponent } from './toolbar-menu-tab/toolbar-menu-tab.component';
+import { CinemaAccessGuard } from 'src/app/shared/guards/cinema-access-guard/cinema-access.guard';
 
 @NgModule({
   declarations: [
     CinemaComponent,
-    SignInComponent,
     MoviesComponent,
     MoviesListComponent,
     MoviesFilterComponent,
@@ -35,5 +34,6 @@ import { ToolbarMenuTabComponent } from './toolbar-menu-tab/toolbar-menu-tab.com
   ],
   imports: [CinemaRoutingModule, SharedModule],
   entryComponents: [RemoveMovieDialogComponent, MovieScreeningsDialogComponent, MovieTrailerDialogComponent],
+  providers: [CinemaAccessGuard],
 })
 export class CinemaModule {}
