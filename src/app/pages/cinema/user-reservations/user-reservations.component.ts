@@ -2,14 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { getReservationsRequest } from 'src/app/core/store/actions/movies.actions';
 import { State } from 'src/app/core/store/reducers';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
-import { getReservationsSelector } from 'src/app/core/store/reducers/movies.reducer';
 import { User } from 'src/app/shared/models/User';
 import { MovieReservation } from '../../../shared/models/MovieReservation';
-import { removeReservationRequest } from '../../../core/store/actions/movies.actions';
 import { Subscription } from 'rxjs';
+import { getReservationsRequest, removeReservationRequest } from 'src/app/core/store/actions/booking.actions';
+import { getReservationsSelector } from 'src/app/core/store/reducers/booking.reducer';
 
 @Component({
   selector: 'app-user-reservations',

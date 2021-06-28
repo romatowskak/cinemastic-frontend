@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, map, catchError, withLatestFrom, tap, filter, mapTo } from 'rxjs/internal/operators';
+import { switchMap, map, catchError, withLatestFrom, filter } from 'rxjs/internal/operators';
 import * as MoviesActions from '../actions/movies.actions';
 import { MoviesService } from '../../services/movies.service';
 import { State } from '../reducers';
@@ -176,109 +176,6 @@ export class MoviesEffects {
       ofType(MoviesActions.updateMovieSuccess),
       map((action) => action.payload),
       map(({ movie }) => MoviesActions.getMovieDetailsRequest({ payload: { movieId: movie.id } }))
-    )
-  );
-
-  addSeat$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MoviesActions.addSeatRequest),
-      map((action) => action.payload),
-      switchMap((seat) => {
-        return this.moviesService.addSeat(seat).pipe(
-          map((response) => MoviesActions.addSeatSuccess({ payload: response })),
-          catchError((error) => of(MoviesActions.addSeatFailure({ payload: error })))
-        );
-      })
-    )
-  );
-
-  getAuditiorium$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MoviesActions.getAuditoriumRequest),
-      map((action) => action.payload),
-      switchMap(({ auditoriumId }) =>
-        this.moviesService.getAuditorium(auditoriumId).pipe(
-          map((response) => MoviesActions.getAuditoriumSuccess({ payload: response })),
-          catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/cinemastic/movies']);
-            }
-            return of(MoviesActions.getAuditoriumFailure({ payload: error }));
-          })
-        )
-      )
-    )
-  );
-
-  getReservations$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MoviesActions.getReservationsRequest),
-      switchMap(() =>
-        this.moviesService.getReservations().pipe(
-          map((response) => MoviesActions.getReservationsSuccess({ payload: response })),
-          catchError((error) => of(MoviesActions.getReservationsFailure({ payload: error })))
-        )
-      )
-    )
-  );
-
-  addReservation$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MoviesActions.addReservationRequest),
-      map((action) => action.payload),
-      switchMap(({ reservation }) =>
-        this.moviesService.addReservation(reservation).pipe(
-          map((reservation) => MoviesActions.addReservationSuccess({ payload: reservation })),
-          catchError((error) => of(MoviesActions.addReservationFailure({ payload: error })))
-        )
-      )
-    )
-  );
-
-  refreshReservations$ = createEffect(() =>
-    this.actions$.pipe(ofType(MoviesActions.removeReservationSuccess), mapTo(MoviesActions.getReservationsRequest()))
-  );
-
-  removeReservation$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MoviesActions.removeReservationRequest),
-      map((action) => action.payload),
-      switchMap(({ reservationId }) =>
-        this.moviesService.removeReservation(reservationId).pipe(
-          map(() => MoviesActions.removeReservationSuccess()),
-          catchError((error) => of(MoviesActions.removeReservationFailure({ payload: error })))
-        )
-      )
-    )
-  );
-
-  redirectOnReservationSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(MoviesActions.addReservationSuccess),
-        map((action) => action.payload),
-        tap((reservation) => {
-          this.router.navigate([`/cinemastic/reservations/${reservation.user.id}`]);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  getScreening$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MoviesActions.getScreeningRequest),
-      map((action) => action.payload),
-      switchMap(({ screeningId }) =>
-        this.moviesService.getScreening(screeningId).pipe(
-          map((response) => MoviesActions.getScreeningSuccess({ payload: response })),
-          catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/cinemastic/movies']);
-            }
-            return of(MoviesActions.getScreeningFailure({ payload: error }));
-          })
-        )
-      )
     )
   );
 

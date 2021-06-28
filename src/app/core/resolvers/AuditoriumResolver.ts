@@ -5,7 +5,7 @@ import { map, take } from 'rxjs/internal/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../store/reducers';
 import { Observable } from 'rxjs';
-import * as MoviesActions from '../store/actions/movies.actions';
+import * as BookingActions from '../store/actions/booking.actions';
 import { CinemaAuditorium } from '../../shared/models/CinemaAuditorium';
 
 @Injectable()
@@ -14,9 +14,9 @@ export class AuditoriumResolver implements Resolve<Observable<CinemaAuditorium>>
 
   resolve(route: ActivatedRouteSnapshot) {
     const auditoriumId = route.params.auditoriumId;
-    this.store.dispatch(MoviesActions.getAuditoriumRequest({ payload: { auditoriumId } }));
+    this.store.dispatch(BookingActions.getAuditoriumRequest({ payload: { auditoriumId } }));
     return this.action$.pipe(
-      ofType(MoviesActions.getAuditoriumSuccess),
+      ofType(BookingActions.getAuditoriumSuccess),
       map((action) => action.payload),
       take(1)
     );

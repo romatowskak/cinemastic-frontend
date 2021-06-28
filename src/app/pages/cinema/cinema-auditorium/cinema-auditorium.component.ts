@@ -2,10 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/core/store/reducers';
 import { ActivatedRoute, Router } from '@angular/router';
-import { addReservationRequest, getAuditoriumRequest, getScreeningRequest } from 'src/app/core/store/actions/movies.actions';
-import { getAuditoriumSelector, getReservationsSelector, getScreeeningSelector } from '../../../core/store/reducers/movies.reducer';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
-import { getReservationsRequest } from '../../../core/store/actions/movies.actions';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CinemaAuditorium } from '../../../shared/models/CinemaAuditorium';
 import { AuditoriumSeat } from 'src/app/shared/models/AuditoriumSeat';
@@ -14,6 +11,13 @@ import { MovieReservation } from '../../../shared/models/MovieReservation';
 import { User } from 'src/app/shared/models/User';
 import { arrangeSeatsInNumericalOrder } from 'src/app/shared/utils/helpers';
 import { Subscription } from 'rxjs';
+import { getAuditoriumSelector, getReservationsSelector, getScreeeningSelector } from 'src/app/core/store/reducers/booking.reducer';
+import {
+  getAuditoriumRequest,
+  getReservationsRequest,
+  getScreeningRequest,
+  addReservationRequest,
+} from 'src/app/core/store/actions/booking.actions';
 
 @Component({
   selector: 'app-cinema-auditorium',

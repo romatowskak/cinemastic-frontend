@@ -5,7 +5,7 @@ import { map, take } from 'rxjs/internal/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../store/reducers';
 import { Observable } from 'rxjs';
-import * as MoviesActions from '../store/actions/movies.actions';
+import * as BookingActions from '../store/actions/booking.actions';
 import { MovieReservation } from '../../shared/models/MovieReservation';
 
 @Injectable()
@@ -13,9 +13,9 @@ export class ReservationsResolver implements Resolve<Observable<MovieReservation
   constructor(private store: Store<State>, private action$: Actions) {}
 
   resolve() {
-    this.store.dispatch(MoviesActions.getReservationsRequest());
+    this.store.dispatch(BookingActions.getReservationsRequest());
     return this.action$.pipe(
-      ofType(MoviesActions.getReservationsSuccess),
+      ofType(BookingActions.getReservationsSuccess),
       map((action) => action.payload),
       take(1)
     );
