@@ -10,6 +10,7 @@ import { AuditoriumSeat } from '../../shared/models/AuditoriumSeat';
 import { CinemaAuditorium } from '../../shared/models/CinemaAuditorium';
 import { MovieReservation } from '../../shared/models/MovieReservation';
 import { MovieScreening } from '../../shared/models/MovieScreening';
+import { formatToArray } from 'src/app/shared/utils/helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +39,9 @@ export class MoviesService {
   }
 
   public uploadPhotos(photos): Observable<MoviePhoto[]> {
+    const uploadPhotos = formatToArray(photos);
     let data = new FormData();
-    photos.forEach((photo) => data.append('files', photo.file));
+    uploadPhotos.forEach((photo) => data.append('files', photo.file));
     return this.httpClient.post<MoviePhoto[]>(`${environment.apiUrl}/upload`, data);
   }
 
@@ -70,6 +72,10 @@ export class MoviesService {
 
   public addReservation(reservation: MovieReservation): Observable<MovieReservation> {
     return this.httpClient.post<MovieReservation>(`${environment.apiUrl}/reservations`, reservation);
+  }
+
+  public removeReservation(reservationId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${environment.apiUrl}/reservations/${reservationId}`);
   }
 
   public getScreening(screeningId: number): Observable<MovieScreening> {

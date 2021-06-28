@@ -1,4 +1,4 @@
-<mat-form-field class="form-field" appearance="standard">
+<mat-form-field class="form-field" appearance="outline">
   <mat-label>{{ label }}</mat-label>
   <input matInput *ngIf="fieldType === 'input'; else textarea" [formControl]="formControl" />
   <ng-template #textarea>

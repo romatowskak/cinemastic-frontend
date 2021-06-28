@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, map, catchError, withLatestFrom, tap, filter } from 'rxjs/internal/operators';
+import { switchMap, map, catchError, withLatestFrom, tap, filter, mapTo } from 'rxjs/internal/operators';
 import * as MoviesActions from '../actions/movies.actions';
 import { MoviesService } from '../../services/movies.service';
 import { State } from '../reducers';
@@ -60,24 +60,38 @@ export class MoviesEffects {
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieRequest),
       map((action) => action.payload),
-      switchMap(({ movie, uploadPhotos }) => {
+      switchMap(({ movie, uploadPhotos, coverPhoto }) => {
         return this.moviesService.updateMovie(movie).pipe(
-          map((movie) => MoviesActions.updateMovieSuccess({ payload: { movie, uploadPhotos } })),
+          map((movie) => MoviesActions.updateMovieSuccess({ payload: { movie, uploadPhotos, coverPhoto } })),
           catchError((error) => of(MoviesActions.updateMovieFailure({ payload: error })))
         );
       })
     )
   );
 
-  uploadPhotos$ = createEffect(() =>
+  uploadCoverPhoto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.updateMovieSuccess),
+      map((action) => action.payload),
+      filter((payload) => !!payload.coverPhoto),
+      switchMap(({ movie, coverPhoto }) => {
+        return this.moviesService.uploadPhotos(coverPhoto).pipe(
+          map((coverPhoto) => MoviesActions.uploadCoverPhotoSuccess({ payload: { movie, coverPhoto } })),
+          catchError((error) => of(MoviesActions.uploadCoverPhotoFailure({ payload: error })))
+        );
+      })
+    )
+  );
+
+  uploadGalleryPhotos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieSuccess),
       map((action) => action.payload),
       filter((payload) => !!payload.uploadPhotos.length),
       switchMap(({ movie, uploadPhotos }) => {
         return this.moviesService.uploadPhotos(uploadPhotos).pipe(
-          map((uploadPhotos) => MoviesActions.uploadPhotosSuccess({ payload: { movie, uploadPhotos } })),
-          catchError((error) => of(MoviesActions.uploadPhotosFailure({ payload: error })))
+          map((uploadPhotos) => MoviesActions.uploadGalleryPhotosSuccess({ payload: { movie, uploadPhotos } })),
+          catchError((error) => of(MoviesActions.uploadGalleryPhotosFailure({ payload: error })))
         );
       })
     )
@@ -85,10 +99,21 @@ export class MoviesEffects {
 
   updateMovieGallery$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.uploadPhotosSuccess),
+      ofType(MoviesActions.uploadGalleryPhotosSuccess),
       map((action) => action.payload),
       map(({ movie, uploadPhotos }) => {
         const cinemaMovie = { ...movie, gallery: [...movie.gallery, ...uploadPhotos] };
+        return MoviesActions.updateMovieRequest({ payload: { movie: cinemaMovie } });
+      })
+    )
+  );
+
+  updateMovieCoverPhoto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.uploadCoverPhotoSuccess),
+      map((action) => action.payload),
+      map(({ movie, coverPhoto }) => {
+        const cinemaMovie = { ...movie, coverPhoto };
         return MoviesActions.updateMovieRequest({ payload: { movie: cinemaMovie } });
       })
     )
@@ -210,12 +235,30 @@ export class MoviesEffects {
     )
   );
 
+  refreshReservations$ = createEffect(() =>
+    this.actions$.pipe(ofType(MoviesActions.removeReservationSuccess), mapTo(MoviesActions.getReservationsRequest()))
+  );
+
+  removeReservation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.removeReservationRequest),
+      map((action) => action.payload),
+      switchMap(({ reservationId }) =>
+        this.moviesService.removeReservation(reservationId).pipe(
+          map(() => MoviesActions.removeReservationSuccess()),
+          catchError((error) => of(MoviesActions.removeReservationFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
   redirectOnReservationSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(MoviesActions.addReservationSuccess),
-        tap(() => {
-          this.router.navigate(['/cinemastic/movies']);
+        map((action) => action.payload),
+        tap((reservation) => {
+          this.router.navigate([`/cinemastic/reservations/${reservation.user.id}`]);
         })
       ),
     { dispatch: false }

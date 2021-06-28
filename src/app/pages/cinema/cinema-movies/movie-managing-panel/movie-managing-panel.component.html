@@ -4,74 +4,84 @@
     {{ movieManagingPanelTitle | translate | uppercase }} <span class="title-movie">{{ "movie.managing.panel.movie" | translate }}</span>
   </p>
   <form class="edit-form" *ngIf="movieManagingForm" [formGroup]="movieManagingForm">
-    <app-form-field [control]="movieManagingForm.get('title')" [label]="'movie.managing.panel.label.title' | translate"></app-form-field>
-    <app-form-field [control]="movieManagingForm.get('genre')" [label]="'movie.managing.panel.label.genre' | translate"></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('production')"
-      [label]="'movie.managing.panel.label.production' | translate"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('director')"
-      [label]="'movie.managing.panel.label.director' | translate"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('duration')"
-      [label]="'movie.managing.panel.label.duration' | translate"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('originalLanguage')"
-      [label]="'movie.managing.panel.label.original_language' | translate"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('subtitles')"
-      [label]="'movie.managing.panel.label.subtitles' | translate"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('releaseDate')"
-      [label]="'movie.managing.panel.label.release_date' | translate"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('releaseDate')"
-      [label]="'movie.managing.panel.label.release_date' | translate"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('overview')"
-      [label]="'movie.managing.panel.label.overview' | translate"
-      fieldType="textarea"
-    ></app-form-field>
-    <app-form-field
-      [control]="movieManagingForm.get('trailer')"
-      [label]="'movie.managing.panel.label.trailer' | translate"
-    ></app-form-field>
-    <div class="adult-toggle">
-      <p class="adult-toggle-label">{{ "movie.managing.panel.label.adult" | translate }}</p>
-      <mat-slide-toggle formControlName="adult" color="primary"></mat-slide-toggle>
+    <div class="form-left-section">
+      <app-form-field [control]="movieManagingForm.get('title')" [label]="'movie.managing.panel.label.title' | translate"></app-form-field>
+      <app-form-field [control]="movieManagingForm.get('genre')" [label]="'movie.managing.panel.label.genre' | translate"></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('production')"
+        [label]="'movie.managing.panel.label.production' | translate"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('director')"
+        [label]="'movie.managing.panel.label.director' | translate"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('duration')"
+        [label]="'movie.managing.panel.label.duration' | translate"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('originalLanguage')"
+        [label]="'movie.managing.panel.label.original_language' | translate"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('subtitles')"
+        [label]="'movie.managing.panel.label.subtitles' | translate"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('releaseDate')"
+        [label]="'movie.managing.panel.label.release_date' | translate"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('releaseDate')"
+        [label]="'movie.managing.panel.label.release_date' | translate"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('overview')"
+        [label]="'movie.managing.panel.label.overview' | translate"
+        fieldType="textarea"
+      ></app-form-field>
+      <app-form-field
+        [control]="movieManagingForm.get('trailer')"
+        [label]="'movie.managing.panel.label.trailer' | translate"
+      ></app-form-field>
+      <div class="adult-toggle">
+        <p class="adult-toggle-label">{{ "movie.managing.panel.label.adult" | translate }}</p>
+        <mat-slide-toggle formControlName="adult" color="primary"></mat-slide-toggle>
+      </div>
     </div>
-    <div class="gallery-photos-upload">
-      <button mat-stroked-button (click)="fileInput.click()" type="button" class="attach-photos-button">
-        <mat-icon class="attach-file-icon" svgIcon="folder"></mat-icon>
-        <p>{{ "movie.managing.panel.attach_movie_photos" | translate }}</p>
-        <input type="file" #fileInput (change)="galleryPhotosChange($event.target.files)" style="display: none" />
-      </button>
-      <div class="photos-list">
-        <div *ngFor="let photo of galleryPhotos; let i = index" class="file">
-          <p class="name">
-            {{ photo.file.name }}
-          </p>
-          <button type="button" mat-icon-button>
-            <mat-icon>close</mat-icon>
-          </button>
+    <div class="form-right-section">
+      <div class="cover-photo-upload">
+        <button mat-stroked-button (click)="coverPhotoInput.click()" type="button" class="attach-photos-button">
+          <mat-icon class="attach-file-icon" svgIcon="folder"></mat-icon>
+          <p>{{ "movie.managing.panel.attach_cover_photo" | translate }}</p>
+          <input type="file" #coverPhotoInput (change)="coverPhotoChange($event.target.files)" style="display: none" />
+        </button>
+        <div class="uploaded-container" *ngIf="movieManagingForm.get('coverPhoto').value">
+          <div class="file">
+            <p class="name">
+              <span>{{ movieManagingForm.get("coverPhoto").value?.name }} </span>
+            </p>
+            <button type="button" mat-icon-button>
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="photos-list">
-        <p class="photos-list-header">{{ "movie.managing.panel.photos" | translate }}</p>
-        <div *ngFor="let photo of movieManagingForm.get('gallery').value; let i = index" class="file">
-          <p class="name">
-            {{ photo.name }}
-          </p>
-          <button type="button" mat-icon-button>
-            <mat-icon>close</mat-icon>
-          </button>
+      <div class="gallery-photos-upload">
+        <button mat-stroked-button (click)="galleryPhotoInput.click()" type="button" class="attach-photos-button">
+          <mat-icon class="attach-file-icon" svgIcon="folder"></mat-icon>
+          <p>{{ "movie.managing.panel.attach_gallery_photos" | translate }}</p>
+          <input type="file" #galleryPhotoInput (change)="galleryPhotosChange($event.target.files)" style="display: none" />
+        </button>
+        <div class="uploaded-container" *ngIf="movieManagingForm.get('gallery').value.length">
+          <div *ngFor="let photo of movieManagingForm.get('gallery').value; let i = index" class="file">
+            <p class="name">
+              {{ photo.name }}
+            </p>
+            <button type="button" mat-icon-button>
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>

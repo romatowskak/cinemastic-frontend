@@ -31,10 +31,42 @@
 .signed-in-user {
   display: flex;
   align-items: center;
-  color: var(--white);
-  font-size: 20px;
   margin-bottom: 20px;
   z-index: 1;
+}
+
+.user-button {
+  background: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .user-name,
+    .arrow-icon {
+      color: var(--green);
+    }
+  }
+}
+
+.user-name {
+  color: var(--white);
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.mat-menu-item {
+  color: var(--white);
+  font-size: 18px;
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.arrow-icon {
+  color: var(--white);
+  font-size: 30px;
+  margin-bottom: 3px;
 }
 
 .mat-tab-link {

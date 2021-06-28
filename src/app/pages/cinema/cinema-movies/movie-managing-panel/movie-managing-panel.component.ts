@@ -57,19 +57,24 @@ export class MovieManagingPanelComponent implements OnInit {
         file: photos[0],
       });
     }
+
+    const { gallery } = this.movieManagingForm.controls;
+    gallery.setValue([...this.galleryPhotos.map((photo) => photo.file), ...gallery.value]);
   }
 
-  coverPhotoChange(file) {
+  coverPhotoChange(photos) {
     this.coverPhoto = {
       uuid: String(new Date().getTime()),
-      file,
+      file: photos[0],
     };
+
+    this.movieManagingForm.get('coverPhoto').setValue(this.coverPhoto.file);
   }
 
   saveChanges() {
     const { movieId } = this.currentRoute.snapshot.params;
     const movie = this.movieManagingForm.value;
-    const payload = { movie: { ...movie, id: movieId }, uploadPhotos: this.galleryPhotos };
+    const payload = { movie: { ...movie, id: movieId }, uploadPhotos: this.galleryPhotos, coverPhoto: this.coverPhoto };
     if (movieId) {
       this.store.dispatch(updateMovieRequest({ payload }));
     } else {

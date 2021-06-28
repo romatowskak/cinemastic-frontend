@@ -6,21 +6,30 @@
 }
 
 .auditorium-banner {
-  height: 600px;
-  width: 100vw;
-  background: url('/assets/images/auditorium-banner.jpeg'), linear-gradient(#07245f5f, #07245ffc);
-  background-blend-mode: multiply;
+  height: 575px;
+  background: url('/assets/images/auditorium-banner.jpeg');
+  background-color: rgba(31, 65, 109, 0.322);
+  background-blend-mode: difference;
   background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.3;
+  transform: scale(1.1);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
 }
 
-.auditorium-banner-movie {
+.auditorium-banner-header {
+  color: var(--white);
+  text-align: center;
+  position: absolute;
+  top: 260px;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +45,7 @@
   display: flex;
   color: var(--white);
   justify-content: space-evenly;
-  width: 50%;
+  width: 10%;
 }
 
 .auditorium {
