@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getMovieDetailsRequest, addRatingRequest, updateRatingRequest } from 'src/app/core/store/actions/movies.actions';
@@ -15,15 +15,18 @@ import { MatDialog } from '@angular/material';
 import { RemoveMovieDialogComponent } from '../../remove-movie-dialog/remove-movie-dialog.component';
 import { MovieTrailerDialogComponent } from '../../movie-trailer-dialog/movie-trailer-dialog.component';
 import { MovieScreeningsDialogComponent } from '../../movie-screenings-dialog/movie-screenings-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss'],
 })
-export class MovieDetailsComponent implements OnInit {
-  movieDetails: Movie;
+export class MovieDetailsComponent implements OnInit, OnDestroy {
+  userSubscription: Subscription;
+  movieDetailsSubscription: Subscription;
   user: User;
+  movieDetails: Movie;
   apiUrl = environment.apiUrl;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryPhotos: NgxGalleryImage[] = [];
@@ -32,7 +35,7 @@ export class MovieDetailsComponent implements OnInit {
   constructor(private store: Store<State>, private currentRoute: ActivatedRoute, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.store.select(getSignedInUserSelector).subscribe((user: User) => {
+    this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user: User) => {
       this.user = user;
     });
 
@@ -89,5 +92,10 @@ export class MovieDetailsComponent implements OnInit {
       height: 'auto',
       data: movie,
     });
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+    this.movieDetailsSubscription.unsubscribe();
   }
 }

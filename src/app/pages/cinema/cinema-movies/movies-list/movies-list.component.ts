@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { State } from 'src/app/core/store/reducers';
@@ -22,9 +22,10 @@ import { MovieTrailerDialogComponent } from '../movie-trailer-dialog/movie-trail
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.scss'],
 })
-export class MoviesListComponent implements OnInit {
+export class MoviesListComponent implements OnInit, OnDestroy {
   movies: Movie[] = [];
   moviesSubscription: Subscription;
+  userSubscription: Subscription;
   filteredMovies: Movie[];
   movieGenreImageDictionary = MovieGenreImageDictionary;
   apiUrl = environment.apiUrl;
@@ -37,14 +38,13 @@ export class MoviesListComponent implements OnInit {
     { value: 'Saturday', day: 'movie.screenings.saturday' },
     { value: 'Sunday', day: 'movie.screenings.sunday' },
   ];
-
   dayParam: string;
   user: User;
 
   constructor(private store: Store<State>, private router: Router, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.store.select(getSignedInUserSelector).subscribe((user) => {
+    this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user) => {
       this.user = user;
     });
 
@@ -56,6 +56,7 @@ export class MoviesListComponent implements OnInit {
 
       this.filterMovies(queryParams);
     });
+
     this.currentRoute.queryParams.subscribe((queryParams) => {
       this.dayParam = queryParams.day;
       this.filterMovies(queryParams);
@@ -128,6 +129,7 @@ export class MoviesListComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.userSubscription.unsubscribe();
     this.moviesSubscription.unsubscribe();
   }
 }
