@@ -12,6 +12,7 @@ import { AuditoriumSeat } from 'src/app/shared/models/AuditoriumSeat';
 import { MovieScreening } from '../../../shared/models/MovieScreening';
 import { MovieReservation } from '../../../shared/models/MovieReservation';
 import { User } from 'src/app/shared/models/User';
+import { arrangeSeatsInNumericalOrder } from 'src/app/shared/utils/helpers';
 
 @Component({
   selector: 'app-cinema-auditorium',
@@ -66,15 +67,13 @@ export class CinemaAuditoriumComponent implements OnInit {
         user: this.user.user,
         screening: this.currentScreening,
         seat,
+        movie: this.currentScreening.movie,
       };
       this.store.dispatch(addReservationRequest({ payload: { reservation } }));
     });
   }
 
   goToMovieDetails(movieId: number) {
-    this.router.navigate(['/cinemastic/movie/', movieId]);
+    this.router.navigate(['/cinemastic/movies/', movieId]);
   }
-}
-function arrangeSeatsInNumericalOrder(seats: any[]): any[] {
-  throw new Error('Function not implemented.');
 }

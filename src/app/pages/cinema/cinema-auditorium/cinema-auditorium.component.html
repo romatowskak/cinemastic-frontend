@@ -1,12 +1,11 @@
 <div class="auditorium-container">
-  <div class="auditorium-banner">
-    <div class="auditorium-banner-movie">
-      <span class="movie-title">{{ currentScreening?.movie.title }}</span>
-      <div class="movie-details">
-        <span>{{ currentScreening?.movie.originalLanguage | uppercase }}</span>
-        <span>|</span>
-        <span>{{ currentScreening?.movie.duration | movieDuration }}</span>
-      </div>
+  <div class="auditorium-banner"></div>
+  <div class="auditorium-banner-header">
+    <span class="movie-title">{{ currentScreening?.movie.title }}</span>
+    <div class="movie-details">
+      <span>{{ currentScreening?.movie.originalLanguage | uppercase }}</span>
+      <span>|</span>
+      <span>{{ currentScreening?.movie.duration | movieDuration }}</span>
     </div>
   </div>
   <div class="auditorium">

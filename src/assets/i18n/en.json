@@ -11,6 +11,7 @@
   "auth.forgotten_password": "Forgot your password?",
   "cinema.menu.movies": "Movies",
   "cinema.menu.user": "Welcome, {{userName}}!",
+  "cinema.menu.my_reservations": "My reservations",
   "movies.banner.header.catch": "Catch",
   "movies.banner.header.movie": "Movie",
   "movies.banner.header.before_everyone": "Before everyone",
@@ -40,7 +41,8 @@
   "movie.managing.panel.label.release_date": "Release date",
   "movie.managing.panel.label.overview": "Overview",
   "movie.managing.panel.label.trailer": "Trailer",
-  "movie.managing.panel.attach_movie_photos": "Attach movie photos",
+  "movie.managing.panel.attach_cover_photo": "Attach movie cover photo",
+  "movie.managing.panel.attach_gallery_photos": "Attach movie gallery photos",
   "movie.managing.panel.photos": "Photos",
   "cinema.auditorium.details.button": "Go to movie details",
   "cinema.auditorium.details.screen": "Screen",
@@ -54,5 +56,12 @@
   "movie.screenings.thursday": "Thursday",
   "movie.screenings.friday": "Friday",
   "movie.screenings.saturday": "Saturday",
-  "movie.screenings.sunday": "Sunday"
+  "movie.screenings.sunday": "Sunday",
+  "user.reservations.header": "Your reservations",
+  "user.reservations.reservation": "Reservation",
+  "user.reservations.movie": "Movie",
+  "user.reservations.auditorium": "Auditorium",
+  "user.reservations.seat": "Seat",
+  "user.reservations.day": "Day",
+  "user.reservations.hour": "Hour"
 }

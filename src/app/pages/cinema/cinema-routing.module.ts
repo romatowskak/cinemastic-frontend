@@ -6,6 +6,7 @@ import { MovieManagingPanelComponent } from './cinema-movies/movie-managing-pane
 import { CinemaAuditoriumComponent } from './cinema-auditorium/cinema-auditorium.component';
 import { CinemaComponent } from './cinema.component';
 import { CinemaAccessGuard } from 'src/app/shared/guards/cinema-access-guard/cinema-access.guard';
+import { UserReservationsComponent } from './user-reservations/user-reservations.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
         path: 'auditorium/:auditoriumId/screening/:screeningId',
         component: CinemaAuditoriumComponent,
       },
+      { path: 'reservations/:userId', component: UserReservationsComponent },
       { path: '**', redirectTo: '/cinemastic/movies' },
     ],
   },

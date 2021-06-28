@@ -15,11 +15,13 @@ export const UPDATE_MOVIE = createRequestAction('UPDATE_MOVIE');
 export const REMOVE_MOVIE = createRequestAction('REMOVE_MOVIE');
 export const ADD_RATING = createRequestAction('ADD_RATING');
 export const UPDATE_RATING = createRequestAction('UPDATE_RATING');
-export const UPLOAD_PHOTOS = createRequestAction('UPLOAD_PHOTOS');
+export const UPLOAD_GALLERY_PHOTOS = createRequestAction('UPLOAD_GALLERY_PHOTOS');
+export const UPLOAD_COVER_PHOTO = createRequestAction('UPLOAD_COVER_PHOTO');
 export const ADD_SEAT = createRequestAction('ADD_SEAT');
 export const GET_AUDITORIUM = createRequestAction('GET_AUDITORIUM');
 export const GET_RESERVATIONS = createRequestAction('GET_RESERVATIONS');
 export const ADD_RESERVATION = createRequestAction('ADD_RESERVATION');
+export const REMOVE_RESERVATION = createRequestAction('REMOVE_RESERVATION');
 export const GET_SCREENING = createRequestAction('GET_SCREENING');
 
 export const getMoviesRequest = createAction(GET_MOVIES.REQUEST);
@@ -34,8 +36,8 @@ export const addMovieRequest = createAction(ADD_MOVIE.REQUEST, props<{ payload: 
 export const addMovieSuccess = createAction(ADD_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos? } }>());
 export const addMovieFailure = createAction(ADD_MOVIE.FAILURE, props<{ payload: HttpErrorResponse }>());
 
-export const updateMovieRequest = createAction(UPDATE_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos? } }>());
-export const updateMovieSuccess = createAction(UPDATE_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos? } }>());
+export const updateMovieRequest = createAction(UPDATE_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
+export const updateMovieSuccess = createAction(UPDATE_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
 export const updateMovieFailure = createAction(UPDATE_MOVIE.FAILURE, props<{ payload: HttpErrorResponse }>());
 
 export const removeMovieRequest = createAction(REMOVE_MOVIE.REQUEST, props<{ payload: { movieId: number } }>());
@@ -50,9 +52,13 @@ export const updateRatingRequest = createAction(UPDATE_RATING.REQUEST, props<{ p
 export const updateRatingSuccess = createAction(UPDATE_RATING.SUCCESS, props<{ payload: MovieRating }>());
 export const updateRatingFailure = createAction(UPDATE_RATING.FAILURE, props<{ payload: HttpErrorResponse }>());
 
-export const uploadPhotosRequest = createAction(UPLOAD_PHOTOS.REQUEST, props<{ payload: { movie: Movie; uploadPhotos } }>());
-export const uploadPhotosSuccess = createAction(UPLOAD_PHOTOS.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos } }>());
-export const uploadPhotosFailure = createAction(UPLOAD_PHOTOS.FAILURE, props<{ payload: HttpErrorResponse }>());
+export const uploadGalleryPhotosRequest = createAction(UPLOAD_GALLERY_PHOTOS.REQUEST, props<{ payload: { movie: Movie; uploadPhotos } }>());
+export const uploadGalleryPhotosSuccess = createAction(UPLOAD_GALLERY_PHOTOS.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos } }>());
+export const uploadGalleryPhotosFailure = createAction(UPLOAD_GALLERY_PHOTOS.FAILURE, props<{ payload: HttpErrorResponse }>());
+
+export const uploadCoverPhotoRequest = createAction(UPLOAD_COVER_PHOTO.REQUEST, props<{ payload: { movie: Movie; coverPhoto? } }>());
+export const uploadCoverPhotoSuccess = createAction(UPLOAD_COVER_PHOTO.SUCCESS, props<{ payload: { movie: Movie; coverPhoto? } }>());
+export const uploadCoverPhotoFailure = createAction(UPLOAD_COVER_PHOTO.FAILURE, props<{ payload: HttpErrorResponse }>());
 
 export const addSeatRequest = createAction(ADD_SEAT.REQUEST, props<{ payload: AuditoriumSeat }>());
 export const addSeatSuccess = createAction(ADD_SEAT.SUCCESS, props<{ payload: AuditoriumSeat }>());
@@ -69,6 +75,10 @@ export const getReservationsFailure = createAction(GET_RESERVATIONS.FAILURE, pro
 export const addReservationRequest = createAction(ADD_RESERVATION.REQUEST, props<{ payload: { reservation: MovieReservation } }>());
 export const addReservationSuccess = createAction(ADD_RESERVATION.SUCCESS, props<{ payload: MovieReservation }>());
 export const addReservationFailure = createAction(ADD_RESERVATION.FAILURE, props<{ payload: HttpErrorResponse }>());
+
+export const removeReservationRequest = createAction(REMOVE_RESERVATION.REQUEST, props<{ payload: { reservationId: number } }>());
+export const removeReservationSuccess = createAction(REMOVE_RESERVATION.SUCCESS);
+export const removeReservationFailure = createAction(REMOVE_RESERVATION.FAILURE, props<{ payload: HttpErrorResponse }>());
 
 export const getScreeningRequest = createAction(GET_SCREENING.REQUEST, props<{ payload: { screeningId: number } }>());
 export const getScreeningSuccess = createAction(GET_SCREENING.SUCCESS, props<{ payload: MovieScreening }>());
