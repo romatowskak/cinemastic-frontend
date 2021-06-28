@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,15 +7,17 @@ import { State } from 'src/app/core/store/reducers';
 import { getMovieDetailsSelector } from 'src/app/core/store/reducers/movies.reducer';
 import { Movie } from 'src/app/shared/models/Movie';
 import { MoviePhoto } from '../../../../shared/models/MoviePhoto';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-managing-panel',
   templateUrl: './movie-managing-panel.component.html',
   styleUrls: ['./movie-managing-panel.component.scss'],
 })
-export class MovieManagingPanelComponent implements OnInit {
+export class MovieManagingPanelComponent implements OnInit, OnDestroy {
   movieManagingForm: FormGroup;
   movieManagingPanelTitle: string;
+  moviesSubscription: Subscription;
   galleryPhotos: { uuid: string; file: MoviePhoto }[] = [];
   coverPhoto: { uuid: string; file: MoviePhoto };
 
@@ -26,7 +28,7 @@ export class MovieManagingPanelComponent implements OnInit {
     this.movieManagingPanelTitle = movieId ? 'movie.managing.panel.edit' : 'movie.managing.panel.add';
     if (movieId) {
       this.store.dispatch(getMovieDetailsRequest({ payload: { movieId: +movieId } }));
-      this.store.select(getMovieDetailsSelector).subscribe((movieDetails: Movie) => {
+      this.moviesSubscription = this.store.select(getMovieDetailsSelector).subscribe((movieDetails: Movie) => {
         this.createForm(movieDetails);
       });
     } else this.createForm();
@@ -80,5 +82,9 @@ export class MovieManagingPanelComponent implements OnInit {
     } else {
       this.store.dispatch(addMovieRequest({ payload }));
     }
+  }
+
+  ngOnDestroy() {
+    this.moviesSubscription.unsubscribe();
   }
 }

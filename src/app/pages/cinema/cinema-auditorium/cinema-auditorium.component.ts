@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/core/store/reducers';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,17 +13,22 @@ import { MovieScreening } from '../../../shared/models/MovieScreening';
 import { MovieReservation } from '../../../shared/models/MovieReservation';
 import { User } from 'src/app/shared/models/User';
 import { arrangeSeatsInNumericalOrder } from 'src/app/shared/utils/helpers';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cinema-auditorium',
   templateUrl: './cinema-auditorium.component.html',
   styleUrls: ['./cinema-auditorium.component.scss'],
 })
-export class CinemaAuditoriumComponent implements OnInit {
+export class CinemaAuditoriumComponent implements OnInit, OnDestroy {
   screeningSeatSelection = new SelectionModel<number>(true);
   reservationSeatSelection = new SelectionModel<AuditoriumSeat>(true);
+  auditoriumSubscription: Subscription;
+  reservationsSubscription: Subscription;
+  screeningSubscription: Subscription;
   auditorium: CinemaAuditorium;
   currentScreening: MovieScreening;
+  userSubscription: Subscription;
   user: User;
 
   constructor(private store: Store<State>, private currentRoute: ActivatedRoute, private router: Router) {}
@@ -35,22 +40,22 @@ export class CinemaAuditoriumComponent implements OnInit {
     this.store.dispatch(getReservationsRequest());
     this.store.dispatch(getScreeningRequest({ payload: { screeningId: +screeningId } }));
 
-    this.store.select(getAuditoriumSelector).subscribe((auditorium: CinemaAuditorium) => {
+    this.auditoriumSubscription = this.store.select(getAuditoriumSelector).subscribe((auditorium: CinemaAuditorium) => {
       this.auditorium = auditorium && { ...auditorium, seats: arrangeSeatsInNumericalOrder(auditorium.seats) };
     });
 
-    this.store.select(getReservationsSelector).subscribe((reservations: MovieReservation[]) => {
+    this.reservationsSubscription = this.store.select(getReservationsSelector).subscribe((reservations: MovieReservation[]) => {
       const screeningReservedSeats = reservations.map(
         (reservation: MovieReservation) => reservation.screening.id === +screeningId && reservation.seat.id
       );
       this.screeningSeatSelection.select(...screeningReservedSeats);
     });
 
-    this.store.select(getScreeeningSelector).subscribe((screening: MovieScreening) => {
+    this.screeningSubscription = this.store.select(getScreeeningSelector).subscribe((screening: MovieScreening) => {
       this.currentScreening = screening;
     });
 
-    this.store.select(getSignedInUserSelector).subscribe((user: User) => {
+    this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user: User) => {
       this.user = user;
     });
   }
@@ -75,5 +80,12 @@ export class CinemaAuditoriumComponent implements OnInit {
 
   goToMovieDetails(movieId: number) {
     this.router.navigate(['/cinemastic/movies/', movieId]);
+  }
+
+  ngOnDestroy() {
+    this.auditoriumSubscription.unsubscribe();
+    this.reservationsSubscription.unsubscribe();
+    this.screeningSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }

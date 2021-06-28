@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -9,14 +9,17 @@ import { getReservationsSelector } from 'src/app/core/store/reducers/movies.redu
 import { User } from 'src/app/shared/models/User';
 import { MovieReservation } from '../../../shared/models/MovieReservation';
 import { removeReservationRequest } from '../../../core/store/actions/movies.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-reservations',
   templateUrl: './user-reservations.component.html',
   styleUrls: ['./user-reservations.component.scss'],
 })
-export class UserReservationsComponent implements OnInit {
+export class UserReservationsComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<MovieReservation>;
+  reservationsSubscription: Subscription;
+  userSubscription: Subscription;
   displayedColumns: string[];
   userReservations: MovieReservation[];
   user: User;
@@ -40,5 +43,10 @@ export class UserReservationsComponent implements OnInit {
 
   cancelReservation(reservationId: number) {
     this.store.dispatch(removeReservationRequest({ payload: { reservationId } }));
+  }
+
+  ngOnDestroy() {
+    this.reservationsSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }
