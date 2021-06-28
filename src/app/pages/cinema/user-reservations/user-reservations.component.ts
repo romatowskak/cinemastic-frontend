@@ -32,11 +32,11 @@ export class UserReservationsComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource<MovieReservation>([]);
     this.store.dispatch(getReservationsRequest());
 
-    this.store.select(getReservationsSelector).subscribe((reservations: MovieReservation[]) => {
+    this.reservationsSubscription = this.store.select(getReservationsSelector).subscribe((reservations: MovieReservation[]) => {
       this.dataSource.data = reservations.filter((reservation: MovieReservation) => reservation.user.id === +userId);
     });
 
-    this.store.select(getSignedInUserSelector).subscribe((user: User) => {
+    this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user: User) => {
       this.user = user;
     });
   }

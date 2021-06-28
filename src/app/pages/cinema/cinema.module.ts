@@ -16,6 +16,10 @@ import { MovieTrailerDialogComponent } from './cinema-movies/movie-trailer-dialo
 import { ToolbarMenuTabComponent } from './toolbar-menu-tab/toolbar-menu-tab.component';
 import { CinemaAccessGuard } from 'src/app/shared/guards/cinema-access-guard/cinema-access.guard';
 import { UserReservationsComponent } from './user-reservations/user-reservations.component';
+import { MoviesResolver } from 'src/app/core/resolvers/MoviesResolver';
+import { MovieDetailsResolver } from 'src/app/core/resolvers/MovieDetailsResolver';
+import { ReservationsResolver } from 'src/app/core/resolvers/ReservationsResolver';
+import { AuditoriumResolver } from 'src/app/core/resolvers/AuditoriumResolver';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,6 @@ import { UserReservationsComponent } from './user-reservations/user-reservations
   ],
   imports: [CinemaRoutingModule, SharedModule],
   entryComponents: [RemoveMovieDialogComponent, MovieScreeningsDialogComponent, MovieTrailerDialogComponent],
-  providers: [CinemaAccessGuard],
+  providers: [CinemaAccessGuard, MoviesResolver, MovieDetailsResolver, ReservationsResolver, AuditoriumResolver],
 })
 export class CinemaModule {}

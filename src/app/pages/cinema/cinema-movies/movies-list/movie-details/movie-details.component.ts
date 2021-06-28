@@ -41,9 +41,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
     const { movieId } = this.currentRoute.snapshot.params;
     this.store.dispatch(getMovieDetailsRequest({ payload: { movieId: +movieId } }));
-    this.store.select(getMovieDetailsSelector).subscribe((movieDetails: Movie) => {
+    this.movieDetailsSubscription = this.store.select(getMovieDetailsSelector).subscribe((movieDetails: Movie) => {
       this.movieDetails = movieDetails;
-
       this.currentUserRating = movieDetails && movieDetails.ratings.find((rating: MovieRating) => rating.user === this.user.user.id);
 
       this.galleryOptions = [
