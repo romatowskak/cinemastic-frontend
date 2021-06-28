@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,17 +7,16 @@ import { State } from 'src/app/core/store/reducers';
 import { getMovieDetailsSelector } from 'src/app/core/store/reducers/movies.reducer';
 import { Movie } from 'src/app/shared/models/Movie';
 import { MoviePhoto } from '../../../../shared/models/MoviePhoto';
-import { Subscription } from 'rxjs';
+import { Pattern } from '../../../../shared/constants/RegexPattern';
 
 @Component({
   selector: 'app-movie-managing-panel',
   templateUrl: './movie-managing-panel.component.html',
   styleUrls: ['./movie-managing-panel.component.scss'],
 })
-export class MovieManagingPanelComponent implements OnInit, OnDestroy {
+export class MovieManagingPanelComponent implements OnInit {
   movieManagingForm: FormGroup;
   movieManagingPanelTitle: string;
-  moviesSubscription: Subscription;
   galleryPhotos: { uuid: string; file: MoviePhoto }[] = [];
   coverPhoto: { uuid: string; file: MoviePhoto };
 
@@ -28,7 +27,7 @@ export class MovieManagingPanelComponent implements OnInit, OnDestroy {
     this.movieManagingPanelTitle = movieId ? 'movie.managing.panel.edit' : 'movie.managing.panel.add';
     if (movieId) {
       this.store.dispatch(getMovieDetailsRequest({ payload: { movieId: +movieId } }));
-      this.moviesSubscription = this.store.select(getMovieDetailsSelector).subscribe((movieDetails: Movie) => {
+      this.store.select(getMovieDetailsSelector).subscribe((movieDetails: Movie) => {
         this.createForm(movieDetails);
       });
     } else this.createForm();
@@ -40,14 +39,14 @@ export class MovieManagingPanelComponent implements OnInit, OnDestroy {
       genre: [(movieDetails && movieDetails.genre) || '', Validators.required],
       production: [(movieDetails && movieDetails.production) || '', Validators.required],
       director: [(movieDetails && movieDetails.director) || '', Validators.required],
-      duration: [(movieDetails && movieDetails.duration) || '', Validators.required],
+      duration: [(movieDetails && movieDetails.duration) || '', [Validators.required, Validators.pattern(Pattern.commaNotationNumber)]],
       adult: [(movieDetails && movieDetails.adult) || false, Validators.required],
       originalLanguage: [(movieDetails && movieDetails.originalLanguage) || '', Validators.required],
       subtitles: [(movieDetails && movieDetails.subtitles) || '', Validators.required],
       releaseDate: [(movieDetails && movieDetails.releaseDate) || '', Validators.required],
       overview: [(movieDetails && movieDetails.overview) || '', Validators.required],
-      trailer: [(movieDetails && movieDetails.trailer) || '', Validators.required],
-      coverPhoto: [(movieDetails && movieDetails.coverPhoto) || null],
+      trailer: [(movieDetails && movieDetails.trailer) || '', [Validators.required, Validators.pattern(Pattern.link)]],
+      coverPhoto: [(movieDetails && movieDetails.coverPhoto) || null, Validators.required],
       gallery: [(movieDetails && movieDetails.gallery) || []],
     });
   }
@@ -82,9 +81,5 @@ export class MovieManagingPanelComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(addMovieRequest({ payload }));
     }
-  }
-
-  ngOnDestroy() {
-    this.moviesSubscription.unsubscribe();
   }
 }

@@ -1,12 +1,12 @@
 <div class="movies-filter-container">
   <div class="movie-search">
-    <h1 class="movie-search-header">search movie</h1>
+    <h1 class="movie-search-header">{{ "movies.filter.search" | translate }}</h1>
     <div class="search">
       <div class="search-input-container">
         <input
           (input)="search($event.target.value)"
           [value]="searchInputValue"
-          placeholder="Search movie by name"
+          [placeholder]="'movies.filter.search_placeholder' | translate"
           class="search-input"
           #searchInput
         />

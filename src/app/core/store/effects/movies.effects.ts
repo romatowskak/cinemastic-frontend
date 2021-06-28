@@ -47,9 +47,9 @@ export class MoviesEffects {
     this.actions$.pipe(
       ofType(MoviesActions.addMovieRequest),
       map((action) => action.payload),
-      switchMap(({ movie, uploadPhotos }) =>
+      switchMap(({ movie, uploadPhotos, coverPhoto }) =>
         this.moviesService.addMovie(movie).pipe(
-          map((movie) => MoviesActions.addMovieSuccess({ payload: { movie, uploadPhotos } })),
+          map((movie) => MoviesActions.addMovieSuccess({ payload: { movie, uploadPhotos, coverPhoto } })),
           catchError((error) => of(MoviesActions.addMovieFailure({ payload: error })))
         )
       )
@@ -71,7 +71,7 @@ export class MoviesEffects {
 
   uploadCoverPhoto$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.updateMovieSuccess),
+      ofType(MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
       map((action) => action.payload),
       filter((payload) => !!payload.coverPhoto),
       switchMap(({ movie, coverPhoto }) => {
@@ -85,7 +85,7 @@ export class MoviesEffects {
 
   uploadGalleryPhotos$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.updateMovieSuccess),
+      ofType(MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
       map((action) => action.payload),
       filter((payload) => !!payload.uploadPhotos.length),
       switchMap(({ movie, uploadPhotos }) => {

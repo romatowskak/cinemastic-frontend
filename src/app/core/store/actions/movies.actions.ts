@@ -22,8 +22,8 @@ export const getMovieDetailsRequest = createAction(GET_MOVIE_DETAILS.REQUEST, pr
 export const getMovieDetailsSuccess = createAction(GET_MOVIE_DETAILS.SUCCESS, props<{ payload: Movie }>());
 export const getMovieDetailsFailure = createAction(GET_MOVIE_DETAILS.FAILURE, props<{ payload: HttpErrorResponse }>());
 
-export const addMovieRequest = createAction(ADD_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos? } }>());
-export const addMovieSuccess = createAction(ADD_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos? } }>());
+export const addMovieRequest = createAction(ADD_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
+export const addMovieSuccess = createAction(ADD_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
 export const addMovieFailure = createAction(ADD_MOVIE.FAILURE, props<{ payload: HttpErrorResponse }>());
 
 export const updateMovieRequest = createAction(UPDATE_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());

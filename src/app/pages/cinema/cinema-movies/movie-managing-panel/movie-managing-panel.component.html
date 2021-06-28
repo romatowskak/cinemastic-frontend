@@ -6,7 +6,14 @@
   <form class="edit-form" *ngIf="movieManagingForm" [formGroup]="movieManagingForm">
     <div class="form-left-section">
       <app-form-field [control]="movieManagingForm.get('title')" [label]="'movie.managing.panel.label.title' | translate"></app-form-field>
-      <app-form-field [control]="movieManagingForm.get('genre')" [label]="'movie.managing.panel.label.genre' | translate"></app-form-field>
+      <mat-form-field appearance="outline" class="genre-field">
+        <mat-label>{{ "movie.managing.panel.label.genre" | translate }}</mat-label>
+        <mat-select formControlName="genre">
+          <mat-option value="COMEDY">{{ "movie.genre.comedy" | translate }}</mat-option>
+          <mat-option value="ANIMATION">{{ "movie.genre.animation" | translate }}</mat-option>
+          <mat-option value="HORROR">{{ "movie.genre.horror" | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
       <app-form-field
         [control]="movieManagingForm.get('production')"
         [label]="'movie.managing.panel.label.production' | translate"
@@ -26,10 +33,6 @@
       <app-form-field
         [control]="movieManagingForm.get('subtitles')"
         [label]="'movie.managing.panel.label.subtitles' | translate"
-      ></app-form-field>
-      <app-form-field
-        [control]="movieManagingForm.get('releaseDate')"
-        [label]="'movie.managing.panel.label.release_date' | translate"
       ></app-form-field>
       <app-form-field
         [control]="movieManagingForm.get('releaseDate')"

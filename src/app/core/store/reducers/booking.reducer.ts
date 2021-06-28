@@ -18,7 +18,6 @@ export const initialState: BookingState = {
 
 const bookingReducer = createReducer(
   initialState,
-
   on(BookingActions.getAuditoriumSuccess, (state, { payload }) => ({ ...state, auditorium: payload })),
   on(BookingActions.getReservationsSuccess, (state, { payload }) => ({ ...state, reservations: payload })),
   on(BookingActions.getScreeningSuccess, (state, { payload }) => ({ ...state, screening: payload }))
