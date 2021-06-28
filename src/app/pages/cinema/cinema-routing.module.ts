@@ -7,6 +7,10 @@ import { CinemaAuditoriumComponent } from './cinema-auditorium/cinema-auditorium
 import { CinemaComponent } from './cinema.component';
 import { CinemaAccessGuard } from 'src/app/shared/guards/cinema-access-guard/cinema-access.guard';
 import { UserReservationsComponent } from './user-reservations/user-reservations.component';
+import { MoviesResolver } from '../../core/resolvers/MoviesResolver';
+import { MovieDetailsResolver } from '../../core/resolvers/MovieDetailsResolver';
+import { ReservationsResolver } from '../../core/resolvers/ReservationsResolver';
+import { AuditoriumResolver } from '../../core/resolvers/AuditoriumResolver';
 
 const routes: Routes = [
   {
@@ -17,10 +21,12 @@ const routes: Routes = [
       {
         path: 'movies',
         component: MoviesComponent,
+        resolve: { MoviesResolver },
       },
       {
         path: 'movies/:movieId',
         component: MovieDetailsComponent,
+        resolve: { MovieDetailsResolver },
       },
       {
         path: 'create',
@@ -33,8 +39,9 @@ const routes: Routes = [
       {
         path: 'auditorium/:auditoriumId/screening/:screeningId',
         component: CinemaAuditoriumComponent,
+        resolve: { AuditoriumResolver },
       },
-      { path: 'reservations/:userId', component: UserReservationsComponent },
+      { path: 'reservations/:userId', component: UserReservationsComponent, resolve: { ReservationsResolver } },
       { path: '**', redirectTo: '/cinemastic/movies' },
     ],
   },
