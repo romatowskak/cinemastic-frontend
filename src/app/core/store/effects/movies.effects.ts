@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, map, catchError, withLatestFrom, filter } from 'rxjs/internal/operators';
+import { switchMap, map, catchError, withLatestFrom, filter, mapTo, tap } from 'rxjs/internal/operators';
 import * as MoviesActions from '../actions/movies.actions';
 import { MoviesService } from '../../services/movies.service';
 import { State } from '../reducers';
@@ -171,12 +171,22 @@ export class MoviesEffects {
     )
   );
 
-  refreshSelectedMovieDetails$ = createEffect(() =>
+  refreshMovies$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.updateMovieSuccess),
-      map((action) => action.payload),
-      map(({ movie }) => MoviesActions.getMovieDetailsRequest({ payload: { movieId: movie.id } }))
+      ofType(MoviesActions.removeMovieSuccess, MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
+      mapTo(MoviesActions.getMoviesRequest())
     )
+  );
+
+  redirectAfterMovieRemove$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(MoviesActions.removeMovieSuccess),
+        tap(() => {
+          this.router.navigate(['/cinemastic/create']);
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(private actions$: Actions, private moviesService: MoviesService, private store: Store<State>, private router: Router) {}

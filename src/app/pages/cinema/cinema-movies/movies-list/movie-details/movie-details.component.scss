@@ -78,15 +78,6 @@
   margin-right: 10px;
 }
 
-.movie-action-button {
-  color: var(--light-purple);
-  font-size: 20px;
-  cursor: pointer;
-  &:hover {
-    color: var(--green);
-  }
-}
-
 .movie-actions {
   display: flex;
   align-items: baseline;

@@ -1,7 +1,7 @@
 <div class="cinema-home-container">
   <div class="navigation-bar">
     <nav mat-tab-nav-bar mat-stretch-tabs class="navigation-bar-list">
-      <mat-icon class="film-roll-icon" svgIcon="movie_ticket"></mat-icon>
+      <img class="logo" src="/assets/images/logo.png" />
       <app-toolbar-menu-tab mat-tab-link route="/cinemastic/movies" [tabName]="'cinema.menu.movies'"></app-toolbar-menu-tab>
     </nav>
     <div class="signed-in-user">
@@ -11,6 +11,7 @@
       </button>
       <mat-menu #menu yPosition="below" xPosition="before">
         <button mat-menu-item (click)="onShowUserReservations()">{{ "cinema.menu.my_reservations" | translate }}</button>
+        <button mat-menu-item *ngIf="user.user.admin" (click)="onManageMovies()">{{ "cinema.menu.manage_movies" | translate }}</button>
       </mat-menu>
       <button mat-raised-button class="sign-out-button" color="primary" (click)="signOut()">{{ "auth.form.sign_out" | translate }}</button>
     </div>

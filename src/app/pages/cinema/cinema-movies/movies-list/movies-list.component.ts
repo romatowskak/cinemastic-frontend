@@ -29,16 +29,6 @@ export class MoviesListComponent implements OnInit, OnDestroy {
   filteredMovies: Movie[];
   movieGenreImageDictionary = MovieGenreImageDictionary;
   apiUrl = environment.apiUrl;
-  weekDays = [
-    { value: 'Monday', day: 'movie.screenings.monday' },
-    { value: 'Tuesday', day: 'movie.screenings.tuesday' },
-    { value: 'Wednesday', day: 'movie.screenings.wednesday' },
-    { value: 'Thursday', day: 'movie.screenings.thursday' },
-    { value: 'Friday', day: 'movie.screenings.friday' },
-    { value: 'Saturday', day: 'movie.screenings.saturday' },
-    { value: 'Sunday', day: 'movie.screenings.sunday' },
-  ];
-  dayParam: string;
   user: User;
 
   constructor(private store: Store<State>, private router: Router, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
@@ -58,7 +48,6 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     });
 
     this.currentRoute.queryParams.subscribe((queryParams) => {
-      this.dayParam = queryParams.day;
       this.filterMovies(queryParams);
     });
   }
@@ -104,14 +93,6 @@ export class MoviesListComponent implements OnInit, OnDestroy {
 
   onShowMovieDetails(movie: Movie) {
     this.router.navigate(['/cinemastic/movies/', movie.id]);
-  }
-
-  onWeekDaySelection(day: string) {
-    this.router.navigate([], { queryParams: { day } });
-  }
-
-  onAddMovie() {
-    this.router.navigate(['/cinemastic/create']);
   }
 
   onShowMovieScreenings(movie: Movie) {

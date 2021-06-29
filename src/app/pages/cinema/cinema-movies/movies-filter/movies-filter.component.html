@@ -1,4 +1,12 @@
 <div class="movies-filter-container">
+  <div class="week-days">
+    <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
+    <mat-select [value]="dayParam" placeholder="Select day">
+      <mat-option [value]="day.day | translate" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day.value)">{{
+        day.day | translate
+      }}</mat-option>
+    </mat-select>
+  </div>
   <div class="movie-search">
     <h1 class="movie-search-header">{{ "movies.filter.search" | translate }}</h1>
     <div class="search">

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { ErrorsDictionary } from '../../constants/ErrorsDictionary';
 
 @Component({
   selector: 'app-form-field',
@@ -8,13 +9,19 @@ import { AbstractControl } from '@angular/forms';
 })
 export class FormFieldComponent implements OnInit {
   @Input() label: string;
-  @Input() fieldType: 'input' | 'textarea' = 'input';
-  @Input() set control(control: AbstractControl) {
-    this.formControl = control;
-  }
-  formControl: AbstractControl;
+  @Input() fieldType = 'input';
+  @Input() control: AbstractControl;
 
   constructor() {}
 
   ngOnInit() {}
+
+  validateField(keys) {
+    const errorKeys = keys && Object.keys(keys);
+    const patternErrors = keys && keys.pattern;
+
+    return patternErrors
+      ? ErrorsDictionary[patternErrors.requiredPattern]
+      : errorKeys && errorKeys.length && ErrorsDictionary[errorKeys[0]];
+  }
 }

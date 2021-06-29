@@ -1,7 +1,8 @@
 <mat-form-field class="form-field" appearance="outline">
   <mat-label>{{ label }}</mat-label>
-  <input matInput *ngIf="fieldType === 'input'; else textarea" [formControl]="formControl" />
+  <input matInput *ngIf="fieldType === 'input'; else textarea" [formControl]="control" />
   <ng-template #textarea>
-    <textarea matInput [formControl]="formControl"></textarea>
+    <textarea matInput [formControl]="control"></textarea>
   </ng-template>
+  <mat-error class="form-error">{{ validateField(control.errors) | translate }}</mat-error>
 </mat-form-field>

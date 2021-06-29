@@ -20,10 +20,6 @@
               <mat-icon class="clock-icon" svgIcon="clock"></mat-icon>
               <p>{{ movieDetails?.duration | movieDuration }}</p>
             </div>
-            <div class="movie-managing-actions">
-              <mat-icon class="movie-action-button" (click)="onEditMovie(movieDetails.id)">edit</mat-icon>
-              <mat-icon class="movie-action-button" (click)="onRemoveMovie(movieDetails)">delete</mat-icon>
-            </div>
           </div>
         </div>
         <div class="movie-actions">

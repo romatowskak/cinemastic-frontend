@@ -32,6 +32,10 @@ export class CinemaComponent implements OnInit, OnDestroy {
     this.router.navigate([`/cinemastic/reservations/${this.user.user.id}`]);
   }
 
+  onManageMovies() {
+    this.router.navigate(['/cinemastic/create']);
+  }
+
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }

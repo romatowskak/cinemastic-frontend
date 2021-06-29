@@ -12,7 +12,6 @@ import { User } from 'src/app/shared/models/User';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
 import { MovieRating } from 'src/app/shared/models/MovieRating';
 import { MatDialog } from '@angular/material';
-import { RemoveMovieDialogComponent } from '../../remove-movie-dialog/remove-movie-dialog.component';
 import { MovieTrailerDialogComponent } from '../../movie-trailer-dialog/movie-trailer-dialog.component';
 import { MovieScreeningsDialogComponent } from '../../movie-screenings-dialog/movie-screenings-dialog.component';
 import { Subscription } from 'rxjs';
@@ -32,7 +31,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   galleryPhotos: NgxGalleryImage[] = [];
   currentUserRating: MovieRating;
 
-  constructor(private store: Store<State>, private currentRoute: ActivatedRoute, private router: Router, private dialog: MatDialog) {}
+  constructor(private store: Store<State>, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user: User) => {
@@ -71,18 +70,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(addRatingRequest({ payload: { value, movie: this.movieDetails } }));
     }
-  }
-
-  onEditMovie(movieId: number) {
-    this.router.navigate(['/cinemastic/edit/', movieId]);
-  }
-
-  onRemoveMovie(movie: Movie) {
-    this.dialog.open(RemoveMovieDialogComponent, {
-      width: '400px',
-      height: 'auto',
-      data: movie,
-    });
   }
 
   onShowMovieScreenings(movie: Movie) {
