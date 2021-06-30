@@ -1,37 +1,33 @@
 .cinema-home-container {
-  padding: 0 50px;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .navigation-bar {
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 30px;
-  padding: 0 50px;
+  padding-top: 30px;
 }
 
 .navigation-bar-list {
   display: flex;
   align-items: baseline;
-  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .logo {
-  height: 40px;
-  width: 80px;
-  margin-top: 15px;
+  height: 45px;
+  width: 85px;
 }
 
 .signed-in-user {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
   z-index: 1;
 }
 
@@ -51,8 +47,9 @@
 
 .user-name {
   color: var(--white);
-  font-size: 20px;
+  font-size: 25px;
   margin-right: 10px;
+  font-weight: 300;
 }
 
 .mat-menu-item {

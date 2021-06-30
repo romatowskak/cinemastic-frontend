@@ -1,18 +1,18 @@
 .tab-link {
   height: 100%;
   width: 100%;
-  font-size: 20px;
-  padding: 20px 0;
+  font-size: 25px;
+  padding-bottom: 10px;
   background-color: transparent;
   text-decoration: none;
   text-transform: uppercase;
   color: var(--white);
   height: 100%;
   width: 100%;
+  font-weight: 400;
 }
 
 .is-active {
-  border-bottom: 2px solid var(--medium-purple);
+  border-bottom: 1px solid var(--medium-purple);
   color: var(--medium-purple);
-  font-weight: bold;
 }

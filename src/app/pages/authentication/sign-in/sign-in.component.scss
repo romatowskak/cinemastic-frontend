@@ -1,3 +1,19 @@
+.banner {
+  height: 100vh;
+  background: url('/assets/images/movies-banner.jpeg');
+  background-color: var(--medium-blue);
+  background-blend-mode: difference;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.08;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .sign-in-page {
   height: 100vh;
   display: flex;
@@ -20,6 +36,7 @@
 }
 
 .sign-in-form {
+  background-color: rgba(255, 255, 255, 0.007);
   height: 75vh;
   width: 500px;
   box-shadow: 0 0 30px 20px rgba(2, 13, 31, 0.667);
@@ -44,7 +61,7 @@
 }
 
 .sign-in-button {
-  padding: 5px 50px;
+  padding: 5px 100px;
   margin: 50px 0;
   color: var(--white);
   border-radius: 30px;

@@ -15,11 +15,13 @@ import { MatDialog } from '@angular/material';
 import { MovieTrailerDialogComponent } from '../../movie-trailer-dialog/movie-trailer-dialog.component';
 import { MovieScreeningsDialogComponent } from '../../movie-screenings-dialog/movie-screenings-dialog.component';
 import { Subscription } from 'rxjs';
+import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss'],
+  animations: [fadeInAnimation],
 })
 export class MovieDetailsComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;

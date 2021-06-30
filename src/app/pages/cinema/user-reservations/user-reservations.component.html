@@ -1,5 +1,5 @@
-<div class="reservations-container">
-  <div class="reservations-banner"></div>
+<div class="reservations-container" [@fadeInTrigger]="true">
+  <div class="banner"></div>
   <div class="reservations-header">{{ "user.reservations.header" | translate }}</div>
   <div class="reservations">
     <table mat-table [dataSource]="dataSource">

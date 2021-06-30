@@ -1,6 +1,6 @@
-<div class="auditorium-container">
-  <div class="auditorium-banner"></div>
-  <div class="auditorium-banner-header">
+<div class="auditorium-container" [@fadeInTrigger]="true">
+  <div class="banner"></div>
+  <div class="banner-header">
     <span class="movie-title">{{ currentScreening?.movie.title }}</span>
     <div class="movie-details">
       <span>{{ currentScreening?.movie.originalLanguage | uppercase }}</span>

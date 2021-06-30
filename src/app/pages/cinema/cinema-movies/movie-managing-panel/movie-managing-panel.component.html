@@ -1,125 +1,15 @@
-<div class="movie-managing-panel-container">
+<div class="movie-managing-panel-container" [@fadeInTrigger]="true">
   <div class="banner"></div>
   <div class="movie-managing-panel-content">
     <div class="left-section">
-      <button class="add-movie-button" mat-raised-button *ngIf="isInEditMode" (click)="onAddMovie()">
-        <mat-icon class="add-movie-icon">add</mat-icon><span>{{ "movies.add_movie" | translate }}</span>
-      </button>
-      <div class="search-input-container">
-        <input
-          (input)="search($event.target.value)"
-          [value]="searchInputValue"
-          [placeholder]="'movies.filter.search_placeholder' | translate"
-          class="search-input"
-          #searchInput
-        />
-        <mat-icon *ngIf="!searchInputValue" matSuffix class="search-icon" color="primary">search</mat-icon>
-        <button mat-button *ngIf="searchInputValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
-          <mat-icon class="close-icon">close</mat-icon>
-        </button>
-      </div>
-      <div class="movies-list">
-        <button mat-button *ngFor="let movie of filteredMovies" [routerLink]="['/cinemastic/edit', movie.id]" class="movie-button">
-          <div class="button-content">
-            <span class="movie-name">{{ movie.title }}</span>
-            <mat-icon class="remove-icon" (click)="onRemoveMovie(movie)">delete</mat-icon>
-          </div>
-        </button>
-      </div>
+      <app-movies-list></app-movies-list>
     </div>
     <div class="right-section">
       <p class="manage-panel-header">
         {{ (isInEditMode ? "movie.managing.panel.edit" : "movie.managing.panel.add") | translate | uppercase }}
         <span class="title-movie">{{ "movie.managing.panel.movie" | translate }}</span>
       </p>
-      <form class="edit-form" *ngIf="movieManagingForm" [formGroup]="movieManagingForm">
-        <app-form-field
-          [control]="movieManagingForm.get('title')"
-          [label]="'movie.managing.panel.label.title' | translate"
-        ></app-form-field>
-        <mat-form-field appearance="outline" class="genre-field">
-          <mat-label>{{ "movie.managing.panel.label.genre" | translate }}</mat-label>
-          <mat-select formControlName="genre">
-            <mat-option value="COMEDY">{{ "movie.genre.comedy" | translate }}</mat-option>
-            <mat-option value="ANIMATION">{{ "movie.genre.animation" | translate }}</mat-option>
-            <mat-option value="HORROR">{{ "movie.genre.horror" | translate }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="movieManagingForm.get('genre').errors?.required" class="genre-error">{{
-            "errors.required" | translate
-          }}</mat-error>
-        </mat-form-field>
-        <app-form-field
-          [control]="movieManagingForm.get('production')"
-          [label]="'movie.managing.panel.label.production' | translate"
-        ></app-form-field>
-        <app-form-field
-          [control]="movieManagingForm.get('director')"
-          [label]="'movie.managing.panel.label.director' | translate"
-        ></app-form-field>
-        <app-form-field
-          [control]="movieManagingForm.get('duration')"
-          [label]="'movie.managing.panel.label.duration' | translate"
-        ></app-form-field>
-        <app-form-field
-          [control]="movieManagingForm.get('originalLanguage')"
-          [label]="'movie.managing.panel.label.original_language' | translate"
-        ></app-form-field>
-        <app-form-field
-          [control]="movieManagingForm.get('subtitles')"
-          [label]="'movie.managing.panel.label.subtitles' | translate"
-        ></app-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>{{ "movie.managing.panel.label.release_date" | translate }}</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="releaseDate" readonly />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <app-form-field
-          [control]="movieManagingForm.get('overview')"
-          [label]="'movie.managing.panel.label.overview' | translate"
-          fieldType="textarea"
-        ></app-form-field>
-        <app-form-field
-          [control]="movieManagingForm.get('trailer')"
-          [label]="'movie.managing.panel.label.trailer' | translate"
-        ></app-form-field>
-        <div class="cover-photo">
-          <div class="photo-upload">
-            <button mat-button (click)="coverPhotoInput.click()" type="button" class="attach-photos-button">
-              <mat-icon class="attach-file-icon" svgIcon="folder"></mat-icon>
-              <p>{{ "movie.managing.panel.attach_cover_photo" | translate }}</p>
-              <input type="file" #coverPhotoInput (change)="coverPhotoChange($event.target.files)" style="display: none" />
-            </button>
-            <div *ngIf="movieManagingForm.get('coverPhoto').value">
-              <div class="file">
-                <p>{{ movieManagingForm.get("coverPhoto").value?.name }}</p>
-                <button type="button" mat-icon-button (click)="removeCoverPhoto()">
-                  <mat-icon>close</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-          <mat-error *ngIf="movieManagingForm.touched && movieManagingForm.get('coverPhoto').errors?.required" class="cover-photo-error">{{
-            "errors.cover.photo" | translate
-          }}</mat-error>
-        </div>
-        <div class="photo-upload">
-          <button mat-button (click)="galleryPhotoInput.click()" type="button" class="attach-photos-button">
-            <mat-icon class="attach-file-icon" svgIcon="folder"></mat-icon>
-            <p>{{ "movie.managing.panel.attach_gallery_photos" | translate }}</p>
-            <input type="file" #galleryPhotoInput (change)="galleryPhotosChange($event.target.files)" style="display: none" />
-          </button>
-          <div *ngIf="movieManagingForm.get('gallery').value.length">
-            <div *ngFor="let photo of movieManagingForm.get('gallery').value; let i = index" class="file">
-              <p>{{ photo.name }}</p>
-              <button type="button" mat-icon-button (click)="removeGalleryPhoto(photo.id)">
-                <mat-icon>close</mat-icon>
-              </button>
-            </div>
-          </div>
-        </div>
-        <button class="save-button" mat-raised-button color="primary" (click)="saveChanges()">{{ "common.save" | translate }}</button>
-      </form>
+      <app-movie-details-form></app-movie-details-form>
     </div>
   </div>
 </div>

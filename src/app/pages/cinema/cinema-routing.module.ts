@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MoviesComponent } from './cinema-movies/movies.component';
-import { MovieDetailsComponent } from './cinema-movies/movies-list/movie-details/movie-details.component';
 import { MovieManagingPanelComponent } from './cinema-movies/movie-managing-panel/movie-managing-panel.component';
 import { CinemaAuditoriumComponent } from './cinema-auditorium/cinema-auditorium.component';
 import { CinemaComponent } from './cinema.component';
@@ -11,6 +10,7 @@ import { MoviesResolver } from '../../core/resolvers/MoviesResolver';
 import { MovieDetailsResolver } from '../../core/resolvers/MovieDetailsResolver';
 import { ReservationsResolver } from '../../core/resolvers/ReservationsResolver';
 import { AuditoriumResolver } from '../../core/resolvers/AuditoriumResolver';
+import { MovieDetailsComponent } from './cinema-movies/movies-cards-list/movie-details/movie-details.component';
 
 const routes: Routes = [
   {

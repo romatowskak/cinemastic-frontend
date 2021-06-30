@@ -18,11 +18,13 @@ import {
   getScreeningRequest,
   addReservationRequest,
 } from 'src/app/core/store/actions/booking.actions';
+import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-cinema-auditorium',
   templateUrl: './cinema-auditorium.component.html',
   styleUrls: ['./cinema-auditorium.component.scss'],
+  animations: [fadeInAnimation],
 })
 export class CinemaAuditoriumComponent implements OnInit, OnDestroy {
   screeningSeatSelection = new SelectionModel<number>(true);

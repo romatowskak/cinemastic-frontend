@@ -1,4 +1,5 @@
-<div class="sign-in-page">
+<div class="banner"></div>
+<div class="sign-in-page" [@fadeInTrigger]="movieDetailsForm">
   <form class="sign-in-form" [formGroup]="signInForm">
     <p class="sign-in-header">
       {{ "auth.form.welcome.header" | translate | uppercase }}

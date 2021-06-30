@@ -31,7 +31,7 @@ body {
   }
 
   .mat-form-field-underline {
-    background-color: var(--white);
+    background-color: var(--blue);
   }
 }
 
@@ -58,7 +58,7 @@ body {
 
 .ngx-pagination li.current {
   border-radius: 30px;
-  background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
+  background: var(--medium-blue);
 }
 
 .mat-select-panel {

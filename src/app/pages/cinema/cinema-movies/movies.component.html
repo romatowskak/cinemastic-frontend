@@ -1,5 +1,5 @@
-<div class="movies-container">
-  <div class="movies-banner">
+<div class="movies-container" [@fadeInTrigger]="true">
+  <div class="banner">
     <div class="banner-photo"></div>
   </div>
   <h1 class="movies-header">
@@ -9,6 +9,6 @@
   </h1>
   <div class="movies">
     <app-movies-filter></app-movies-filter>
-    <app-movies-list></app-movies-list>
+    <app-movies-cards-list></app-movies-cards-list>
   </div>
 </div>

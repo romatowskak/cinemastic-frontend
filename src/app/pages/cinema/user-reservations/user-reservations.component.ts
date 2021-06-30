@@ -9,11 +9,13 @@ import { MovieReservation } from '../../../shared/models/MovieReservation';
 import { Subscription } from 'rxjs';
 import { getReservationsRequest, removeReservationRequest } from 'src/app/core/store/actions/booking.actions';
 import { getReservationsSelector } from 'src/app/core/store/reducers/booking.reducer';
+import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-user-reservations',
   templateUrl: './user-reservations.component.html',
   styleUrls: ['./user-reservations.component.scss'],
+  animations: [fadeInAnimation],
 })
 export class UserReservationsComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<MovieReservation>;

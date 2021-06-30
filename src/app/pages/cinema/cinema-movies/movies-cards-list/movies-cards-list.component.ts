@@ -18,11 +18,11 @@ import { MovieScreeningsDialogComponent } from '../movie-screenings-dialog/movie
 import { MovieTrailerDialogComponent } from '../movie-trailer-dialog/movie-trailer-dialog.component';
 
 @Component({
-  selector: 'app-movies-list',
-  templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.scss'],
+  selector: 'app-movies-cards-list',
+  templateUrl: './movies-cards-list.component.html',
+  styleUrls: ['./movies-cards-list.component.scss'],
 })
-export class MoviesListComponent implements OnInit, OnDestroy {
+export class MoviesCardsListComponent implements OnInit, OnDestroy {
   movies: Movie[] = [];
   moviesSubscription: Subscription;
   userSubscription: Subscription;

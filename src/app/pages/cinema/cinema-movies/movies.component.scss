@@ -4,6 +4,7 @@
   width: 100vw;
   padding: 0 150px;
   min-width: 1280px;
+  height: 100%;
 }
 
 .movies {
@@ -12,8 +13,8 @@
   width: 100%;
 }
 
-.movies-banner {
-  height: 600px;
+.banner {
+  height: 700px;
   background: url('/assets/images/movies-banner.jpeg');
   background-color: var(--medium-blue);
   background-blend-mode: difference;
@@ -49,6 +50,6 @@ app-movies-filter {
   width: 30%;
 }
 
-app-movies-list {
+app-movies-cards-list {
   width: 70%;
 }
