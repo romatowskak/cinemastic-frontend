@@ -159,13 +159,16 @@ export class MoviesEffects {
   updateMovieAfterRating$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.addRatingSuccess, MoviesActions.updateRatingSuccess),
-      withLatestFrom(this.store.select(getMoviesSelector)),
-      map(([{ payload }, movies]) => {
-        const movie = movies.find((movie) => movie.id === payload.movie.id);
-        const movieUpdated = { ...movie, ratings: [...movie.ratings, payload] };
-        return movieUpdated;
+      map((action) => action.payload),
+      map(({ id, value, user, movie }) => {
+        const ratings = movie.ratings ? [...movie.ratings, { id, value, user, movie }] : [{ id, value, user, movie }];
+        const updatedMovie = {
+          ...movie,
+          ratings,
+        };
+        return updatedMovie;
       }),
-      map((movieUpdated) => MoviesActions.updateMovieRequest({ payload: { movie: movieUpdated } }))
+      map((movie) => MoviesActions.updateMovieRequest({ payload: { movie } }))
     )
   );
 
@@ -176,6 +179,13 @@ export class MoviesEffects {
     )
   );
 
+  refreshMovieDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.updateMovieSuccess),
+      map((action) => action.payload),
+      map(({ movie }) => MoviesActions.getMovieDetailsRequest({ payload: { movieId: movie.id } }))
+    )
+  );
   redirectAfterMovieRemove$ = createEffect(
     () =>
       this.actions$.pipe(
