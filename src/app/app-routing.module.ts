@@ -13,6 +13,7 @@ const routes: Routes = [
         path: 'cinemastic',
         loadChildren: () => import('./pages/cinema/cinema.module').then((m) => m.CinemaModule),
       },
+      { path: '**', redirectTo: '/cinemastic/movies' },
     ],
   },
 ];

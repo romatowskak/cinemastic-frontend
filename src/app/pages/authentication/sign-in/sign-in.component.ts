@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { signInRequest } from 'src/app/core/store/actions/auth.actions';
 import { State } from 'src/app/core/store/reducers';
+import { getSignInStatusSelector } from 'src/app/core/store/reducers/app-status.reducer';
 import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
 
 @Component({
@@ -21,6 +22,10 @@ export class SignInComponent implements OnInit {
     this.signInForm = this.formBuilder.group({
       userName: ['', Validators.required],
       password: ['', Validators.required],
+    });
+
+    this.store.select(getSignInStatusSelector).subscribe((status) => {
+      if (status && status.state === 'FAILURE') this.signInForm.setErrors({ invalidCredentials: true });
     });
   }
 

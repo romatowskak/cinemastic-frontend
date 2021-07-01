@@ -1,7 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MovieGenre } from 'src/app/shared/enums/MovieGenre';
-import { MovieLanguage } from 'src/app/shared/enums/MovieLanguage';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatToArray } from 'src/app/shared/utils/helpers';
 
@@ -13,8 +12,8 @@ import { formatToArray } from 'src/app/shared/utils/helpers';
 export class MoviesFilterComponent implements OnInit {
   genreSelection = new SelectionModel<MovieGenre>(true);
   genres = [MovieGenre.COMEDY, MovieGenre.ANIMATION, MovieGenre.HORROR];
-  languageSelection = new SelectionModel<MovieLanguage>(true);
-  languages = [MovieLanguage.ENGLISH, MovieLanguage.POLISH, MovieLanguage.ITALIAN];
+  languageSelection = new SelectionModel<string>(true);
+  languages = ['ENGLISH', 'POLISH', 'ITALIAN'];
   searchInputValue = '';
   weekDays = [
     { value: 'Monday', day: 'movie.screenings.monday' },
@@ -68,7 +67,7 @@ export class MoviesFilterComponent implements OnInit {
     });
   }
 
-  toggleLanguage(language: MovieLanguage) {
+  toggleLanguage(language: string) {
     this.languageSelection.toggle(language);
     this.router.navigate([], {
       queryParams: { language: this.languageSelection.selected },

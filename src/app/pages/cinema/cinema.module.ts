@@ -18,10 +18,10 @@ import { MoviesResolver } from 'src/app/core/resolvers/MoviesResolver';
 import { MovieDetailsResolver } from 'src/app/core/resolvers/MovieDetailsResolver';
 import { ReservationsResolver } from 'src/app/core/resolvers/ReservationsResolver';
 import { AuditoriumResolver } from 'src/app/core/resolvers/AuditoriumResolver';
-import { MovieDetailsComponent } from './cinema-movies/movies-cards-list/movie-details/movie-details.component';
 import { MoviesCardsListComponent } from './cinema-movies/movies-cards-list/movies-cards-list.component';
 import { MovieDetailsFormComponent } from './cinema-movies/movie-managing-panel/movie-details-form/movie-details-form.component';
 import { MoviesListComponent } from './cinema-movies/movie-managing-panel/movies-list/movies-list.component';
+import { MovieDetailsComponent } from './cinema-movies/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [

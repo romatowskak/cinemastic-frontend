@@ -1,19 +1,22 @@
 <div class="banner"></div>
 <div class="sign-in-page" [@fadeInTrigger]="movieDetailsForm">
-  <form class="sign-in-form" [formGroup]="signInForm">
-    <p class="sign-in-header">
+  <form class="sing-in-form-container" [formGroup]="signInForm">
+    <p class="header">
       {{ "auth.form.welcome.header" | translate | uppercase }}
       <span class="header-cinemastic">{{ "auth.form.welcome.header.cinemastic" | translate | uppercase }}</span> !
     </p>
-    <mat-form-field appearance="standard">
-      <mat-label>{{ "auth.form.form.email" | translate }}</mat-label>
-      <input formControlName="userName" matInput color="white" />
-    </mat-form-field>
-    <mat-form-field appearance="standard">
-      <mat-label>{{ "auth.form.form.password" | translate }}</mat-label>
-      <input formControlName="password" matInput [type]="passwordHidden ? 'password' : 'text'" />
-      <mat-icon matSuffix class="show-password" (click)="showPassword()">{{ passwordHidden ? "visibility_off" : "visibility" }}</mat-icon>
-    </mat-form-field>
+    <div class="sing-in-form">
+      <mat-form-field appearance="standard">
+        <mat-label>{{ "auth.form.form.user_name" | translate }}</mat-label>
+        <input formControlName="userName" matInput color="white" />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>{{ "auth.form.form.password" | translate }}</mat-label>
+        <input formControlName="password" matInput [type]="passwordHidden ? 'password' : 'text'" />
+        <mat-icon matSuffix class="show-password" (click)="showPassword()">{{ passwordHidden ? "visibility_off" : "visibility" }}</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="signInForm.errors?.invalidCredentials" class="form-error">{{ "errors.auth" | translate }}</mat-error>
+    </div>
     <button class="sign-in-button" mat-raised-button color="primary" (click)="signIn()">
       {{ "auth.form.sign_in" | translate | uppercase }}
     </button>

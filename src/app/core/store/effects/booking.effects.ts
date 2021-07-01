@@ -18,9 +18,7 @@ export class BookingEffects {
         this.bookingService.getAuditorium(auditoriumId).pipe(
           map((response) => BookingActions.getAuditoriumSuccess({ payload: response })),
           catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/cinemastic/movies']);
-            }
+            if (error.status === 404) this.router.navigate(['/cinemastic/movies']);
             return of(BookingActions.getAuditoriumFailure({ payload: error }));
           })
         )
@@ -90,9 +88,7 @@ export class BookingEffects {
         this.bookingService.getScreening(screeningId).pipe(
           map((response) => BookingActions.getScreeningSuccess({ payload: response })),
           catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/cinemastic/movies']);
-            }
+            if (error.status === 404) this.router.navigate(['/cinemastic/movies']);
             return of(BookingActions.getScreeningFailure({ payload: error }));
           })
         )

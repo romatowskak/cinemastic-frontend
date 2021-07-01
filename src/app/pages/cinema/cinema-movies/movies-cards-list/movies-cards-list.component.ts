@@ -6,7 +6,6 @@ import { Movie } from 'src/app/shared/models/Movie';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MovieGenreImageDictionary } from 'src/app/shared/constants/MovieGenresImagesDictionary';
 import { formatToArray } from 'src/app/shared/utils/helpers';
-import { MovieLanguage } from 'src/app/shared/enums/MovieLanguage';
 import { MovieGenre } from 'src/app/shared/enums/MovieGenre';
 import { getMoviesSelector } from '../../../../core/store/reducers/movies.reducer';
 import { environment } from 'src/environments/environment';
@@ -56,19 +55,13 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
     const { day, genre, language, query } = queryParams;
     let movies = this.movies;
 
-    if (day) {
-      movies = this.filterByScreeningDay(movies, day);
-    }
-    if (genre) {
-      movies = this.fiterByGenre(movies, formatToArray(genre));
-    }
-    if (language) {
-      movies = this.filterByLanguage(movies, formatToArray(language));
-    }
+    if (day) movies = this.filterByScreeningDay(movies, day);
 
-    if (query) {
-      movies = this.filterBySearchQuery(movies, query);
-    }
+    if (genre) movies = this.fiterByGenre(movies, formatToArray(genre));
+
+    if (language) movies = this.filterByLanguage(movies, formatToArray(language));
+
+    if (query) movies = this.filterBySearchQuery(movies, query);
 
     this.filteredMovies = movies;
   }
@@ -81,9 +74,9 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
     return genres && genres.length ? movies.filter((movie: Movie) => genres.find((genre: MovieGenre) => genre === movie.genre)) : movies;
   }
 
-  filterByLanguage(movies: Movie[], languages: MovieLanguage[]) {
+  filterByLanguage(movies: Movie[], languages: string[]) {
     return languages && languages.length
-      ? movies.filter((movie: Movie) => languages.find((language: MovieLanguage) => language === movie.originalLanguage))
+      ? movies.filter((movie: Movie) => languages.find((language) => language === movie.originalLanguage))
       : movies;
   }
 

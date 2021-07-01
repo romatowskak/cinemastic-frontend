@@ -4,7 +4,7 @@
   "common.close": "Close",
   "auth.form.welcome.header": "Welcome to",
   "auth.form.welcome.header.cinemastic": "Cinemastic",
-  "auth.form.form.email": "Email",
+  "auth.form.form.user_name": "Username",
   "auth.form.form.password": "Password",
   "auth.form.sign_in": "Sign in",
   "auth.form.sign_out": "Sign out",
@@ -71,5 +71,7 @@
   "user.reservations.hour": "Hour",
   "errors.required": "Field is required",
   "errors.cover.photo": "Adding cover photo is required",
-  "errors.decimal": "Must be float number"
+  "errors.decimal": "Must be float number",
+  "errors.link": "Must be valid link",
+  "errors.auth": "Incorrenct username or password"
 }

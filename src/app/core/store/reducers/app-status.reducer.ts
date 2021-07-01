@@ -1,4 +1,4 @@
-import * as AppStatusActions from './../actions/app-status.actions';
+import * as AppStatusActions from '../actions/app-status.actions';
 import { createSelector } from '@ngrx/store';
 import { RequestStatus } from '../../../shared/models/RequestStatus';
 import { RequestActionState } from 'src/app/shared/enums/RequestActionState';
@@ -6,8 +6,7 @@ import camelCase from 'lodash.camelcase';
 
 export interface AppStatusState {
   pendingRequests: number;
-  getMovies?: RequestStatus;
-  getSignedInUser?: RequestStatus;
+  signIn?: RequestStatus;
 }
 
 export const initialState: AppStatusState = {
@@ -49,6 +48,4 @@ export const appStatusSelector = (state) => state.appStatus;
 
 export const getPendingRequests = createSelector(appStatusSelector, (state: AppStatusState) => state.pendingRequests);
 
-export const getMoviesStatus = createSelector(appStatusSelector, (state: AppStatusState) => state.getMovies);
-
-export const getSignedInUserStatus = createSelector(appStatusSelector, (state: AppStatusState) => state.getSignedInUser);
+export const getSignInStatusSelector = createSelector(appStatusSelector, (state: AppStatusState) => state.signIn);

@@ -1,6 +1,6 @@
 import { MovieRating } from './MovieRating';
 import { MovieGenre } from 'src/app/shared/enums/MovieGenre';
-import { MovieLanguage } from 'src/app/shared/enums/MovieLanguage';
+
 import { MoviePhoto } from './MoviePhoto';
 import { MovieActor } from './MovieActor';
 
@@ -12,7 +12,7 @@ export interface Movie {
   director: string;
   duration: number;
   adult: boolean;
-  originalLanguage: MovieLanguage;
+  originalLanguage: string;
   subtitles: string;
   releaseDate: string;
   ratings: MovieRating[];

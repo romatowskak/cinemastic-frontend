@@ -10,7 +10,7 @@ import { MoviesResolver } from '../../core/resolvers/MoviesResolver';
 import { MovieDetailsResolver } from '../../core/resolvers/MovieDetailsResolver';
 import { ReservationsResolver } from '../../core/resolvers/ReservationsResolver';
 import { AuditoriumResolver } from '../../core/resolvers/AuditoriumResolver';
-import { MovieDetailsComponent } from './cinema-movies/movies-cards-list/movie-details/movie-details.component';
+import { MovieDetailsComponent } from './cinema-movies/movie-details/movie-details.component';
 
 const routes: Routes = [
   {
@@ -42,7 +42,6 @@ const routes: Routes = [
         resolve: { AuditoriumResolver },
       },
       { path: 'reservations/:userId', component: UserReservationsComponent, resolve: { ReservationsResolver } },
-      { path: '**', redirectTo: '/cinemastic/movies' },
     ],
   },
 ];

@@ -1,7 +1,7 @@
 <div class="movies-filter-container">
   <div class="week-days">
     <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
-    <mat-select [value]="dayParam" placeholder="Select day">
+    <mat-select [value]="dayParam" [placeholder]="'movie.screenings.select.placeholder' | translate">
       <mat-option [value]="day.day | translate" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day.value)">{{
         day.day | translate
       }}</mat-option>

@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.sign-in-header {
+.header {
   color: var(--white);
   font-size: 40px;
   margin-bottom: 60px;
@@ -35,7 +35,7 @@
   color: var(--green);
 }
 
-.sign-in-form {
+.sing-in-form-container {
   background-color: rgba(255, 255, 255, 0.007);
   height: 75vh;
   width: 500px;
@@ -46,9 +46,23 @@
   align-items: center;
 }
 
+.sing-in-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .mat-form-field {
   width: 300px;
   color: var(--white);
+}
+
+.form-error {
+  font-size: 12px;
+  position: absolute;
+  top: 200px;
 }
 
 .show-password {

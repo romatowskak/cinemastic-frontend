@@ -7,15 +7,15 @@ import { getMovieDetailsSelector } from 'src/app/core/store/reducers/movies.redu
 import { Movie } from 'src/app/shared/models/Movie';
 import { environment } from 'src/environments/environment';
 import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
-import { MoviePhoto } from '../../../../../shared/models/MoviePhoto';
+import { MoviePhoto } from '../../../../shared/models/MoviePhoto';
 import { User } from 'src/app/shared/models/User';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
 import { MovieRating } from 'src/app/shared/models/MovieRating';
 import { MatDialog } from '@angular/material';
-import { MovieTrailerDialogComponent } from '../../movie-trailer-dialog/movie-trailer-dialog.component';
-import { MovieScreeningsDialogComponent } from '../../movie-screenings-dialog/movie-screenings-dialog.component';
 import { Subscription } from 'rxjs';
 import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
+import { MovieTrailerDialogComponent } from '../movie-trailer-dialog/movie-trailer-dialog.component';
+import { MovieScreeningsDialogComponent } from '../movie-screenings-dialog/movie-screenings-dialog.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -67,11 +67,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   rateMovie(value: number) {
-    if (this.currentUserRating) {
-      this.store.dispatch(updateRatingRequest({ payload: { ...this.currentUserRating, value } }));
-    } else {
-      this.store.dispatch(addRatingRequest({ payload: { value, movie: this.movieDetails } }));
-    }
+    if (this.currentUserRating) this.store.dispatch(updateRatingRequest({ payload: { ...this.currentUserRating, value } }));
+    else this.store.dispatch(addRatingRequest({ payload: { value, movie: this.movieDetails } }));
   }
 
   onShowMovieScreenings(movie: Movie) {

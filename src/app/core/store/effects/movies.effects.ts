@@ -33,9 +33,7 @@ export class MoviesEffects {
         this.moviesService.getMovieDetails(movieId).pipe(
           map((response) => MoviesActions.getMovieDetailsSuccess({ payload: response })),
           catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/cinemastic/movies']);
-            }
+            if (error.status === 404) this.router.navigate(['/cinemastic/movies']);
             return of(MoviesActions.getMovieDetailsFailure({ payload: error }));
           })
         )

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -8,13 +8,15 @@ import { State } from 'src/app/core/store/reducers';
 import { getMoviesSelector } from 'src/app/core/store/reducers/movies.reducer';
 import { Movie } from 'src/app/shared/models/Movie';
 import { RemoveMovieDialogComponent } from '../../remove-movie-dialog/remove-movie-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.scss'],
 })
-export class MoviesListComponent implements OnInit {
+export class MoviesListComponent implements OnInit, OnDestroy {
+  movieSubscription: Subscription;
   movies: Movie[];
   filteredMovies: Movie[];
   searchInputValue = '';
@@ -29,7 +31,7 @@ export class MoviesListComponent implements OnInit {
     this.isInEditMode = !!movieId;
 
     this.store.dispatch(getMoviesRequest());
-    this.store.select(getMoviesSelector).subscribe((movies: Movie[]) => {
+    this.movieSubscription = this.store.select(getMoviesSelector).subscribe((movies: Movie[]) => {
       this.movies = movies;
       this.filteredMovies = movies;
     });
@@ -49,5 +51,9 @@ export class MoviesListComponent implements OnInit {
 
   onAddMovie() {
     this.router.navigate(['/cinemastic/create']);
+  }
+
+  ngOnDestroy() {
+    this.movieSubscription.unsubscribe();
   }
 }
