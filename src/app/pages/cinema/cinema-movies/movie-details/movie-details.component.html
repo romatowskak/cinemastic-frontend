@@ -14,7 +14,7 @@
           <div class="movie-release-date-and-duration">
             <div class="movie-release-date">
               <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
-              <p>{{ movieDetails?.releaseDate }}</p>
+              <p>{{ movieDetails?.releaseDate | date: "dd/MM/yyyy" }}</p>
             </div>
             <div class="movie-duration">
               <mat-icon class="clock-icon" svgIcon="clock"></mat-icon>

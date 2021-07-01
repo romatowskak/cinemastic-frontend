@@ -6,6 +6,10 @@
       <mat-option value="COMEDY">{{ "movie.genre.comedy" | translate }}</mat-option>
       <mat-option value="ANIMATION">{{ "movie.genre.animation" | translate }}</mat-option>
       <mat-option value="HORROR">{{ "movie.genre.horror" | translate }}</mat-option>
+      <mat-option value="DRAMA">{{ "movie.genre.drama" | translate }}</mat-option>
+      <mat-option value="ACTION">{{ "movie.genre.action" | translate }}</mat-option>
+      <mat-option value="DOCUMENTARY">{{ "movie.genre.documentary" | translate }}</mat-option>
+      <mat-option value="ROMANCE">{{ "movie.genre.romance" | translate }}</mat-option>
     </mat-select>
     <mat-error *ngIf="movieDetailsForm.get('genre').errors?.required" class="genre-error">{{ "errors.required" | translate }}</mat-error>
   </mat-form-field>

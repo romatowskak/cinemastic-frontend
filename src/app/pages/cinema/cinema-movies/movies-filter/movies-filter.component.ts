@@ -11,9 +11,22 @@ import { formatToArray } from 'src/app/shared/utils/helpers';
 })
 export class MoviesFilterComponent implements OnInit {
   genreSelection = new SelectionModel<MovieGenre>(true);
-  genres = [MovieGenre.COMEDY, MovieGenre.ANIMATION, MovieGenre.HORROR];
+  genres = [
+    { value: MovieGenre.COMEDY, genre: 'movie.genre.comedy' },
+    { value: MovieGenre.ANIMATION, genre: 'movie.genre.animation' },
+    { value: MovieGenre.HORROR, genre: 'movie.genre.horror' },
+    { value: MovieGenre.DRAMA, genre: 'movie.genre.drama' },
+    { value: MovieGenre.ACTION, genre: 'movie.genre.action' },
+    { value: MovieGenre.DOCUMENTARY, genre: 'movie.genre.documentary' },
+    { value: MovieGenre.ROMANCE, genre: 'movie.genre.romance' },
+  ];
   languageSelection = new SelectionModel<string>(true);
-  languages = ['ENGLISH', 'POLISH', 'ITALIAN'];
+  languages = [
+    { value: 'ENGLISH', language: 'movie.language.english' },
+    { value: 'POLISH', language: 'movie.language.polish' },
+    { value: 'ITALIAN', language: 'movie.language.italian' },
+    { value: 'SPANISH', language: 'movie.language.spanish' },
+  ];
   searchInputValue = '';
   weekDays = [
     { value: 'Monday', day: 'movie.screenings.monday' },
