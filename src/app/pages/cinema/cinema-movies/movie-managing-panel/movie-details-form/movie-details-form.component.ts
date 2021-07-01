@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { addMovieRequest, getMovieDetailsRequest, updateMovieRequest } from 'src/app/core/store/actions/movies.actions';
+import { createMovieRequest, getMovieDetailsRequest, updateMovieRequest } from 'src/app/core/store/actions/movies.actions';
 import { State } from 'src/app/core/store/reducers';
 import { getMovieDetailsSelector } from 'src/app/core/store/reducers/movies.reducer';
 import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
@@ -93,6 +93,6 @@ export class MovieDetailsFormComponent implements OnInit {
 
     if (this.movieDetailsForm.status === 'VALID')
       if (movieId) this.store.dispatch(updateMovieRequest({ payload }));
-      else this.store.dispatch(addMovieRequest({ payload }));
+      else this.store.dispatch(createMovieRequest({ payload }));
   }
 }

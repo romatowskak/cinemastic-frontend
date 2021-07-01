@@ -30,7 +30,7 @@ export class MoviesService {
     return this.httpClient.delete<void>(`${environment.apiUrl}/movies/${movieId}`);
   }
 
-  public addMovie(movie: Movie): Observable<Movie> {
+  public createMovie(movie: Movie): Observable<Movie> {
     return this.httpClient.post<Movie>(`${environment.apiUrl}/movies`, movie);
   }
 

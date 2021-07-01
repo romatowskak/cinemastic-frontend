@@ -6,7 +6,7 @@ import { MovieRating } from 'src/app/shared/models/MovieRating';
 
 export const GET_MOVIES = createRequestAction('GET_MOVIES');
 export const GET_MOVIE_DETAILS = createRequestAction('GET_MOVIE_DETAILS');
-export const ADD_MOVIE = createRequestAction('ADD_MOVIE');
+export const CREATE_MOVIE = createRequestAction('CREATE_MOVIE');
 export const UPDATE_MOVIE = createRequestAction('UPDATE_MOVIE');
 export const REMOVE_MOVIE = createRequestAction('REMOVE_MOVIE');
 export const ADD_RATING = createRequestAction('ADD_RATING');
@@ -22,9 +22,9 @@ export const getMovieDetailsRequest = createAction(GET_MOVIE_DETAILS.REQUEST, pr
 export const getMovieDetailsSuccess = createAction(GET_MOVIE_DETAILS.SUCCESS, props<{ payload: Movie }>());
 export const getMovieDetailsFailure = createAction(GET_MOVIE_DETAILS.FAILURE, props<{ payload: HttpErrorResponse }>());
 
-export const addMovieRequest = createAction(ADD_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
-export const addMovieSuccess = createAction(ADD_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
-export const addMovieFailure = createAction(ADD_MOVIE.FAILURE, props<{ payload: HttpErrorResponse }>());
+export const createMovieRequest = createAction(CREATE_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
+export const createMovieSuccess = createAction(CREATE_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
+export const createMovieFailure = createAction(CREATE_MOVIE.FAILURE, props<{ payload: HttpErrorResponse }>());
 
 export const updateMovieRequest = createAction(UPDATE_MOVIE.REQUEST, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());
 export const updateMovieSuccess = createAction(UPDATE_MOVIE.SUCCESS, props<{ payload: { movie: Movie; uploadPhotos?; coverPhoto? } }>());

@@ -81,7 +81,7 @@
   "user.reservations.day": "Day",
   "user.reservations.hour": "Hour",
   "user.reservations.cancel_dialog.cancel_reservation": "Cancel reservation",
-  "user.reservations.cancel_dialog.confirmation_text": "Are you sure you want to cancel this reservation? You will not be able to recover it.",
+  "user.reservations.cancel_dialog.confirmation_text": "Are you sure you want to cancel this reservation?",
   "user.reservations.success_snackbar": "Reservation was cancelled successfully",
   "user.reservations.cancel_dialog.cancel": "Cancel",
   "user.reservations.cancel_dialog.close": "Close",

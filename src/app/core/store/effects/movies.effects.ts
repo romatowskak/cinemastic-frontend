@@ -43,12 +43,12 @@ export class MoviesEffects {
 
   addMovie$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.addMovieRequest),
+      ofType(MoviesActions.createMovieRequest),
       map((action) => action.payload),
       switchMap(({ movie, uploadPhotos, coverPhoto }) =>
-        this.moviesService.addMovie(movie).pipe(
-          map((movie) => MoviesActions.addMovieSuccess({ payload: { movie, uploadPhotos, coverPhoto } })),
-          catchError((error) => of(MoviesActions.addMovieFailure({ payload: error })))
+        this.moviesService.createMovie(movie).pipe(
+          map((movie) => MoviesActions.createMovieSuccess({ payload: { movie, uploadPhotos, coverPhoto } })),
+          catchError((error) => of(MoviesActions.createMovieFailure({ payload: error })))
         )
       )
     )
@@ -69,7 +69,7 @@ export class MoviesEffects {
 
   uploadCoverPhoto$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
+      ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
       map((action) => action.payload),
       filter((payload) => !!payload.coverPhoto),
       switchMap(({ movie, coverPhoto }) => {
@@ -83,7 +83,7 @@ export class MoviesEffects {
 
   uploadGalleryPhotos$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
+      ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
       map((action) => action.payload),
       filter((payload) => !!payload.uploadPhotos.length),
       switchMap(({ movie, uploadPhotos }) => {
@@ -174,14 +174,14 @@ export class MoviesEffects {
 
   refreshMovies$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.removeMovieSuccess, MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
+      ofType(MoviesActions.removeMovieSuccess, MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
       mapTo(MoviesActions.getMoviesRequest())
     )
   );
 
   showSnackBarAfterMovieDataSubmitSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
+      ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
       mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.submit_succes.snackbar' } }))
     )
   );
