@@ -17,7 +17,7 @@
 <div class="movies-list">
   <button mat-button *ngFor="let movie of filteredMovies" [routerLink]="['/cinemastic/edit', movie.id]" class="movie-button">
     <div class="button-content">
-      <span class="movie-name">{{ movie.title }}</span>
+      <span class="movie-name" [matTooltip]="movie.title">{{ movie.title }}</span>
       <mat-icon class="remove-icon" (click)="onRemoveMovie(movie)">delete</mat-icon>
     </div>
   </button>

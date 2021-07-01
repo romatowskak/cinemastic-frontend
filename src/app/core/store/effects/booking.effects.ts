@@ -3,6 +3,7 @@ import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { switchMap, map, catchError, tap, mapTo } from 'rxjs/internal/operators';
 import * as BookingActions from '../actions/booking.actions';
+import * as SnackBarActions from '../actions/snack-bar.actions';
 import { State } from '../reducers';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -65,6 +66,13 @@ export class BookingEffects {
           catchError((error) => of(BookingActions.removeReservationFailure({ payload: error })))
         )
       )
+    )
+  );
+
+  showSnackbarOnCancelReservationSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BookingActions.removeReservationSuccess),
+      mapTo(SnackBarActions.showSnackBar({ payload: { message: 'user.reservations.success_snackbar' } }))
     )
   );
 

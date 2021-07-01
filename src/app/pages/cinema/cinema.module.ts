@@ -22,6 +22,7 @@ import { MoviesCardsListComponent } from './cinema-movies/movies-cards-list/movi
 import { MovieDetailsFormComponent } from './cinema-movies/movie-managing-panel/movie-details-form/movie-details-form.component';
 import { MoviesListComponent } from './cinema-movies/movie-managing-panel/movies-list/movies-list.component';
 import { MovieDetailsComponent } from './cinema-movies/movie-details/movie-details.component';
+import { CancelReservationDialogComponent } from './user-reservations/cancel-reservation-dialog/cancel-reservation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,9 +42,15 @@ import { MovieDetailsComponent } from './cinema-movies/movie-details/movie-detai
     UserReservationsComponent,
     MoviesListComponent,
     MovieDetailsFormComponent,
+    CancelReservationDialogComponent,
   ],
   imports: [CinemaRoutingModule, SharedModule],
-  entryComponents: [RemoveMovieDialogComponent, MovieScreeningsDialogComponent, MovieTrailerDialogComponent],
+  entryComponents: [
+    RemoveMovieDialogComponent,
+    MovieScreeningsDialogComponent,
+    MovieTrailerDialogComponent,
+    CancelReservationDialogComponent,
+  ],
   providers: [CinemaAccessGuard, MoviesResolver, MovieDetailsResolver, ReservationsResolver, AuditoriumResolver],
 })
 export class CinemaModule {}

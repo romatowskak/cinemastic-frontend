@@ -29,6 +29,7 @@ export class MoviesFilterComponent implements OnInit {
   ];
   searchInputValue = '';
   weekDays = [
+    { value: 'Week', day: 'movie.screenings.entire_week' },
     { value: 'Monday', day: 'movie.screenings.monday' },
     { value: 'Tuesday', day: 'movie.screenings.tuesday' },
     { value: 'Wednesday', day: 'movie.screenings.wednesday' },

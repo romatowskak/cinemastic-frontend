@@ -77,3 +77,18 @@ body {
 .mat-menu-panel {
   background-color: var(--dark-blue);
 }
+
+.mat-tooltip {
+  font-size: 16px;
+  padding: 10px;
+  color: var(--white);
+  background-color: var(--dark-blue);
+}
+
+.snack-bar {
+  color: var(--white);
+  background-color: var(--medium-blue);
+  span {
+    margin: auto;
+  }
+}

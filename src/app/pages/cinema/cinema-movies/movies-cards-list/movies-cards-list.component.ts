@@ -67,7 +67,7 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
   }
 
   filterByScreeningDay(movies: Movie[], day: string) {
-    return day && day !== 'All' ? movies.filter((movie: Movie) => movie.screenings.find((screening) => screening.day === day)) : movies;
+    return day && day !== 'Week' ? movies.filter((movie: Movie) => movie.screenings.find((screening) => screening.day === day)) : movies;
   }
 
   fiterByGenre(movies: Movie[], genres: MovieGenre[]) {

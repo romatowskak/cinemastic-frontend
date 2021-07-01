@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/core/store/reducers';
@@ -7,9 +7,10 @@ import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reduce
 import { User } from 'src/app/shared/models/User';
 import { MovieReservation } from '../../../shared/models/MovieReservation';
 import { Subscription } from 'rxjs';
-import { getReservationsRequest, removeReservationRequest } from 'src/app/core/store/actions/booking.actions';
+import { getReservationsRequest } from 'src/app/core/store/actions/booking.actions';
 import { getReservationsSelector } from 'src/app/core/store/reducers/booking.reducer';
 import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
+import { CancelReservationDialogComponent } from './cancel-reservation-dialog/cancel-reservation-dialog.component';
 
 @Component({
   selector: 'app-user-reservations',
@@ -25,7 +26,7 @@ export class UserReservationsComponent implements OnInit, OnDestroy {
   userReservations: MovieReservation[];
   user: User;
 
-  constructor(private store: Store<State>, private currentRoute: ActivatedRoute) {}
+  constructor(private store: Store<State>, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
     const { userId } = this.currentRoute.snapshot.params;
@@ -43,7 +44,11 @@ export class UserReservationsComponent implements OnInit, OnDestroy {
   }
 
   cancelReservation(reservationId: number) {
-    this.store.dispatch(removeReservationRequest({ payload: { reservationId } }));
+    this.dialog.open(CancelReservationDialogComponent, {
+      width: '400px',
+      height: 'auto',
+      data: reservationId,
+    });
   }
 
   ngOnDestroy() {

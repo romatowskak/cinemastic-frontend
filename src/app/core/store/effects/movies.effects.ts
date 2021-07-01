@@ -3,11 +3,11 @@ import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { switchMap, map, catchError, withLatestFrom, filter, mapTo, tap } from 'rxjs/internal/operators';
 import * as MoviesActions from '../actions/movies.actions';
+import * as SnackBarActions from '../actions/snack-bar.actions';
 import { MoviesService } from '../../services/movies.service';
 import { State } from '../reducers';
 import { Store } from '@ngrx/store';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
-import { getMoviesSelector } from '../reducers/movies.reducer';
 import { MovieRating } from 'src/app/shared/models/MovieRating';
 import { Router } from '@angular/router';
 
@@ -179,6 +179,13 @@ export class MoviesEffects {
     )
   );
 
+  showSnackBarAfterMovieDataSubmitSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.updateMovieSuccess, MoviesActions.addMovieSuccess),
+      mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.submit_succes.snackbar' } }))
+    )
+  );
+
   refreshMovieDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieSuccess),
@@ -186,15 +193,15 @@ export class MoviesEffects {
       map(({ movie }) => MoviesActions.getMovieDetailsRequest({ payload: { movieId: movie.id } }))
     )
   );
-  redirectAfterMovieRemove$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(MoviesActions.removeMovieSuccess),
-        tap(() => {
-          this.router.navigate(['/cinemastic/create']);
-        })
-      ),
-    { dispatch: false }
+
+  redirectAfterMovieRemove$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.removeMovieSuccess),
+      tap(() => {
+        this.router.navigate(['/cinemastic/create']);
+      }),
+      mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.remove_success.snackbar' } }))
+    )
   );
 
   constructor(private actions$: Actions, private moviesService: MoviesService, private store: Store<State>, private router: Router) {}
