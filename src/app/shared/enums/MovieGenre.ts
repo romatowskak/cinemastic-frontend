@@ -4,6 +4,6 @@ export enum MovieGenre {
   HORROR = 'HORROR',
   DRAMA = 'DRAMA',
   ACTION = 'ACTION',
-  DOCUMENTARY = 'DOCUMENTARY',
+  DOCUMENT = 'DOCUMENT',
   ROMANCE = 'ROMANCE',
 }

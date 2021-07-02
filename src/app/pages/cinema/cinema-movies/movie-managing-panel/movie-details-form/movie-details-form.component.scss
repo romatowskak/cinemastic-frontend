@@ -42,14 +42,35 @@ mat-datepicker-toggle {
 }
 
 .file {
-  color: var(--white);
+  color: var(--light-purple);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.file-name {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 100%;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.remove-photo-icon {
+  cursor: pointer;
 }
 
 .genre-error {
@@ -60,6 +81,22 @@ mat-datepicker-toggle {
   font-size: 12px;
   margin-top: 10px;
   margin-left: 15px;
+}
+
+.uploaded-photos {
+  margin-bottom: 30px;
+}
+
+.movie-photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-photos-header {
+  color: var(--white);
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .save-button {

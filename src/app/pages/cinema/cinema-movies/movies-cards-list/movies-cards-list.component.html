@@ -6,17 +6,17 @@
         <div class="card-header">
           <span class="movie-title">{{ movie.title }}</span>
           <div class="movie-details">
-            <div class="movie-rating">
-              <mat-icon class="movie-details-icon" svgIcon="rating_star"></mat-icon>
-              <span>{{ movie.ratings | movieRatingAverage }}</span>
-            </div>
             <div class="movie-genre">
-              <mat-icon class="movie-details-icon" [svgIcon]="movieGenreImageDictionary[movie.genre]"></mat-icon>
+              <img class="genre-icon" src="assets/images/genre.png" />
               <span>{{ movie.genre }}</span>
             </div>
             <div class="movie-duration">
               <mat-icon class="movie-details-icon" svgIcon="clock"></mat-icon>
               <span>{{ movie.duration | movieDuration }}</span>
+            </div>
+            <div class="movie-rating">
+              <mat-icon class="movie-details-icon" svgIcon="rating_star"></mat-icon>
+              <span>{{ movie.ratings | movieRatingAverage }}</span>
             </div>
           </div>
           <div class="movie-details-and-actions">

@@ -95,7 +95,7 @@ mat-label {
   align-items: center;
   margin-bottom: 5px;
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 .movie-action-button {
@@ -109,7 +109,14 @@ mat-label {
 }
 
 .movie-details-icon {
-  margin-right: 10px;
+  margin-right: 5px;
+}
+
+.genre-icon {
+  height: 20px;
+  margin: 0;
+  width: 20px;
+  margin-right: 5px;
 }
 
 pagination-controls {

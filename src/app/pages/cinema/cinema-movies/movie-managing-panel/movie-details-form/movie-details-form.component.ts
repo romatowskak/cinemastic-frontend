@@ -18,7 +18,7 @@ import { MoviePhoto } from 'src/app/shared/models/MoviePhoto';
 })
 export class MovieDetailsFormComponent implements OnInit {
   movieDetailsForm: FormGroup;
-  galleryPhotos: { uuid: string; file: MoviePhoto }[] = [];
+  uploadedMoviePhotos: { uuid: string; file: MoviePhoto }[] = [];
   coverPhoto: { uuid: string; file: MoviePhoto };
 
   constructor(private store: Store<State>, private currentRoute: ActivatedRoute, private formBuilder: FormBuilder) {}
@@ -46,9 +46,9 @@ export class MovieDetailsFormComponent implements OnInit {
       duration: [(movieDetails && movieDetails.duration) || '', [Validators.required, Validators.pattern(Pattern.decimal)]],
       originalLanguage: [(movieDetails && movieDetails.originalLanguage) || '', Validators.required],
       subtitles: [(movieDetails && movieDetails.subtitles) || '', Validators.required],
-      releaseDate: [(movieDetails && movieDetails.releaseDate) || '', Validators.required],
+      releaseDate: [(movieDetails && movieDetails.releaseDate) || ''],
       overview: [(movieDetails && movieDetails.overview) || '', Validators.required],
-      trailer: [(movieDetails && movieDetails.trailer) || '', [Validators.required, Validators.pattern(Pattern.link)]],
+      trailer: [(movieDetails && movieDetails.trailer) || '', [Validators.pattern(Pattern.link)]],
       coverPhoto: [(movieDetails && movieDetails.coverPhoto) || null, Validators.required],
       gallery: [(movieDetails && movieDetails.gallery) || []],
     });
@@ -66,18 +66,19 @@ export class MovieDetailsFormComponent implements OnInit {
 
   galleryPhotosChange(photos) {
     if (photos.length)
-      this.galleryPhotos.push({
+      this.uploadedMoviePhotos.push({
         uuid: String(new Date().getTime()),
         file: photos[0],
       });
-
-    const { gallery } = this.movieDetailsForm.controls;
-    gallery.setValue([...this.galleryPhotos.map((photo) => photo.file), ...gallery.value]);
   }
 
   removeCoverPhoto() {
     const { coverPhoto } = this.movieDetailsForm.controls;
     coverPhoto.setValue(null);
+  }
+
+  removeUploadedPhoto(photoId: string) {
+    this.uploadedMoviePhotos = this.uploadedMoviePhotos.filter((photo) => photo.uuid !== photoId);
   }
 
   removeGalleryPhoto(photoId: number) {
@@ -89,10 +90,12 @@ export class MovieDetailsFormComponent implements OnInit {
     this.movieDetailsForm.markAllAsTouched();
     const { movieId } = this.currentRoute.snapshot.params;
     const movie = this.movieDetailsForm.value;
-    const payload = { movie: { ...movie, id: movieId }, uploadPhotos: this.galleryPhotos, coverPhoto: this.coverPhoto };
+    const payload = { movie: { ...movie, id: movieId }, uploadPhotos: this.uploadedMoviePhotos, coverPhoto: this.coverPhoto };
 
-    if (this.movieDetailsForm.status === 'VALID')
+    if (this.movieDetailsForm.status === 'VALID') {
+      this.uploadedMoviePhotos = [];
       if (movieId) this.store.dispatch(updateMovieRequest({ payload }));
       else this.store.dispatch(createMovieRequest({ payload }));
+    }
   }
 }

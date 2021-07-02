@@ -71,17 +71,19 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
   }
 
   fiterByGenre(movies: Movie[], genres: MovieGenre[]) {
-    return genres && genres.length ? movies.filter((movie: Movie) => genres.find((genre: MovieGenre) => genre === movie.genre)) : movies;
+    return genres && genres.length
+      ? movies.filter((movie: Movie) => genres.find((genre: MovieGenre) => genre.toLocaleLowerCase() === movie.genre.toLocaleLowerCase()))
+      : movies;
   }
 
   filterByLanguage(movies: Movie[], languages: string[]) {
     return languages && languages.length
-      ? movies.filter((movie: Movie) => languages.find((language) => language === movie.originalLanguage))
+      ? movies.filter((movie: Movie) => languages.find((language) => language.toLowerCase() === movie.originalLanguage.toLowerCase()))
       : movies;
   }
 
   filterBySearchQuery(movies: Movie[], query: string) {
-    return query ? movies.filter((movie: Movie) => movie.title.includes(query)) : this.movies;
+    return query ? movies.filter((movie: Movie) => movie.title.toLowerCase().includes(query.toLowerCase())) : this.movies;
   }
 
   onShowMovieDetails(movie: Movie) {

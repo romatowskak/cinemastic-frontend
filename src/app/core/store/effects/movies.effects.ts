@@ -41,7 +41,7 @@ export class MoviesEffects {
     )
   );
 
-  addMovie$ = createEffect(() =>
+  createMovie$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.createMovieRequest),
       map((action) => action.payload),
@@ -52,6 +52,29 @@ export class MoviesEffects {
         )
       )
     )
+  );
+
+  redirectOnMovieCreate$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(MoviesActions.createMovieSuccess),
+        map((action) => action.payload),
+        tap(({ movie }) => {
+          this.router.navigate([`/cinemastic/edit/${movie.id}`]);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  redirectOnMovieRemove$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(MoviesActions.removeMovieSuccess),
+        tap(() => {
+          this.router.navigate([`/cinemastic/create`]);
+        })
+      ),
+    { dispatch: false }
   );
 
   updateMovie$ = createEffect(() =>
@@ -71,7 +94,7 @@ export class MoviesEffects {
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
       map((action) => action.payload),
-      filter((payload) => !!payload.coverPhoto),
+      filter((payload) => payload.coverPhoto),
       switchMap(({ movie, coverPhoto }) => {
         return this.moviesService.uploadPhotos(coverPhoto).pipe(
           map((coverPhoto) => MoviesActions.uploadCoverPhotoSuccess({ payload: { movie, coverPhoto } })),
@@ -85,7 +108,7 @@ export class MoviesEffects {
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
       map((action) => action.payload),
-      filter((payload) => !!payload.uploadPhotos.length),
+      filter((payload) => payload.uploadPhotos.length),
       switchMap(({ movie, uploadPhotos }) => {
         return this.moviesService.uploadPhotos(uploadPhotos).pipe(
           map((uploadPhotos) => MoviesActions.uploadGalleryPhotosSuccess({ payload: { movie, uploadPhotos } })),
@@ -130,6 +153,13 @@ export class MoviesEffects {
     )
   );
 
+  showSnackBarOnMovieRemove$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.removeMovieSuccess),
+      mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.remove_success.snackbar' } }))
+    )
+  );
+
   addRating$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.addRatingRequest),
@@ -156,7 +186,7 @@ export class MoviesEffects {
     )
   );
 
-  updateMovieAfterRating$ = createEffect(() =>
+  updateMovieRating$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.addRatingSuccess, MoviesActions.updateRatingSuccess),
       map((action) => action.payload),
@@ -179,13 +209,6 @@ export class MoviesEffects {
     )
   );
 
-  showSnackBarAfterMovieDataSubmitSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
-      mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.submit_succes.snackbar' } }))
-    )
-  );
-
   refreshMovieDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(MoviesActions.updateMovieSuccess),
@@ -194,13 +217,10 @@ export class MoviesEffects {
     )
   );
 
-  redirectAfterMovieRemove$ = createEffect(() =>
+  showSnackBarOnMovieDataSubmitSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.removeMovieSuccess),
-      tap(() => {
-        this.router.navigate(['/cinemastic/create']);
-      }),
-      mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.remove_success.snackbar' } }))
+      ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
+      mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.submit_succes.snackbar' } }))
     )
   );
 

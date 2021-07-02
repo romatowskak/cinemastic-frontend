@@ -17,7 +17,7 @@ export class MoviesFilterComponent implements OnInit {
     { value: MovieGenre.HORROR, genre: 'movie.genre.horror' },
     { value: MovieGenre.DRAMA, genre: 'movie.genre.drama' },
     { value: MovieGenre.ACTION, genre: 'movie.genre.action' },
-    { value: MovieGenre.DOCUMENTARY, genre: 'movie.genre.documentary' },
+    { value: MovieGenre.DOCUMENT, genre: 'movie.genre.document' },
     { value: MovieGenre.ROMANCE, genre: 'movie.genre.romance' },
   ];
   languageSelection = new SelectionModel<string>(true);

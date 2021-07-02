@@ -14,24 +14,8 @@ export class AppComponent implements OnInit {
   constructor(private translate: TranslateService, private matIconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
     const icons = [
       {
-        name: 'google',
-        url: 'assets/icons/google.svg',
-      },
-      {
         name: 'rating_star',
         url: 'assets/icons/rating-star.svg',
-      },
-      {
-        name: 'comedy',
-        url: 'assets/icons/comedy.svg',
-      },
-      {
-        name: 'animation',
-        url: 'assets/icons/animation.svg',
-      },
-      {
-        name: 'horror',
-        url: 'assets/icons/horror.svg',
       },
       {
         name: 'clock',
@@ -46,12 +30,12 @@ export class AppComponent implements OnInit {
         url: 'assets/icons/ticket.svg',
       },
       {
-        name: 'folder',
-        url: 'assets/icons/folder.svg',
-      },
-      {
         name: 'play_button',
         url: 'assets/icons/play-button.svg',
+      },
+      {
+        name: 'folder',
+        url: 'assets/icons/folder.svg',
       },
     ];
 
