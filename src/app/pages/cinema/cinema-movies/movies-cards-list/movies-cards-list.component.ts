@@ -109,6 +109,7 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
       width: '50vw',
       height: 'auto',
       data: movie,
+      autoFocus: false,
     });
   }
 
