@@ -73,7 +73,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   onShowMovieScreenings(movie: Movie) {
     this.dialog.open(MovieScreeningsDialogComponent, {
-      width: '50vw',
+      width: '55vw',
       height: 'auto',
       data: movie,
       autoFocus: false,

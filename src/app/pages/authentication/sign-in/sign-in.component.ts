@@ -31,7 +31,7 @@ export class SignInComponent implements OnInit {
 
   signIn() {
     const { userName, password } = this.signInForm.controls;
-    this.store.dispatch(signInRequest({ payload: { identifier: userName.value, password: password.value } }));
+    this.store.dispatch(signInRequest({ payload: { username: userName.value, password: password.value } }));
   }
 
   showPassword() {

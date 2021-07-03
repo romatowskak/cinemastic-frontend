@@ -6,7 +6,6 @@ import { AngularMaterialModule } from '../pages/angular-material/angular-materia
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxGalleryModule } from 'ngx-gallery';
-import 'hammerjs';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 
 @NgModule({

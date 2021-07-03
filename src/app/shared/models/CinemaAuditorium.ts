@@ -1,3 +1,6 @@
+import { AuditoriumSeat } from './AuditoriumSeat';
+
 export interface CinemaAuditorium {
-  seats: any[];
+  seatNo: number;
+  seats: AuditoriumSeat[];
 }

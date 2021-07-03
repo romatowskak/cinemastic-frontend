@@ -1,7 +1,7 @@
 <div class="movie-screenings-container">
   <div class="movie-screenings-content">
     <p class="dialog-header">{{ "movie.screenings.header" | translate | uppercase }}</p>
-    <div class="days">
+    <div class="day-selection">
       <button mat-raised-button class="day" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day.value)">
         {{ day.day | translate }}
       </button>

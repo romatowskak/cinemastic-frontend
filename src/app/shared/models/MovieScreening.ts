@@ -6,5 +6,5 @@ export interface MovieScreening {
   movie: Movie;
   auditorium: CinemaAuditorium;
   day: string;
-  time: string;
+  time: number;
 }

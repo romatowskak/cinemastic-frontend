@@ -9,7 +9,7 @@ import { ErrorsDictionary } from '../../constants/ErrorsDictionary';
 })
 export class FormFieldComponent implements OnInit {
   @Input() label: string;
-  @Input() fieldType = 'input';
+  @Input() fieldType: 'input' | 'textarea' = 'input';
   @Input() control: AbstractControl;
 
   constructor() {}

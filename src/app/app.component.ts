@@ -26,10 +26,6 @@ export class AppComponent implements OnInit {
         url: 'assets/icons/calendar.svg',
       },
       {
-        name: 'movie_ticket',
-        url: 'assets/icons/ticket.svg',
-      },
-      {
         name: 'play_button',
         url: 'assets/icons/play-button.svg',
       },

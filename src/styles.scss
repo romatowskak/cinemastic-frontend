@@ -61,6 +61,11 @@ body {
   background: var(--medium-blue);
 }
 
+.mat-dialog-container,
+.mat-menu-panel {
+  background-color: var(--dark-blue);
+}
+
 .mat-tooltip {
   font-size: 16px;
   padding: 10px;

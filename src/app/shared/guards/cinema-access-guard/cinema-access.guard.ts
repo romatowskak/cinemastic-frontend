@@ -17,10 +17,7 @@ export class CinemaAccessGuard implements CanActivateChild {
       this.user = user;
     });
 
-    if (this.user) {
-      return true;
-    } else {
-      this.router.navigate(['start/signin']);
-    }
+    if (this.user) return true;
+    else this.router.navigate(['start/signin']);
   }
 }

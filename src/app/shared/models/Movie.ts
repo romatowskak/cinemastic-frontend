@@ -1,8 +1,7 @@
 import { MovieRating } from './MovieRating';
 import { MovieGenre } from 'src/app/shared/enums/MovieGenre';
-
 import { MoviePhoto } from './MoviePhoto';
-import { MovieActor } from './MovieActor';
+import { MovieScreening } from 'src/app/shared/models/MovieScreening';
 
 export interface Movie {
   id: number;
@@ -20,6 +19,5 @@ export interface Movie {
   coverPhoto: MoviePhoto;
   trailer: string;
   gallery: MoviePhoto[];
-  actors: MovieActor[];
-  screenings: any;
+  screenings: MovieScreening[];
 }

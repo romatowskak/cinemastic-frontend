@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
   public signIn(userName: string, password: string): Observable<User> {
-    const userCredentials = { identifier: userName, password };
+    const userCredentials = { username: userName, password };
     return this.httpClient.post<User>(`${environment.apiUrl}/auth/local`, userCredentials);
   }
 }

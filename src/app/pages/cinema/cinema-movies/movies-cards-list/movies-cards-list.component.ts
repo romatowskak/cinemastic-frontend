@@ -44,8 +44,10 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const { day } = this.currentRoute.snapshot.queryParams;
-    if (!day) this.router.navigate([], { queryParams: { day: 'All' } });
-    this.dayParam = day;
+    if (!day) {
+      this.router.navigate([], { queryParams: { day: 'All' } });
+      this.dayParam = day;
+    }
 
     this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user) => {
       this.user = user;

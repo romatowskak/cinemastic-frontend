@@ -12,8 +12,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.signInRequest),
       map((payload) => payload.payload),
-      switchMap(({ identifier, password }) =>
-        this.authService.signIn(identifier, password).pipe(
+      switchMap(({ username, password }) =>
+        this.authService.signIn(username, password).pipe(
           map((response) => AuthActions.signInSuccess({ payload: response })),
           catchError((error) => of(AuthActions.signInFailure({ payload: error })))
         )

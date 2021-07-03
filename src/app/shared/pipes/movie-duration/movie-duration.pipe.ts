@@ -4,9 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'movieDuration',
 })
 export class MovieDurationPipe implements PipeTransform {
-  transform(duration): string {
-    var hours = parseInt(duration);
-    var minutes = Math.round((duration - hours) * 60);
+  transform(duration: number): string {
+    const hours = duration && duration.toFixed();
+    const minutes = Math.round((duration - +hours) * 60);
     return hours + 'h ' + minutes + 'm';
   }
 }

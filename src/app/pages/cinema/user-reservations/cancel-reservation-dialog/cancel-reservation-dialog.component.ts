@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { removeReservationRequest } from 'src/app/core/store/actions/booking.actions';
-import { showSnackBar } from 'src/app/core/store/actions/snack-bar.actions';
 import { State } from 'src/app/core/store/reducers';
 
 @Component({
