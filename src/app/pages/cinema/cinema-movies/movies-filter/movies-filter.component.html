@@ -1,28 +1,17 @@
 <div class="movies-filter-container">
-  <div class="week-days">
-    <mat-icon class="calendar-icon" svgIcon="calendar"></mat-icon>
-    <mat-select [value]="dayParam" [placeholder]="'movie.screenings.select.placeholder' | translate">
-      <mat-option [value]="day.day | translate" *ngFor="let day of weekDays" (click)="onWeekDaySelection(day?.value)">{{
-        day?.day | translate
-      }}</mat-option>
-    </mat-select>
-  </div>
   <div class="movie-search">
-    <h1 class="movie-search-header">{{ "movies.filter.search" | translate }}</h1>
-    <div class="search">
-      <div class="search-input-container">
-        <input
-          (input)="search($event.target.value)"
-          [value]="searchInputValue"
-          [placeholder]="'movies.filter.search_placeholder' | translate"
-          class="search-input"
-          #searchInput
-        />
-        <mat-icon *ngIf="!searchInputValue" matSuffix class="search-icon" color="primary">search</mat-icon>
-        <button mat-button *ngIf="searchInputValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
-          <mat-icon class="close-icon">close</mat-icon>
-        </button>
-      </div>
+    <div class="search-input-container">
+      <input
+        (input)="search($event.target.value)"
+        [value]="searchInputValue"
+        [placeholder]="'movies.filter.search_placeholder' | translate"
+        class="search-input"
+        #searchInput
+      />
+      <mat-icon *ngIf="!searchInputValue" matSuffix class="search-icon" color="primary">search</mat-icon>
+      <button mat-button *ngIf="searchInputValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
     </div>
   </div>
   <div class="genre-filters">

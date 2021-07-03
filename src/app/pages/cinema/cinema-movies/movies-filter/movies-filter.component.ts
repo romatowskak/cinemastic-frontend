@@ -28,17 +28,6 @@ export class MoviesFilterComponent implements OnInit {
     { value: 'SPANISH', language: 'movie.language.spanish' },
   ];
   searchInputValue = '';
-  weekDays = [
-    { value: 'Week', day: 'movie.screenings.entire_week' },
-    { value: 'Monday', day: 'movie.screenings.monday' },
-    { value: 'Tuesday', day: 'movie.screenings.tuesday' },
-    { value: 'Wednesday', day: 'movie.screenings.wednesday' },
-    { value: 'Thursday', day: 'movie.screenings.thursday' },
-    { value: 'Friday', day: 'movie.screenings.friday' },
-    { value: 'Saturday', day: 'movie.screenings.saturday' },
-    { value: 'Sunday', day: 'movie.screenings.sunday' },
-  ];
-  dayParam: string;
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) {}
 
@@ -52,14 +41,6 @@ export class MoviesFilterComponent implements OnInit {
 
     const { query } = this.currentRoute.snapshot.queryParams;
     this.searchInputValue = query ? query : '';
-
-    this.currentRoute.queryParams.subscribe((queryParams) => {
-      this.dayParam = queryParams.day;
-    });
-  }
-
-  onWeekDaySelection(day: string) {
-    this.router.navigate([], { queryParams: { day } });
   }
 
   search(searchQuery: string) {

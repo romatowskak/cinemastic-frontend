@@ -4,51 +4,6 @@
   padding-right: 40px;
 }
 
-.week-days {
-  margin-bottom: 50px;
-  width: 100%;
-  padding: 0 10px;
-  border: 1px solid var(--blue);
-  padding: 10px 20px;
-  border-radius: 30px;
-}
-
-.week-day {
-  color: var(--white);
-  font-size: 20px;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
-  &:hover {
-    color: var(--green);
-  }
-}
-
-.week-day-active {
-  color: var(--green);
-}
-
-.calendar-icon {
-  margin-right: 15px;
-  height: 30px;
-  width: 30px;
-}
-
-mat-select {
-  color: var(--white);
-  width: 100%;
-}
-
-mat-option {
-  color: var(--white);
-}
-
-.week-days {
-  display: flex;
-  align-items: center;
-  align-items: center;
-}
-
 .movie-search-header,
 .genre-filters-header,
 .language-filters-header {
@@ -89,10 +44,10 @@ mat-option {
   align-items: center;
   font-size: 14px;
   background: var(--light-gray);
-  padding: 10px 5px 10px 10px;
-  height: 36px;
+  padding: 10px;
   border-radius: 4px;
   width: 100%;
+  height: 100%;
 }
 
 input.search-input {
@@ -130,8 +85,4 @@ input::placeholder {
     font-size: 16px;
     padding: 0 10px;
   }
-}
-
-.search {
-  padding-top: 20px;
 }

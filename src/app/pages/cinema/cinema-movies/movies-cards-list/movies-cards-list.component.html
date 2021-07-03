@@ -1,4 +1,15 @@
 <div class="movies-list-container">
+  <div class="day-selection">
+    <button
+      mat-raised-button
+      class="day"
+      *ngFor="let day of weekDays"
+      (click)="onWeekDaySelection(day.value)"
+      [class.is-active]="dayParam === day.value"
+    >
+      {{ day.day | translate }}
+    </button>
+  </div>
   <div class="movies-list" *ngIf="filteredMovies.length">
     <mat-card class="movie-card" *ngFor="let movie of filteredMovies | paginate: { itemsPerPage: 6, currentPage: p }">
       <img mat-card-image (click)="onShowMovieDetails(movie)" class="movie-image" [src]="apiUrl + movie.coverPhoto?.url" />

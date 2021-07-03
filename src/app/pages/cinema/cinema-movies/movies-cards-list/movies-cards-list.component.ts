@@ -29,10 +29,24 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
   movieGenreImageDictionary = MovieGenreImageDictionary;
   apiUrl = environment.apiUrl;
   user: User;
-
+  weekDays = [
+    { value: 'All', day: 'movie.screenings.all' },
+    { value: 'Monday', day: 'movie.screenings.monday' },
+    { value: 'Tuesday', day: 'movie.screenings.tuesday' },
+    { value: 'Wednesday', day: 'movie.screenings.wednesday' },
+    { value: 'Thursday', day: 'movie.screenings.thursday' },
+    { value: 'Friday', day: 'movie.screenings.friday' },
+    { value: 'Saturday', day: 'movie.screenings.saturday' },
+    { value: 'Sunday', day: 'movie.screenings.sunday' },
+  ];
+  dayParam: string;
   constructor(private store: Store<State>, private router: Router, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
+    const { day } = this.currentRoute.snapshot.queryParams;
+    if (!day) this.router.navigate([], { queryParams: { day: 'All' } });
+    this.dayParam = day;
+
     this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user) => {
       this.user = user;
     });
@@ -56,18 +70,20 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
     let movies = this.movies;
 
     if (day) movies = this.filterByScreeningDay(movies, day);
-
     if (genre) movies = this.fiterByGenre(movies, formatToArray(genre));
-
     if (language) movies = this.filterByLanguage(movies, formatToArray(language));
-
     if (query) movies = this.filterBySearchQuery(movies, query);
 
     this.filteredMovies = movies;
   }
 
+  onWeekDaySelection(day: string) {
+    this.dayParam = day;
+    this.router.navigate([], { queryParams: { day } });
+  }
+
   filterByScreeningDay(movies: Movie[], day: string) {
-    return day && day !== 'Week' ? movies.filter((movie: Movie) => movie.screenings.find((screening) => screening.day === day)) : movies;
+    return day && day !== 'All' ? movies.filter((movie: Movie) => movie.screenings.find((screening) => screening.day === day)) : movies;
   }
 
   fiterByGenre(movies: Movie[], genres: MovieGenre[]) {
