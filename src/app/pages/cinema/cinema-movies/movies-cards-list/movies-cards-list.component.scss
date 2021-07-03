@@ -7,23 +7,22 @@
 }
 
 .book-tickets-button {
-  height: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: var(--white);
+  color: var(--light-purple);
   padding: 3px 20px;
   border-radius: 30px;
-  font-size: 16px;
+  font-size: 13px;
   text-transform: uppercase;
   cursor: pointer;
+  padding: 0px 30px;
   background-color: transparent;
   border: 1px solid var(--blue);
-}
-
-.book-tickets-button {
-  height: 35px;
-  font-size: 13px;
+  &:hover {
+    color: var(--white);
+    background-color: var(--green);
+    border: none;
+  }
 }
 
 .add-movie-icon {
@@ -96,13 +95,13 @@ mat-label {
   margin-bottom: 5px;
   font-size: 12px;
   margin-right: 12px;
+  color: var(--light-purple);
 }
 
 .movie-action-button {
   font-size: 22px;
   margin-right: 5px;
   cursor: pointer;
-
   &:hover {
     color: var(--green);
   }
@@ -135,7 +134,10 @@ mat-icon {
 }
 
 .play-icon {
-  color: var(--white);
+  color: var(--light-purple);
   height: 25px;
   width: 25px;
+  &:hover {
+    color: var(--green);
+  }
 }

@@ -1,6 +1,6 @@
 <div class="remove-movie-container">
   <div class="remove-dialog-content">
-    <h1 mat-dialog-title>{{ "movie.remove.dialog.remove_movie" | translate }}</h1>
+    <p class="dialog-header">{{ "movie.remove.dialog.remove_movie" | translate | uppercase }}</p>
     <p class="confirmation-text">{{ "movie.remove.dialog.confirmation_text" | translate: { movieTitle: data?.title } }}</p>
   </div>
   <mat-dialog-actions class="remove-dialog-bottom">

@@ -7,6 +7,13 @@
   color: var(--white);
 }
 
+.dialog-header {
+  color: var(--white);
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+
 .dialog-content {
   display: flex;
   flex-direction: column;
@@ -15,15 +22,8 @@
 }
 
 .confirmation-text {
-  margin-top: 60px;
+  margin-top: 50px;
   line-height: 30px;
-  text-align: center;
-}
-
-.mat-dialog-title {
-  font-size: 25px;
-  font-family: 'Open Sans', sans-serif;
-  text-transform: uppercase;
   text-align: center;
 }
 

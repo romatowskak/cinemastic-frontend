@@ -6,25 +6,52 @@
   justify-content: space-between;
   align-items: center;
   color: var(--white);
-  padding: 20px;
+  padding: 20px 40px;
 }
 
-mat-select {
-  margin-top: 10px;
-  color: var(--white);
-  width: 200px;
-  border: 1px solid var(--blue);
-  padding: 10px 20px;
-  border-radius: 30px;
+.movie-screenings-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
-mat-option {
+.dialog-header {
   color: var(--white);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.days {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.day {
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 16px;
+  background-color: var(--blue);
+  border-radius: 40px;
+  padding: 0 13px;
+  margin-right: 15px;
+  box-shadow: 0 1em 1em -0.4em rgba(2, 13, 31, 0.667);
+}
+
+.day:hover,
+.day:focus {
+  transform: translateY(-0.25em);
+  box-shadow: 0 0.5em 0.5em -0.4em var(--green);
+  background-color: var(--green);
 }
 
 .movie-screenings-list {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
@@ -43,14 +70,13 @@ mat-option {
 }
 
 .close-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: var(--white);
-  padding: 3px 50px;
+  padding: 3px 20px;
   border-radius: 30px;
   font-size: 16px;
+  text-transform: uppercase;
   cursor: pointer;
-  margin-top: 30px;
-  background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
+  padding: 5px 70px;
+  background-color: transparent;
+  border: 1px solid var(--blue);
 }

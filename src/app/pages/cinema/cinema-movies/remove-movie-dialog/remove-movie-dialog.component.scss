@@ -7,6 +7,12 @@
   color: var(--white);
 }
 
+.dialog-header {
+  color: var(--white);
+  font-size: 25px;
+  font-weight: 400;
+}
+
 .remove-dialog-content {
   display: flex;
   flex-direction: column;
@@ -15,7 +21,7 @@
 }
 
 .confirmation-text {
-  margin-top: 70px;
+  margin-top: 50px;
   line-height: 30px;
   text-align: center;
 }
