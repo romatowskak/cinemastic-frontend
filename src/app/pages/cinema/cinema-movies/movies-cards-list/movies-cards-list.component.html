@@ -5,7 +5,7 @@
       class="day"
       *ngFor="let day of weekDays"
       (click)="onWeekDaySelection(day.value)"
-      [class.is-active]="dayParam === day.value"
+      [class.is-active]="dayParam && dayParam === day.value"
     >
       {{ day.day | translate }}
     </button>

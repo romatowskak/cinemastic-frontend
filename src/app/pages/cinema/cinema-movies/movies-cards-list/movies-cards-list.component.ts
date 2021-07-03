@@ -44,25 +44,21 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const { day } = this.currentRoute.snapshot.queryParams;
-    if (!day) {
-      this.router.navigate([], { queryParams: { day: 'All' } });
-      this.dayParam = day;
-    }
+    if (!day) this.router.navigate([], { queryParams: { day: 'All' } });
 
     this.userSubscription = this.store.select(getSignedInUserSelector).subscribe((user) => {
       this.user = user;
     });
 
     this.store.dispatch(getMoviesRequest());
-
     this.moviesSubscription = this.store.select(getMoviesSelector).subscribe((movies: Movie[]) => {
       this.movies = movies;
       const { queryParams } = this.currentRoute.snapshot;
-
       this.filterMovies(queryParams);
     });
 
     this.currentRoute.queryParams.subscribe((queryParams) => {
+      this.dayParam = queryParams.day;
       this.filterMovies(queryParams);
     });
   }
@@ -81,7 +77,7 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
 
   onWeekDaySelection(day: string) {
     this.dayParam = day;
-    this.router.navigate([], { queryParams: { day } });
+    this.router.navigate([], { queryParams: { day }, queryParamsHandling: 'merge' });
   }
 
   filterByScreeningDay(movies: Movie[], day: string) {
