@@ -11,7 +11,7 @@
       </button>
       <mat-menu #menu yPosition="below" xPosition="before">
         <button mat-menu-item (click)="onShowUserReservations()">{{ "cinema.menu.my_reservations" | translate }}</button>
-        <button mat-menu-item *ngIf="user.user.admin" (click)="onManageMovies()">{{ "cinema.menu.manage_movies" | translate }}</button>
+        <button mat-menu-item *ngIf="user?.user.admin" (click)="onManageMovies()">{{ "cinema.menu.manage_movies" | translate }}</button>
       </mat-menu>
       <button mat-raised-button class="sign-out-button" color="primary" (click)="signOut()">{{ "auth.form.sign_out" | translate }}</button>
     </div>
