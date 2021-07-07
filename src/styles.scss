@@ -43,6 +43,11 @@ body {
   border-color: var(--white);
 }
 
+.mat-select-arrow,
+.mat-select-value-text {
+  color: var(--white);
+}
+
 .ngx-pagination {
   span,
   .pagination-previous a,

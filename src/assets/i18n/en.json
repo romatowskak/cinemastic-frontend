@@ -89,5 +89,5 @@
   "errors.cover.photo": "Adding cover photo is required",
   "errors.decimal": "Must be float number",
   "errors.link": "Must be valid link",
-  "errors.auth": "Incorrenct username or password"
+  "errors.auth": "Incorrect username or password"
 }
