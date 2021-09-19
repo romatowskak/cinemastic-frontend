@@ -20,7 +20,7 @@ export class BookingEffects {
           map((response) => BookingActions.getAuditoriumSuccess({ payload: response })),
           catchError((error) => {
             if (error.status === 404) {
-              this.router.navigate(['/cinema/movies']);
+              this.router.navigate(['/movies']);
             } else {
               return of(BookingActions.getAuditoriumFailure({ payload: error }));
             }
@@ -85,7 +85,7 @@ export class BookingEffects {
         ofType(BookingActions.addReservationSuccess),
         map((action) => action.payload),
         tap((reservation) => {
-          this.router.navigate([`/cinema/reservations/${reservation.user.id}`]);
+          this.router.navigate([`/reservations/${reservation.user.id}`]);
         })
       ),
     { dispatch: false }
