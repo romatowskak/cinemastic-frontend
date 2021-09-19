@@ -6,10 +6,10 @@ import { Store } from '@ngrx/store';
 import { State } from '../store/reducers';
 import { Observable } from 'rxjs';
 import * as BookingActions from '../store/actions/booking.actions';
-import { CinemaAuditorium } from '../../shared/models/CinemaAuditorium';
+import { Auditorium } from 'src/app/shared/models/Auditorium';
 
 @Injectable()
-export class AuditoriumResolver implements Resolve<Observable<CinemaAuditorium>> {
+export class AuditoriumResolver implements Resolve<Observable<Auditorium>> {
   constructor(private store: Store<State>, private action$: Actions) {}
 
   resolve(route: ActivatedRouteSnapshot) {

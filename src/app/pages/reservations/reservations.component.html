@@ -1,0 +1,39 @@
+<app-toolbar></app-toolbar>
+<div class="reservations-container">
+  <div class="banner"></div>
+  <div class="reservations-header">{{ "user.reservations.header" | translate }}</div>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="reservation">
+      <th mat-header-cell *matHeaderCellDef>{{ "user.reservations.reservation" | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="movie">
+      <th mat-header-cell *matHeaderCellDef>{{ "user.reservations.movie" | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.movie.title }}</td>
+    </ng-container>
+    <ng-container matColumnDef="auditorium">
+      <th mat-header-cell *matHeaderCellDef>{{ "user.reservations.auditorium" | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.screening.auditorium }}</td>
+    </ng-container>
+    <ng-container matColumnDef="seat">
+      <th mat-header-cell *matHeaderCellDef>{{ "user.reservations.seat" | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.seat }}</td>
+    </ng-container>
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef>{{ "user.reservations.day" | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.screening.day }}</td>
+    </ng-container>
+    <ng-container matColumnDef="hour">
+      <th mat-header-cell *matHeaderCellDef>{{ "user.reservations.hour" | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.screening.time }}</td>
+    </ng-container>
+    <ng-container matColumnDef="reservationCancelButton">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button><mat-icon (click)="cancelReservation(element.id)">delete</mat-icon></button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

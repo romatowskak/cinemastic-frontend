@@ -1,0 +1,27 @@
+.movie-managing-panel-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 100px;
+  margin-top: 150px;
+}
+
+.banner {
+  height: 600px;
+  background: url('/assets/images/working-people-banner.jpeg');
+  background-color: var(--medium-blue);
+  background-blend-mode: difference;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  transform: scale(1.2);
+  margin: -50px;
+}
+
+.left-section {
+  width: 30%;
+  margin: 20px 80px 0 0;
+}
+
+.right-section {
+  width: 70%;
+}

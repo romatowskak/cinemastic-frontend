@@ -1,0 +1,71 @@
+.movies-filter-container {
+  height: 100%;
+  margin: 20px 30px 0 0;
+  padding-right: 40px;
+}
+
+.filter-section-header {
+  font-size: 20px;
+  margin-left: 10px;
+  padding: 10px;
+  border-bottom: 1px dotted var(--blue);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.filter-section {
+  min-width: 200px;
+  background-color: var(--medium-blue);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  padding: 10px;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.genre,
+.language {
+  color: var(--white);
+  font-size: 13px;
+}
+
+.filter-checkbox {
+  margin-right: 10px;
+  color: var(--white);
+}
+
+.search-input-container {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+
+  input {
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 40px;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: var(--white);
+  }
+}
+
+input::placeholder {
+  color: var(--indigo);
+}
+
+.search-icon {
+  vertical-align: middle;
+  margin: 0 8px 0 8px;
+}
+
+.close-icon {
+  font-size: 17px;
+  color: var(--indigo);
+}

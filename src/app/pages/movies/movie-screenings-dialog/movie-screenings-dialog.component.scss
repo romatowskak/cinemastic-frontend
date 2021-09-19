@@ -1,0 +1,86 @@
+.movie-screenings-dialog-container {
+  min-height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--white);
+  padding: 10px;
+}
+
+.movie-screenings-dialog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.dialog-header {
+  color: var(--white);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.day-selection {
+  width: 100%;
+  margin: 30px 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.day {
+  flex: 1;
+  border: none;
+  outline: none;
+  color: var(--white);
+  background-color: var(--medium-blue);
+  box-shadow: 0 1em 1em -0.4em rgba(2, 13, 31, 0.667);
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 40px;
+  padding: 3px 10px;
+  margin-right: 10px;
+}
+
+.day:hover,
+.day:focus {
+  transform: translateY(-0.25em);
+  box-shadow: 0 0.5em 0.5em -0.4em var(--green);
+  background-color: var(--green);
+}
+
+.movie-screenings-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.screening {
+  height: 50px;
+  width: 100px;
+  margin: 10px;
+  background: url('/assets/images/movie-ticket.png') no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.close-button {
+  color: var(--white);
+  padding: 3px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 5px 70px;
+  background-color: transparent;
+  border: 1px solid var(--blue);
+}

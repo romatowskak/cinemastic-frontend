@@ -1,0 +1,12 @@
+<div class="cancel-reservation-dialog-container">
+  <div class="cancel-reservation-dialog-content">
+    <p class="dialog-header">{{ "user.reservations.cancel_dialog.cancel_reservation" | translate | uppercase }}</p>
+    <p class="confirmation-text">{{ "user.reservations.cancel_dialog.confirmation_text" | translate }}</p>
+  </div>
+  <mat-dialog-actions class="cancel-reservation-dialog-bottom">
+    <button mat-flat-button class="cancel-reservation-button" (click)="cancelReservation()" mat-dialog-close>
+      {{ "user.reservations.cancel_dialog.cancel" | translate }}
+    </button>
+    <button mat-flat-button mat-dialog-close class="close-dialog-button">{{ "user.reservations.cancel_dialog.close" | translate }}</button>
+  </mat-dialog-actions>
+</div>

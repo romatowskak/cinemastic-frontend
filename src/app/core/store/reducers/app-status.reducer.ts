@@ -1,4 +1,3 @@
-import * as AppStatusActions from '../actions/app-status.actions';
 import { createSelector } from '@ngrx/store';
 import { RequestStatus } from '../../../shared/models/RequestStatus';
 import { RequestActionState } from 'src/app/shared/enums/RequestActionState';
@@ -28,24 +27,11 @@ export function reducer(state = initialState, action) {
     };
   }
 
-  switch (action.type) {
-    case AppStatusActions.REQUEST_STARTED:
-      return {
-        ...state,
-        pendingRequests: ++state.pendingRequests,
-      };
-    case AppStatusActions.REQUEST_FINISHED:
-      return {
-        ...state,
-        pendingRequests: --state.pendingRequests,
-      };
-    default:
-      return state;
-  }
+  return state;
 }
 
 export const appStatusSelector = (state) => state.appStatus;
 
 export const getPendingRequests = createSelector(appStatusSelector, (state: AppStatusState) => state.pendingRequests);
 
-export const getSignInStatusSelector = createSelector(appStatusSelector, (state: AppStatusState) => state.signIn);
+export const getSignInStatus = createSelector(appStatusSelector, (state: AppStatusState) => state.signIn);

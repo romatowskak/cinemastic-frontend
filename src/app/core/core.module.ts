@@ -9,6 +9,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { localStorageSyncReducer } from './store/reducers/local-storage-meta.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [],
@@ -25,6 +26,7 @@ import { localStorageSyncReducer } from './store/reducers/local-storage-meta.red
     }),
     StoreModule.forRoot(reducers, { metaReducers: [localStorageSyncReducer] }),
     EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument(),
   ],
   exports: [],
 })

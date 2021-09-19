@@ -19,8 +19,11 @@ export class BookingEffects {
         this.bookingService.getAuditorium(auditoriumId).pipe(
           map((response) => BookingActions.getAuditoriumSuccess({ payload: response })),
           catchError((error) => {
-            if (error.status === 404) this.router.navigate(['/cinemastic/movies']);
-            return of(BookingActions.getAuditoriumFailure({ payload: error }));
+            if (error.status === 404) {
+              this.router.navigate(['/cinema/movies']);
+            } else {
+              return of(BookingActions.getAuditoriumFailure({ payload: error }));
+            }
           })
         )
       )
@@ -45,7 +48,7 @@ export class BookingEffects {
       map((action) => action.payload),
       switchMap(({ reservation }) =>
         this.bookingService.addReservation(reservation).pipe(
-          map((reservation) => BookingActions.addReservationSuccess({ payload: reservation })),
+          map((response) => BookingActions.addReservationSuccess({ payload: response })),
           catchError((error) => of(BookingActions.addReservationFailure({ payload: error })))
         )
       )
@@ -82,7 +85,7 @@ export class BookingEffects {
         ofType(BookingActions.addReservationSuccess),
         map((action) => action.payload),
         tap((reservation) => {
-          this.router.navigate([`/cinemastic/reservations/${reservation.user.id}`]);
+          this.router.navigate([`/cinema/reservations/${reservation.user.id}`]);
         })
       ),
     { dispatch: false }
@@ -96,7 +99,9 @@ export class BookingEffects {
         this.bookingService.getScreening(screeningId).pipe(
           map((response) => BookingActions.getScreeningSuccess({ payload: response })),
           catchError((error) => {
-            if (error.status === 404) this.router.navigate(['/cinemastic/movies']);
+            if (error.status === 404) {
+              this.router.navigate(['/cinema/movies']);
+            } // close in one effect
             return of(BookingActions.getScreeningFailure({ payload: error }));
           })
         )
@@ -104,5 +109,8 @@ export class BookingEffects {
     )
   );
 
+  /// form // what if user will be logged out --- resfresh tokena
+
+  // guard nie w shared senotira!§
   constructor(private actions$: Actions, private bookingService: BookingService, private store: Store<State>, private router: Router) {}
 }

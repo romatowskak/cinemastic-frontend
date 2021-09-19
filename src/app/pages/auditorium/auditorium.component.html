@@ -1,0 +1,70 @@
+<app-toolbar></app-toolbar>
+<div class="banner"></div>
+<div class="banner-header">
+  <span class="movie-title">{{ currentScreening?.movie.title }}</span>
+  <div class="movie-details">
+    <span>{{ currentScreening?.movie.originalLanguage | uppercase }}</span>
+  </div>
+</div>
+<div class="auditorium">
+  <div class="auditorium-header">
+    <button mat-button class="back-button" (click)="goBack()">
+      <mat-icon class="arrow-icon">arrow_back</mat-icon>
+      <span>{{ "cinema.auditorium.details.back_button" | translate | uppercase }}</span>
+    </button>
+    <div class="screening-details">
+      <span class="screening-detail">{{ currentScreening?.day | uppercase }}</span>
+      <span class="screening-detail">{{ currentScreening?.time }}</span>
+    </div>
+  </div>
+  <div class="auditorium-content">
+    <div class="screen">
+      <p class="screen-header">{{ "cinema.auditorium.details.screen" | translate | uppercase }}</p>
+      <img class="screen-image" src="/assets/images/cinema-screen.png" />
+      <p class="seats-header">{{ "cinema.auditorium.details.seats" | translate | uppercase }}</p>
+    </div>
+    <div class="auditorium-seats" *ngIf="auditorium">
+      <button
+        mat-button
+        [disableRipple]="true"
+        class="seat-button"
+        *ngFor="let seat of auditorium.seats"
+        (click)="selectSeat(seat)"
+        [disabled]="screeningSeatSelection.isSelected(seat.id) && !reservationSeatSelection.isSelected(seat)"
+      >
+        <div class="seat" [class.selected-seat]="screeningSeatSelection.isSelected(seat.id)">
+          {{ seat.seatNumber }}
+        </div>
+      </button>
+    </div>
+    <div class="row" *ngFor="let row of auditorium.seatPlan; let i = index">
+      <div class="row-number">{{ auditoriumRow[i] }}</div>
+      <div *ngFor="let seat of row">
+        <button
+          *ngIf="seat > 0"
+          mat-button
+          [disableRipple]="true"
+          class="seat-button"
+          (click)="selectSeat(seat, i)"
+          [disabled]="isSeatSelected(seat, i) && !isSeatReserved(seat, i)"
+        >
+          <div class="seat" [class.selected-seat]="isSeatSelected(seat, i)">
+            {{ seat }}
+          </div>
+        </button>
+        <div class="aisle" *ngIf="seat < 0"></div>
+      </div>
+    </div>
+  </div>
+  <div class="reservation-overview-container">
+    <div class="reservation-overview-header">
+      <p class="selected-seats-title">{{ "cinema.auditorium.selected_seats" | translate | uppercase }}</p>
+      <button mat-button class="book-button" (click)="bookTickets()" [disabled]="!reservationSeatSelection.selected.length">
+        {{ "movie.details.book_tickets" | translate | uppercase }}
+      </button>
+    </div>
+    <div class="selected-seats-numbers">
+      <div class="selected-seat-number" *ngFor="let seat of reservationSeatSelection.selected">{{ seat }}</div>
+    </div>
+  </div>
+</div>

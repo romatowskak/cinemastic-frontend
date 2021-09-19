@@ -1,0 +1,21 @@
+<div class="search-input-container">
+  <input
+    (input)="search($event.target.value)"
+    [value]="searchInputValue"
+    [placeholder]="'movies.filter.search_placeholder' | translate"
+    class="search-input"
+    #searchInput
+  />
+  <mat-icon *ngIf="!searchInputValue" matSuffix class="search-icon" color="primary">search</mat-icon>
+  <button mat-button *ngIf="searchInputValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+</div>
+<div class="movies-list">
+  <button mat-button *ngFor="let movie of filteredMovies" [routerLink]="['/management/edit', movie.id]" class="movie-button">
+    <div class="button-content">
+      <span class="movie-name" [matTooltip]="movie.title">{{ movie.title }}</span>
+      <mat-icon class="remove-icon" (click)="onRemoveMovie(movie)">delete</mat-icon>
+    </div>
+  </button>
+</div>

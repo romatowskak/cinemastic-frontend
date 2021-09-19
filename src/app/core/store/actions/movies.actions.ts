@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { Movie } from 'src/app/shared/models/Movie';
-import { createRequestAction } from './utils/createRequestAction';
 import { MovieRating } from 'src/app/shared/models/MovieRating';
+import { createRequestAction } from './utils/createRequestAction';
 
 export const GET_MOVIES = createRequestAction('GET_MOVIES');
 export const GET_MOVIE_DETAILS = createRequestAction('GET_MOVIE_DETAILS');

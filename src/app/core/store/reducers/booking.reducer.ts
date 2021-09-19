@@ -1,13 +1,13 @@
 import { Action, createReducer, createSelector, on } from '@ngrx/store';
-import { CinemaAuditorium } from '../../../shared/models/CinemaAuditorium';
-import { MovieReservation } from '../../../shared/models/MovieReservation';
-import { MovieScreening } from '../../../shared/models/MovieScreening';
+import { Auditorium } from 'src/app/shared/models/Auditorium';
+import { Reservation } from 'src/app/shared/models/Reservation';
+import { Screening } from 'src/app/shared/models/Screening';
 import * as BookingActions from '../actions/booking.actions';
 
 export interface BookingState {
-  auditorium: CinemaAuditorium;
-  reservations: MovieReservation[];
-  screening: MovieScreening;
+  auditorium: Auditorium;
+  reservations: Reservation[];
+  screening: Screening;
 }
 
 export const initialState: BookingState = {

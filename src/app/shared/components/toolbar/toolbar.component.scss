@@ -1,0 +1,85 @@
+.toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 100px;
+}
+
+.toolbar-tabs {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 45px;
+  width: 85px;
+  margin-right: 20px;
+}
+
+.tab-button {
+  z-index: 1;
+  font-size: 25px;
+  background-color: transparent;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--white);
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.toolbar-user {
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.user-name {
+  color: var(--white);
+  font-size: 25px;
+  margin-right: 10px;
+  font-weight: 300;
+}
+
+.user-button {
+  background: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .user-name,
+    .arrow-icon {
+      color: var(--green);
+    }
+  }
+}
+
+.mat-menu-item {
+  color: var(--white);
+  font-size: 18px;
+  &:hover {
+    color: var(--green);
+  }
+}
+
+.arrow-icon {
+  color: var(--white);
+  font-size: 30px;
+  margin-bottom: 3px;
+}
+
+.sign-out-button {
+  padding: 5px 40px;
+  margin-left: 20px;
+  color: var(--white);
+  border-radius: 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 35%, var(--medium-purple) 100%);
+}

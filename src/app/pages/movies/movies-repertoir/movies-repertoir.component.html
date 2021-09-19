@@ -1,0 +1,11 @@
+<app-toolbar></app-toolbar>
+<div class="banner"></div>
+<div class="movies-header">
+  {{ "movies.banner.header.catch" | translate | uppercase }}
+  <span class="header-movie">{{ "movies.banner.header.movie" | translate | uppercase }}</span>
+  {{ "movies.banner.header.before_everyone" | translate | uppercase }}
+</div>
+<div class="movies">
+  <app-movies-filter></app-movies-filter>
+  <app-movies-cards-list></app-movies-cards-list>
+</div>

@@ -12,8 +12,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.signInRequest),
       map((payload) => payload.payload),
-      switchMap(({ username, password }) =>
-        this.authService.signIn(username, password).pipe(
+      switchMap(({ identifier, password }) =>
+        this.authService.signIn(identifier, password).pipe(
           map((response) => AuthActions.signInSuccess({ payload: response })),
           catchError((error) => of(AuthActions.signInFailure({ payload: error })))
         )
@@ -26,7 +26,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.signInSuccess),
         tap(() => {
-          this.router.navigate(['/cinemastic/movies']);
+          this.router.navigate(['./movies']);
         })
       ),
     {

@@ -1,0 +1,17 @@
+<div class="toolbar">
+  <div class="toolbar-tabs">
+    <img class="logo" src="/assets/images/logo.png" />
+    <button class="tab-button" (click)="goToMovies()">{{ "cinema.menu.movies" | translate }}</button>
+  </div>
+  <div class="toolbar-user">
+    <button mat-button [matMenuTriggerFor]="menu" class="user-button">
+      <span class="user-name">{{ "cinema.menu.user" | translate: { userName: user?.user.username } }}</span>
+      <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #menu yPosition="below" xPosition="before">
+      <button mat-menu-item (click)="onShowUserReservations()">{{ "cinema.menu.my_reservations" | translate }}</button>
+      <button mat-menu-item *ngIf="user?.user.admin" (click)="onManageMovies()">{{ "cinema.menu.manage_movies" | translate }}</button>
+    </mat-menu>
+    <button mat-raised-button class="sign-out-button" color="primary" (click)="signOut()">{{ "auth.form.sign_out" | translate }}</button>
+  </div>
+</div>

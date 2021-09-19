@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { signInRequest } from 'src/app/core/store/actions/auth.actions';
 import { State } from 'src/app/core/store/reducers';
-import { getSignInStatusSelector } from 'src/app/core/store/reducers/app-status.reducer';
-import { fadeInAnimation } from 'src/app/shared/animations/fade-in.animation';
+import { getSignInStatus } from 'src/app/core/store/reducers/app-status.reducer';
+import { RequestActionState } from 'src/app/shared/enums/RequestActionState';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
-  animations: [fadeInAnimation],
 })
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
@@ -24,17 +23,19 @@ export class SignInComponent implements OnInit {
       password: ['', Validators.required],
     });
 
-    this.store.select(getSignInStatusSelector).subscribe((status) => {
-      if (status && status.state === 'FAILURE') this.signInForm.setErrors({ invalidCredentials: true });
+    this.store.select(getSignInStatus).subscribe((status) => {
+      if (status && status.state === RequestActionState.FAILURE) {
+        this.signInForm.setErrors({ invalidCredentials: true });
+      }
     });
   }
 
   signIn() {
     const { userName, password } = this.signInForm.controls;
-    this.store.dispatch(signInRequest({ payload: { username: userName.value, password: password.value } }));
+    this.store.dispatch(signInRequest({ payload: { identifier: userName.value, password: password.value } }));
   }
 
-  showPassword() {
+  togglePasswordVisibility() {
     this.passwordHidden = !this.passwordHidden;
   }
 }

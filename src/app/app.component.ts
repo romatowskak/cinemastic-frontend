@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { fadeInAnimation } from './shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [fadeInAnimation],
 })
 export class AppComponent implements OnInit {
-  title = 'cinema-app';
-
   constructor(private translate: TranslateService, private matIconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
     const icons = [
       {
@@ -43,5 +44,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animationState'];
   }
 }

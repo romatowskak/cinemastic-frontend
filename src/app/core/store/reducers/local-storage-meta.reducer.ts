@@ -5,6 +5,6 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
   return localStorageSync({
     keys: ['authState'],
     rehydrate: true,
-    storageKeySerializer: (key) => `cinemastic_${key}`,
+    storageKeySerializer: (key) => `cinema_${key}`,
   })(reducer);
 }

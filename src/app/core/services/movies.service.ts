@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Movie } from 'src/app/shared/models/Movie';
 import { User } from 'src/app/shared/models/User';
-import { MovieRating } from 'src/app/shared/models/MovieRating';
 import { MoviePhoto } from '../../shared/models/MoviePhoto';
 import { formatToArray } from 'src/app/shared/utils/helpers';
+import { MovieRating } from 'src/app/shared/models/MovieRating';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,7 @@ export class MoviesService {
 
   public uploadPhotos(photos): Observable<MoviePhoto[]> {
     const uploadPhotos = formatToArray(photos);
-    let data = new FormData();
+    const data = new FormData();
     uploadPhotos.forEach((photo) => data.append('files', photo.file));
     return this.httpClient.post<MoviePhoto[]>(`${environment.apiUrl}/upload`, data);
   }

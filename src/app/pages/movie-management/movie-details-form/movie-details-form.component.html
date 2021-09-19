@@ -1,0 +1,90 @@
+<div class="form-header">
+  <div>
+    {{ (isInEditMode ? "movie.managing.panel.edit" : "movie.managing.panel.add") | translate | uppercase }}
+    <span class="title-movie">{{ "movie.managing.panel.movie" | translate }}</span>
+  </div>
+  <mat-icon [matTooltip]="'movies.add_movie' | translate | uppercase" *ngIf="isInEditMode" (click)="onAddMovie()" class="add-movie-icon"
+    >add</mat-icon
+  >
+</div>
+<form class="form" *ngIf="movieDetailsForm" [formGroup]="movieDetailsForm">
+  <app-form-field [control]="movieDetailsForm.get('title')" [label]="'movie.managing.panel.label.title' | translate"></app-form-field>
+  <mat-form-field appearance="outline" class="genre-field">
+    <mat-label>{{ "movie.managing.panel.label.genre" | translate }}</mat-label>
+    <mat-select formControlName="genre">
+      <mat-option value="COMEDY">{{ "movie.genre.comedy" | translate }}</mat-option>
+      <mat-option value="ANIMATION">{{ "movie.genre.animation" | translate }}</mat-option>
+      <mat-option value="HORROR">{{ "movie.genre.horror" | translate }}</mat-option>
+      <mat-option value="DRAMA">{{ "movie.genre.drama" | translate }}</mat-option>
+      <mat-option value="ACTION">{{ "movie.genre.action" | translate }}</mat-option>
+      <mat-option value="DOCUMENT">{{ "movie.genre.document" | translate }}</mat-option>
+      <mat-option value="ROMANCE">{{ "movie.genre.romance" | translate }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="movieDetailsForm.get('genre').errors?.required" class="genre-error">{{ "errors.required" | translate }}</mat-error>
+  </mat-form-field>
+  <app-form-field
+    [control]="movieDetailsForm.get('production')"
+    [label]="'movie.managing.panel.label.production' | translate"
+  ></app-form-field>
+  <app-form-field [control]="movieDetailsForm.get('director')" [label]="'movie.managing.panel.label.director' | translate"></app-form-field>
+  <app-form-field [control]="movieDetailsForm.get('duration')" [label]="'movie.managing.panel.label.duration' | translate"></app-form-field>
+  <app-form-field
+    [control]="movieDetailsForm.get('originalLanguage')"
+    [label]="'movie.managing.panel.label.original_language' | translate"
+  ></app-form-field>
+  <app-form-field
+    [control]="movieDetailsForm.get('subtitles')"
+    [label]="'movie.managing.panel.label.subtitles' | translate"
+  ></app-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ "movie.managing.panel.label.release_date" | translate }}</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="releaseDate" readonly />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <app-form-field
+    [control]="movieDetailsForm.get('overview')"
+    [label]="'movie.managing.panel.label.overview' | translate"
+    fieldType="textarea"
+  ></app-form-field>
+  <app-form-field [control]="movieDetailsForm.get('trailer')" [label]="'movie.managing.panel.label.trailer' | translate"></app-form-field>
+  <div class="cover-photo">
+    <div class="photo-upload">
+      <button mat-button (click)="coverPhotoInput.click()" type="button" class="attach-photos-button">
+        <mat-icon class="attach-file-icon" svgIcon="folder"></mat-icon>
+        <p>{{ "movie.managing.panel.attach_cover_photo" | translate }}</p>
+        <input type="file" #coverPhotoInput (change)="coverPhotoChange($event.target.files)" style="display: none" />
+      </button>
+      <div *ngIf="movieDetailsForm.get('coverPhoto').value">
+        <div class="file">
+          <span class="file-name">{{ movieDetailsForm.get("coverPhoto").value?.name }}</span>
+          <mat-icon class="remove-photo-icon" (click)="removeCoverPhoto()">close</mat-icon>
+        </div>
+      </div>
+    </div>
+    <mat-error *ngIf="movieDetailsForm.touched && movieDetailsForm.get('coverPhoto').errors?.required" class="cover-photo-error">{{
+      "errors.cover.photo" | translate
+    }}</mat-error>
+  </div>
+  <div class="photo-upload">
+    <button mat-button (click)="galleryPhotoInput.click()" type="button" class="attach-photos-button">
+      <mat-icon class="attach-file-icon" svgIcon="folder"></mat-icon>
+      <p>{{ "movie.managing.panel.attach_gallery_photos" | translate }}</p>
+      <input type="file" #galleryPhotoInput (change)="galleryPhotosChange($event.target.files)" style="display: none" />
+    </button>
+    <div class="uploaded-photos" *ngIf="uploadedMoviePhotos.length">
+      <div *ngFor="let photo of uploadedMoviePhotos; let i = index" class="file">
+        <span class="file-name">{{ photo.file.name }}</span>
+        <mat-icon class="remove-photo-icon" (click)="removeUploadedPhoto(photo.uuid)">close</mat-icon>
+      </div>
+    </div>
+    <div class="movie-photos" *ngIf="movieDetailsForm.get('gallery').value.length">
+      <p class="movie-photos-header">{{ "movie.managing.panel.movie_photos" | translate | uppercase }}</p>
+      <div *ngFor="let photo of movieDetailsForm.get('gallery').value; let i = index" class="file">
+        <span class="file-name">{{ photo.name }}</span>
+        <mat-icon class="remove-photo-icon" (click)="removeGalleryPhoto(photo.id)">close</mat-icon>
+      </div>
+    </div>
+  </div>
+  <button class="save-button" mat-raised-button color="primary" (click)="saveChanges()">{{ "common.save" | translate }}</button>
+</form>

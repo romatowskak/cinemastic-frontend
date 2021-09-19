@@ -1,0 +1,53 @@
+.cancel-reservation-dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--white);
+}
+
+.cancel-reservation-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 60px 60px;
+}
+
+.dialog-header {
+  color: var(--white);
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.confirmation-text {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.cancel-reservation-dialog-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 20px;
+  padding: 16px 20px;
+}
+
+.mat-flat-button {
+  min-width: 200px;
+  margin-bottom: 20px;
+  color: var(--white);
+  padding: 3px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cancel-reservation-button {
+  background-color: var(--green);
+}
+
+.close-dialog-button {
+  background-color: transparent;
+  border: 1px solid var(--blue);
+}

@@ -1,5 +1,5 @@
 <div class="banner"></div>
-<div class="sign-in-page" [@fadeInTrigger]="movieDetailsForm">
+<div class="sign-in-page">
   <form class="sing-in-form-container" [formGroup]="signInForm">
     <p class="header">
       {{ "auth.form.welcome.header" | translate | uppercase }}
@@ -13,9 +13,11 @@
       <mat-form-field appearance="standard">
         <mat-label>{{ "auth.form.form.password" | translate }}</mat-label>
         <input formControlName="password" matInput [type]="passwordHidden ? 'password' : 'text'" />
-        <mat-icon matSuffix class="show-password" (click)="showPassword()">{{ passwordHidden ? "visibility_off" : "visibility" }}</mat-icon>
+        <mat-icon matSuffix *ngIf="signInForm.controls.password.value" class="show-password" (click)="togglePasswordVisibility()">{{
+          passwordHidden ? "visibility_off" : "visibility"
+        }}</mat-icon>
       </mat-form-field>
-      <mat-error *ngIf="signInForm.errors?.invalidCredentials" class="form-error">{{ "errors.auth" | translate }}</mat-error>
+      <mat-error [class.visible]="signInForm.errors?.invalidCredentials" class="form-error">{{ "errors.auth" | translate }}</mat-error>
     </div>
     <button class="sign-in-button" mat-raised-button color="primary" (click)="signIn()">
       {{ "auth.form.sign_in" | translate | uppercase }}

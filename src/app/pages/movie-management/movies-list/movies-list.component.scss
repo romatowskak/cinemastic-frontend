@@ -1,0 +1,53 @@
+.search-input-container {
+  border: 1px solid var(--blue);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 15px 20px;
+  margin-bottom: 40px;
+}
+
+input.search-input {
+  text-overflow: ellipsis;
+  background: transparent;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  color: var(--white);
+  width: 100%;
+}
+
+input::placeholder {
+  color: var(--indigo);
+}
+
+.movies-list {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-blue);
+  border-radius: 5px;
+}
+
+.movie-button {
+  padding: 10px;
+}
+
+.movie-name:hover,
+.remove-icon:hover {
+  color: var(--green);
+}
+
+.movie-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--white);
+}

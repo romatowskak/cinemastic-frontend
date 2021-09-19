@@ -1,0 +1,12 @@
+<div class="remove-movie-dialog-container">
+  <div class="remove-movie-dialog-content">
+    <p class="dialog-header">{{ "movie.remove.dialog.remove_movie" | translate | uppercase }}</p>
+    <p class="confirmation-text">{{ "movie.remove.dialog.confirmation_text" | translate: { movieTitle: data?.title } }}</p>
+  </div>
+  <mat-dialog-actions class="remove-movie-dialog-bottom">
+    <button mat-flat-button class="remove-movie-button" (click)="onRemoveMovie()" mat-dialog-close>
+      {{ "movie.remove.dialog.remove" | translate }}
+    </button>
+    <button mat-flat-button mat-dialog-close class="close-dialog-button">{{ "movie.remove.dialog.close" | translate }}</button>
+  </mat-dialog-actions>
+</div>

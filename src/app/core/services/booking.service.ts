@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CinemaAuditorium } from 'src/app/shared/models/CinemaAuditorium';
-import { MovieReservation } from 'src/app/shared/models/MovieReservation';
-import { MovieScreening } from 'src/app/shared/models/MovieScreening';
+import { Auditorium } from 'src/app/shared/models/Auditorium';
+import { Reservation } from 'src/app/shared/models/Reservation';
+import { Screening } from 'src/app/shared/models/Screening';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,20 +12,20 @@ import { environment } from 'src/environments/environment';
 export class BookingService {
   constructor(private httpClient: HttpClient) {}
 
-  public getAuditorium(auditoriumId: number): Observable<CinemaAuditorium> {
-    return this.httpClient.get<CinemaAuditorium>(`${environment.apiUrl}/auditoriums/${auditoriumId}`);
+  public getAuditorium(auditoriumId: number): Observable<Auditorium> {
+    return this.httpClient.get<Auditorium>(`${environment.apiUrl}/auditoriums/${auditoriumId}`);
   }
 
-  public getScreening(screeningId: number): Observable<MovieScreening> {
-    return this.httpClient.get<MovieScreening>(`${environment.apiUrl}/screenings/${screeningId}`);
+  public getScreening(screeningId: number): Observable<Screening> {
+    return this.httpClient.get<Screening>(`${environment.apiUrl}/screenings/${screeningId}`);
   }
 
-  public getReservations(): Observable<MovieReservation[]> {
-    return this.httpClient.get<MovieReservation[]>(`${environment.apiUrl}/reservations`);
+  public getReservations(): Observable<Reservation[]> {
+    return this.httpClient.get<Reservation[]>(`${environment.apiUrl}/reservations`);
   }
 
-  public addReservation(reservation: MovieReservation): Observable<MovieReservation> {
-    return this.httpClient.post<MovieReservation>(`${environment.apiUrl}/reservations`, reservation);
+  public addReservation(reservation: Reservation): Observable<Reservation> {
+    return this.httpClient.post<Reservation>(`${environment.apiUrl}/reservations`, reservation);
   }
 
   public removeReservation(reservationId: number): Observable<void> {

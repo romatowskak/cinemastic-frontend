@@ -43,9 +43,21 @@ body {
   border-color: var(--white);
 }
 
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: var(--green);
+}
+
 .mat-select-arrow,
 .mat-select-value-text {
   color: var(--white);
+}
+
+.snack-bar {
+  color: var(--white);
+  background-color: var(--medium-blue);
+  span {
+    margin: auto;
+  }
 }
 
 .ngx-pagination {
@@ -76,12 +88,4 @@ body {
   padding: 10px;
   color: var(--white);
   background-color: var(--dark-blue);
-}
-
-.snack-bar {
-  color: var(--white);
-  background-color: var(--medium-blue);
-  span {
-    margin: auto;
-  }
 }

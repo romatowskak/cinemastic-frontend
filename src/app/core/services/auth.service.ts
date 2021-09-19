@@ -10,9 +10,7 @@ import { User } from 'src/app/shared/models/User';
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
-  public signIn(userName: string, password: string): Observable<User> {
-    const userCredentials = { identifier: userName, password };
-    console.log(userCredentials);
-    return this.httpClient.post<User>(`${environment.apiUrl}/auth/local`, userCredentials);
+  public signIn(identifier: string, password: string): Observable<User> {
+    return this.httpClient.post<User>(`${environment.apiUrl}/auth/local`, { identifier, password });
   }
 }

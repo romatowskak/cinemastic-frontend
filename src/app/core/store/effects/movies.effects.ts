@@ -8,7 +8,6 @@ import { MoviesService } from '../../services/movies.service';
 import { State } from '../reducers';
 import { Store } from '@ngrx/store';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
-import { MovieRating } from 'src/app/shared/models/MovieRating';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -33,7 +32,9 @@ export class MoviesEffects {
         this.moviesService.getMovieDetails(movieId).pipe(
           map((response) => MoviesActions.getMovieDetailsSuccess({ payload: response })),
           catchError((error) => {
-            if (error.status === 404) this.router.navigate(['/cinemastic/movies']);
+            if (error.status === 404) {
+              this.router.navigate(['/movies']);
+            }
             return of(MoviesActions.getMovieDetailsFailure({ payload: error }));
           })
         )
@@ -47,7 +48,7 @@ export class MoviesEffects {
       map((action) => action.payload),
       switchMap(({ movie, uploadPhotos, coverPhoto }) =>
         this.moviesService.createMovie(movie).pipe(
-          map((movie) => MoviesActions.createMovieSuccess({ payload: { movie, uploadPhotos, coverPhoto } })),
+          map((response) => MoviesActions.createMovieSuccess({ payload: { movie: response, uploadPhotos, coverPhoto } })),
           catchError((error) => of(MoviesActions.createMovieFailure({ payload: error })))
         )
       )
@@ -60,7 +61,7 @@ export class MoviesEffects {
         ofType(MoviesActions.createMovieSuccess),
         map((action) => action.payload),
         tap(({ movie }) => {
-          this.router.navigate([`/cinemastic/edit/${movie.id}`]);
+          this.router.navigate([`/cinema/edit/${movie.id}`]);
         })
       ),
     { dispatch: false }
@@ -71,7 +72,7 @@ export class MoviesEffects {
       this.actions$.pipe(
         ofType(MoviesActions.removeMovieSuccess),
         tap(() => {
-          this.router.navigate([`/cinemastic/create`]);
+          this.router.navigate([`/cinema/create`]);
         })
       ),
     { dispatch: false }
@@ -83,7 +84,7 @@ export class MoviesEffects {
       map((action) => action.payload),
       switchMap(({ movie, uploadPhotos, coverPhoto }) => {
         return this.moviesService.updateMovie(movie).pipe(
-          map((movie) => MoviesActions.updateMovieSuccess({ payload: { movie, uploadPhotos, coverPhoto } })),
+          map((response) => MoviesActions.updateMovieSuccess({ payload: { movie: response, uploadPhotos, coverPhoto } })),
           catchError((error) => of(MoviesActions.updateMovieFailure({ payload: error })))
         );
       })
@@ -97,7 +98,7 @@ export class MoviesEffects {
       filter((payload) => payload.coverPhoto),
       switchMap(({ movie, coverPhoto }) => {
         return this.moviesService.uploadPhotos(coverPhoto).pipe(
-          map((coverPhoto) => MoviesActions.uploadCoverPhotoSuccess({ payload: { movie, coverPhoto } })),
+          map((response) => MoviesActions.uploadCoverPhotoSuccess({ payload: { movie, coverPhoto: response } })),
           catchError((error) => of(MoviesActions.uploadCoverPhotoFailure({ payload: error })))
         );
       })
@@ -111,7 +112,7 @@ export class MoviesEffects {
       filter((payload) => payload.uploadPhotos.length),
       switchMap(({ movie, uploadPhotos }) => {
         return this.moviesService.uploadPhotos(uploadPhotos).pipe(
-          map((uploadPhotos) => MoviesActions.uploadGalleryPhotosSuccess({ payload: { movie, uploadPhotos } })),
+          map((response) => MoviesActions.uploadGalleryPhotosSuccess({ payload: { movie, uploadPhotos: response } })),
           catchError((error) => of(MoviesActions.uploadGalleryPhotosFailure({ payload: error })))
         );
       })
@@ -177,7 +178,7 @@ export class MoviesEffects {
     this.actions$.pipe(
       ofType(MoviesActions.updateRatingRequest),
       map((action) => action.payload),
-      switchMap((rating: MovieRating) =>
+      switchMap((rating) =>
         this.moviesService.updateRating(rating).pipe(
           map((response) => MoviesActions.updateRatingSuccess({ payload: response })),
           catchError((error) => of(MoviesActions.updateRatingFailure({ payload: error })))
