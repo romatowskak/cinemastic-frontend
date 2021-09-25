@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CinemaAccessGuard } from 'src/app/core/guards/cinema-access-guard/cinema-access.guard';
 import { MoviesResolver } from '../../core/resolvers/MoviesResolver';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MoviesRepertoirComponent } from './movies-repertoir/movies-repertoir.component';
@@ -11,7 +10,6 @@ const routes: Routes = [
   {
     path: '',
     component: MoviesComponent,
-    canActivateChild: [CinemaAccessGuard],
     children: [
       {
         path: '',

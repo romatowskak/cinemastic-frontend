@@ -24,7 +24,7 @@ export class MoviesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const { query } = this.currentRoute.snapshot.queryParams;
-    this.searchInputValue = query ? query : '';
+    this.searchInputValue = query || '';
 
     this.movieSubscription = this.store.select(getMoviesSelector).subscribe((movies: Movie[]) => {
       this.movies = movies;

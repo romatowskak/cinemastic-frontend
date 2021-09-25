@@ -33,7 +33,7 @@
         <button mat-button><mat-icon (click)="cancelReservation(element.id)">delete</mat-icon></button>
       </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>

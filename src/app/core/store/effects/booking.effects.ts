@@ -4,8 +4,6 @@ import { of } from 'rxjs';
 import { switchMap, map, catchError, tap, mapTo } from 'rxjs/internal/operators';
 import * as BookingActions from '../actions/booking.actions';
 import * as SnackBarActions from '../actions/snack-bar.actions';
-import { State } from '../reducers';
-import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { BookingService } from '../../services/booking.service';
 
@@ -18,13 +16,7 @@ export class BookingEffects {
       switchMap(({ auditoriumId }) =>
         this.bookingService.getAuditorium(auditoriumId).pipe(
           map((response) => BookingActions.getAuditoriumSuccess({ payload: response })),
-          catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/movies']);
-            } else {
-              return of(BookingActions.getAuditoriumFailure({ payload: error }));
-            }
-          })
+          catchError((error) => of(BookingActions.getAuditoriumFailure({ payload: error })))
         )
       )
     )
@@ -98,19 +90,11 @@ export class BookingEffects {
       switchMap(({ screeningId }) =>
         this.bookingService.getScreening(screeningId).pipe(
           map((response) => BookingActions.getScreeningSuccess({ payload: response })),
-          catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/cinema/movies']);
-            } // close in one effect
-            return of(BookingActions.getScreeningFailure({ payload: error }));
-          })
+          catchError((error) => of(BookingActions.getScreeningFailure({ payload: error })))
         )
       )
     )
   );
 
-  /// form // what if user will be logged out --- resfresh tokena
-
-  // guard nie w shared senotira!§
-  constructor(private actions$: Actions, private bookingService: BookingService, private store: Store<State>, private router: Router) {}
+  constructor(private actions$: Actions, private bookingService: BookingService, private router: Router) {}
 }

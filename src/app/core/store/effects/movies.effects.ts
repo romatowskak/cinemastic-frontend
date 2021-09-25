@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { switchMap, map, catchError, withLatestFrom, filter, mapTo, tap } from 'rxjs/internal/operators';
 import * as MoviesActions from '../actions/movies.actions';
 import * as SnackBarActions from '../actions/snack-bar.actions';
+import * as BookingActions from '../actions/booking.actions';
 import { MoviesService } from '../../services/movies.service';
 import { State } from '../reducers';
 import { Store } from '@ngrx/store';
@@ -31,12 +32,7 @@ export class MoviesEffects {
       switchMap(({ movieId }) =>
         this.moviesService.getMovieDetails(movieId).pipe(
           map((response) => MoviesActions.getMovieDetailsSuccess({ payload: response })),
-          catchError((error) => {
-            if (error.status === 404) {
-              this.router.navigate(['/movies']);
-            }
-            return of(MoviesActions.getMovieDetailsFailure({ payload: error }));
-          })
+          catchError((error) => of(MoviesActions.getMovieDetailsFailure({ payload: error })))
         )
       )
     )
@@ -223,6 +219,20 @@ export class MoviesEffects {
       ofType(MoviesActions.updateMovieSuccess, MoviesActions.createMovieSuccess),
       mapTo(SnackBarActions.showSnackBar({ payload: { message: 'movie.managing.panel.submit_succes.snackbar' } }))
     )
+  );
+
+  redirectToMovies$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(BookingActions.getScreeningFailure, BookingActions.getAuditoriumFailure, MoviesActions.getMovieDetailsFailure),
+        map((action) => action.payload),
+        tap(({ status }) => {
+          if (status === 404) {
+            this.router.navigate(['/cinema/movies']);
+          }
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(private actions$: Actions, private moviesService: MoviesService, private store: Store<State>, private router: Router) {}
