@@ -5,7 +5,6 @@ import { State } from 'src/app/core/store/reducers';
 import { getMovieDetailsSelector } from 'src/app/core/store/reducers/movies.reducer';
 import { Movie } from 'src/app/shared/models/Movie';
 import { environment } from 'src/environments/environment';
-import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
 import { User } from 'src/app/shared/models/User';
 import { getSignedInUserSelector } from 'src/app/core/store/reducers/auth.reducer';
 import { MatDialog } from '@angular/material';
@@ -14,6 +13,7 @@ import { MovieScreeningsDialogComponent } from '../movie-screenings-dialog/movie
 import { MovieRating } from 'src/app/shared/models/MovieRating';
 import { MovieTrailerDialogComponent } from 'src/app/shared/components/movie-trailer-dialog/movie-trailer-dialog.component';
 import { MoviePhoto } from 'src/app/shared/models/MoviePhoto';
+import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery-9';
 
 @Component({
   selector: 'app-movie-details',

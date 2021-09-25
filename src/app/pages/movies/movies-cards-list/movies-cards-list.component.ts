@@ -36,6 +36,7 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
     { value: 'Sunday', day: 'movie.screenings.sunday' },
   ];
   dayParam: string;
+  currentPage: number;
   constructor(private store: Store<State>, private router: Router, private currentRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
@@ -67,7 +68,7 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
   }
 
   filterMovies(queryParams) {
-    const { day, genre, language, query } = queryParams;
+    const { day, genre, language, query, page } = queryParams;
     let movies = this.movies;
 
     if (day) {
@@ -81,6 +82,9 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
     }
     if (query) {
       movies = this.filterBySearchQuery(movies, query);
+    }
+    if (page) {
+      this.currentPage = page;
     }
 
     this.filteredMovies = movies;
@@ -128,6 +132,11 @@ export class MoviesCardsListComponent implements OnInit, OnDestroy {
     this.dialog.open(MovieTrailerDialogComponent, {
       data: movie,
     });
+  }
+
+  onPageChange(currentPage: number) {
+    this.currentPage = currentPage;
+    this.router.navigate([], { queryParams: { page: currentPage }, queryParamsHandling: 'merge' });
   }
 
   ngOnDestroy() {

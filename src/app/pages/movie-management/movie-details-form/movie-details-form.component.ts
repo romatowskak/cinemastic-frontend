@@ -42,18 +42,18 @@ export class MovieDetailsFormComponent implements OnInit {
 
   createForm(movieDetails?: Movie) {
     this.movieDetailsForm = this.formBuilder.group({
-      title: [(movieDetails && movieDetails.title) || '', Validators.required],
-      genre: [(movieDetails && movieDetails.genre) || '', Validators.required],
-      production: [(movieDetails && movieDetails.production) || '', Validators.required],
-      director: [(movieDetails && movieDetails.director) || '', Validators.required],
-      duration: [(movieDetails && movieDetails.duration) || '', [Validators.required, Validators.pattern(Pattern.decimal)]],
-      originalLanguage: [(movieDetails && movieDetails.originalLanguage) || '', Validators.required],
-      subtitles: [(movieDetails && movieDetails.subtitles) || '', Validators.required],
-      releaseDate: [(movieDetails && movieDetails.releaseDate) || ''],
-      overview: [(movieDetails && movieDetails.overview) || '', Validators.required],
-      trailer: [(movieDetails && movieDetails.trailer) || '', [Validators.pattern(Pattern.link)]],
-      coverPhoto: [(movieDetails && movieDetails.coverPhoto) || null, Validators.required],
-      gallery: [(movieDetails && movieDetails.gallery) || []],
+      title: [movieDetails?.title || '', Validators.required],
+      genre: [movieDetails?.genre || '', Validators.required],
+      production: [movieDetails?.production || '', Validators.required],
+      director: [movieDetails?.director || '', Validators.required],
+      duration: [movieDetails?.duration || '', [Validators.required, Validators.pattern(Pattern.decimal)]],
+      originalLanguage: [movieDetails?.originalLanguage || '', Validators.required],
+      subtitles: [movieDetails?.subtitles || '', Validators.required],
+      releaseDate: [movieDetails?.releaseDate || ''],
+      overview: [movieDetails?.overview || '', Validators.required],
+      trailer: [movieDetails?.trailer || '', [Validators.pattern(Pattern.link)]],
+      coverPhoto: [movieDetails?.coverPhoto || null, Validators.required],
+      gallery: [movieDetails?.gallery || []],
     });
   }
 

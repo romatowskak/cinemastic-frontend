@@ -13,6 +13,7 @@ import { MoviesRepertoirComponent } from './movies-repertoir/movies-repertoir.co
 import { MoviesComponent } from './movies.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MoviesRoutingModule } from './movies-routing.module';
+import { NgxGalleryModule } from 'ngx-gallery-9';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { MoviesRoutingModule } from './movies-routing.module';
     MovieTrailerDialogComponent,
   ],
   entryComponents: [MovieScreeningsDialogComponent, MovieTrailerDialogComponent],
-  imports: [SharedModule, MoviesRoutingModule],
+  imports: [SharedModule, MoviesRoutingModule, NgxGalleryModule],
   providers: [CinemaAccessGuard, MoviesResolver, MovieDetailsResolver],
 })
 export class MoviesModule {}

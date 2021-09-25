@@ -181,15 +181,16 @@
   margin-right: 10px;
 }
 
-.selected-seat-numbers {
+.selected-seats-numbers {
   width: 60%;
   display: flex;
   flex-wrap: wrap;
-}
-
-.selected-seats-numbers {
   font-size: 25px;
   font-weight: 500;
   color: var(--green);
+  margin-right: 10px;
+}
+
+.selected-seat-number {
   margin-right: 10px;
 }

@@ -33,7 +33,8 @@ export class MoviesListComponent implements OnInit, OnDestroy {
   }
 
   search(searchQuery: string) {
-    this.filteredMovies = this.movies.filter((movie: Movie) => movie.title.includes(searchQuery));
+    this.searchInputValue = searchQuery;
+    this.filteredMovies = searchQuery ? this.movies.filter((movie: Movie) => movie.title.includes(searchQuery)) : this.movies;
   }
 
   onRemoveMovie(movie: Movie) {

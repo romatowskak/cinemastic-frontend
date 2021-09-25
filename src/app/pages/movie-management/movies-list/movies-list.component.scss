@@ -51,3 +51,9 @@ input::placeholder {
   justify-content: space-between;
   color: var(--white);
 }
+
+.close-icon,
+.search-icon {
+  color: var(--indigo);
+  cursor: pointer;
+}

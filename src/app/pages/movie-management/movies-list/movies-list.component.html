@@ -7,9 +7,7 @@
     #searchInput
   />
   <mat-icon *ngIf="!searchInputValue" matSuffix class="search-icon" color="primary">search</mat-icon>
-  <button mat-button *ngIf="searchInputValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
-    <mat-icon class="close-icon">close</mat-icon>
-  </button>
+  <mat-icon *ngIf="searchInputValue" class="close-icon" (click)="search('')">close</mat-icon>
 </div>
 <div class="movies-list">
   <button mat-button *ngFor="let movie of filteredMovies" [routerLink]="['/management/edit', movie.id]" class="movie-button">

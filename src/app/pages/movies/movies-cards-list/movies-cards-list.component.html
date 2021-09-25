@@ -11,7 +11,7 @@
     </button>
   </div>
   <div class="movies-list" *ngIf="filteredMovies.length">
-    <mat-card class="movie-card" *ngFor="let movie of filteredMovies | paginate: { itemsPerPage: 6, currentPage: p }">
+    <mat-card class="movie-card" *ngFor="let movie of filteredMovies | paginate: { itemsPerPage: 6, currentPage: currentPage }">
       <img mat-card-image (click)="onShowMovieDetails(movie)" class="movie-image" [src]="movie.coverPhoto.url" />
       <mat-card-content class="card-content">
         <div class="card-header">
@@ -42,5 +42,5 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <pagination-controls *ngIf="filteredMovies.length && filteredMovies.length > 6" (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls *ngIf="filteredMovies.length && filteredMovies.length > 6" (pageChange)="onPageChange($event)"></pagination-controls>
 </div>

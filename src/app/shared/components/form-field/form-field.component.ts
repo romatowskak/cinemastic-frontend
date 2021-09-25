@@ -20,8 +20,6 @@ export class FormFieldComponent implements OnInit {
     const errorKeys = keys && Object.keys(keys);
     const patternErrors = keys && keys.pattern;
 
-    return patternErrors
-      ? ErrorsDictionary[patternErrors.requiredPattern]
-      : errorKeys && errorKeys.length && ErrorsDictionary[errorKeys[0]];
+    return patternErrors ? ErrorsDictionary[patternErrors.requiredPattern] : errorKeys?.length && ErrorsDictionary[errorKeys[0]];
   }
 }
