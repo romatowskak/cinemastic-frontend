@@ -13,7 +13,7 @@ jobs:
           key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - 'node_modules'
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+      - run: npm run lint
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
