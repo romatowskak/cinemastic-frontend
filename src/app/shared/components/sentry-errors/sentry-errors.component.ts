@@ -20,7 +20,7 @@ export class SentryErrorsComponent implements OnInit {
   }
 
   onSyntaxError() {
-    // eval('foo bar');
+    eval('foo bar');
   }
 
   onRangeError() {
