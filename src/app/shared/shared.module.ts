@@ -6,12 +6,12 @@ import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AngularMaterialModule } from './angular-material.module';
 import { FormFieldComponent } from './components/form-field/form-field.component';
+import { SentryErrorsComponent } from './components/sentry-errors/sentry-errors.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [FormFieldComponent, ToolbarComponent],
+  declarations: [FormFieldComponent, ToolbarComponent, SentryErrorsComponent],
   imports: [CommonModule, ReactiveFormsModule, AngularMaterialModule, TranslateModule, NgxPaginationModule, BarRatingModule],
-
   exports: [
     ReactiveFormsModule,
     AngularMaterialModule,
@@ -21,6 +21,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     BarRatingModule,
     FormFieldComponent,
     ToolbarComponent,
+    SentryErrorsComponent,
   ],
 })
 export class SharedModule {}

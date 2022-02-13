@@ -9,7 +9,11 @@
     "stylelint": "stylelint '**/*.scss'",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prettier": "prettier --write './**/*.ts' './**/*.scss' './**/*.html'"
+    "prettier": "prettier --write './**/*.ts' './**/*.scss' './**/*.html'",
+    "sentry:createrelease": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring new -p sentrymonitoring dev",
+    "sentry:associatecommits": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring set-commits dev --auto",
+    "sentry:uploadsourcemaps": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring -p sentrymonitoring files dev upload-sourcemaps --url-prefix \"~/\" --rewrite --validate dist",
+    "sentry:uploadsourcemaps:finalize": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring -p sentrymonitoring finalize dev"
   },
   "husky": {
     "hooks": {
@@ -34,6 +38,9 @@
     "@ngrx/store-devtools": "^8.5.2",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@sentry/angular": "^6.17.1",
+    "@sentry/browser": "^6.17.2",
+    "@sentry/tracing": "^6.17.1",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
     "i": "^0.3.6",
@@ -53,6 +60,7 @@
     "@angular/cli": "~9.1.15",
     "@angular/compiler-cli": "~9.1.13",
     "@angular/language-service": "~9.1.13",
+    "@sentry/cli": "^1.63.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "^2.0.10",
     "@types/lodash.get": "^4.4.2",
