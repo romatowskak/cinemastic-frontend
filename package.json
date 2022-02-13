@@ -11,7 +11,7 @@
     "e2e": "ng e2e",
     "prettier": "prettier --write './**/*.ts' './**/*.scss' './**/*.html'",
     "sentry:createrelease": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring new -p sentrymonitoring dev",
-    "sentry:associatecommits": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring -p sentrymonitoring set-commits --auto dev ",
+    "sentry:associatecommits": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring -p sentrymonitoring set-commits --auto dev",
     "sentry:uploadsourcemaps": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring -p sentrymonitoring files dev upload-sourcemaps --url-prefix \"~/\" --rewrite --validate dist",
     "sentry:uploadsourcemaps:finalize": "./node_modules/.bin/sentry-cli releases -o sentrymonitoring -p sentrymonitoring finalize dev"
   },
