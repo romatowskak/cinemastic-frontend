@@ -24,6 +24,6 @@ export class SentryErrorsComponent implements OnInit {
   }
 
   onRangeError() {
-    // throw new RangeError('Parameter must be between 1 and 100');
+    throw new RangeError('Parameter must be between 1 and 100');
   }
 }
