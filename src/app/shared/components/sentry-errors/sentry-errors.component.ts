@@ -16,7 +16,7 @@ export class SentryErrorsComponent implements OnInit {
   }
 
   onURIError() {
-    // decodeURIComponent('%');
+    decodeURIComponent('%');
   }
 
   onSyntaxError() {
