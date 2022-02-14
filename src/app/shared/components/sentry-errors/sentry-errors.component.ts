@@ -10,20 +10,20 @@ export class SentryErrorsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onNotAFunctionError() {
-    const someArray = [{ func: () => {} }];
-    someArray[1].func();
-  }
+  // onNotAFunctionError() {
+  //   const someArray = [{ func: () => {} }];
+  //   someArray[1].func();
+  // }
 
-  onURIError() {
-    decodeURIComponent('%');
-  }
+  // onURIError() {
+  //   decodeURIComponent('%');
+  // }
 
-  onSyntaxError() {
-    eval('foo bar');
-  }
+  // onSyntaxError() {
+  //   eval('foo bar');
+  // }
 
-  onRangeError() {
-    throw new RangeError('Parameter must be between 1 and 100');
-  }
+  // onRangeError() {
+  //   throw new RangeError('Parameter must be between 1 and 100');
+  // }
 }
