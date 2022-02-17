@@ -11,12 +11,12 @@ export class SentryErrorsComponent implements OnInit {
   ngOnInit(): void {}
 
   onNotAFunctionError() {
-    // const someArray = [{ func: () => {} }];
-    // someArray[1].func();
+    const someArray = [{ func: () => {} }];
+    someArray[1].func();
   }
 
   onURIError() {
-    // decodeURIComponent('%');
+    decodeURIComponent('%');
   }
 
   onSyntaxError() {
