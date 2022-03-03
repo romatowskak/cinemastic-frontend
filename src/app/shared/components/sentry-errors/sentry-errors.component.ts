@@ -20,10 +20,10 @@ export class SentryErrorsComponent implements OnInit {
   }
 
   onSyntaxError() {
-    // eval('foo bar');
+    eval('foo bar');
   }
 
   onRangeError() {
-    // throw new RangeError('Parameter must be between 1 and 100');
+    throw new RangeError('Parameter must be between 1 and 100');
   }
 }
